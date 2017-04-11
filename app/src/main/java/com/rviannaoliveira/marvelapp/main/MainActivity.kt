@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             splashView.visibility = View.GONE
+            val bottomNavigationView = findViewById(R.id.bottom_navigation)
+            bottomNavigationView.visibility = View.VISIBLE
         }, resources.getInteger(R.integer.delay_splash).toLong())
     }
 }
