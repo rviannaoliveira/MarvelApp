@@ -10,7 +10,7 @@ import io.reactivex.Observable
 class DataManager {
     private val marvelApiHelper = MarvelApiHelper()
 
-    fun getMarvelCharacters(): Observable<ArrayList<MarvelCharacter>?>? {
+    fun getMarvelCharacters(): Observable<ArrayList<MarvelCharacter>> {
         return marvelApiHelper.getMarvelCharacters()
     }
 

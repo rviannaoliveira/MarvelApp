@@ -15,17 +15,17 @@ class MarvelApiHelper {
     private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)
     private var LIMIT_REGISTER = 100
 
-    fun getMarvelCharacters(): Observable<ArrayList<MarvelCharacter>?>? {
+    fun getMarvelCharacters(): Observable<ArrayList<MarvelCharacter>> {
         val response = marvelService.getCharacters(getMapDefaultParams(), LIMIT_REGISTER)
 
         return response.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
                     Observable.fromArray(dataWrappers.data)
                 })
                 .concatMap({ dataContainer ->
                     Observable.fromArray(dataContainer?.results)
                 })
-                .observeOn(AndroidSchedulers.mainThread())
 
     }
 

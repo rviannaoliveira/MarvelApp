@@ -4,17 +4,17 @@
     <item
         android:id="@+id/action_character"
         android:enabled="true"
-        android:icon="@drawable/ic_character_white_24px"
+        android:icon="@drawable/ic_spiderman"
         android:title="@string/character"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_favorite"
+        android:icon="@drawable/ic_favorite_white_24px"
+        android:title="@string/history"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_comic"
         android:icon="@drawable/ic_comic_white_24px"
         android:title="@string/comic"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/action_story"
-        android:icon="@drawable/ic_history_white_24px"
-        android:title="@string/history"
         app:showAsAction="ifRoom"/>
 </menu>

@@ -12,16 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <ImageView
-        android:id="@+id/splash"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
-        android:contentDescription="@string/marvel"
-        android:src="@drawable/ic_marvel_comics"
-        tools:visibility="gone"/>
-
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

@@ -1,10 +1,8 @@
-package com.rviannaoliveira.marvelapp.main
+package com.rviannaoliveira.marvelapp.characters
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
+import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 /**
  * Criado por rodrigo on 09/04/17.
@@ -51,10 +50,7 @@ class CharactersFragment : Fragment(), CharactersView {
     override fun loadCharacters(marvelCharacters: ArrayList<MarvelCharacter>) {
         charactersAdapter = CharactersAdapter(marvelCharacters)
         charactersRecyclerView.adapter = charactersAdapter
-        charactersRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.line_divider))
-        charactersRecyclerView.addItemDecoration(dividerItemDecoration)
+        val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
+        charactersRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
     }
 }

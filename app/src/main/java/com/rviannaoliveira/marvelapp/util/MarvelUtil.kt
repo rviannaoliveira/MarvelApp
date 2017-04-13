@@ -1,6 +1,7 @@
 package com.rviannaoliveira.marvelapp.util
 
 import android.content.Context
+import android.content.res.Configuration
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
@@ -32,6 +33,12 @@ object MarvelUtil {
         }
 
         transaction.commit()
+    }
+
+    fun isPortrait(context: Context): Boolean {
+        val intOrientation = context.resources.configuration.orientation
+        return Configuration.ORIENTATION_PORTRAIT == intOrientation
+
     }
 
 }

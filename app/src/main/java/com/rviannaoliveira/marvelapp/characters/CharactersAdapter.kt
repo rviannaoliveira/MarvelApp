@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.main
+package com.rviannaoliveira.marvelapp.characters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -19,17 +19,17 @@ class CharactersAdapter(private val characters: ArrayList<MarvelCharacter>) : Re
     private lateinit var context: Context
 
 
-    override fun onBindViewHolder(holder: MarvelViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: MarvelViewHolder, position: Int) {
         if (characters.isNotEmpty()) {
             val marvelCharacter = characters[position]
-            holder!!.name.text = marvelCharacter.name
+            holder.name.text = marvelCharacter.name
             MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail.toString(), holder.image, 90, 90)
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MarvelViewHolder {
-        this.context = parent!!.context
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarvelViewHolder {
+        this.context = parent.context
         return MarvelViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.character_row, parent, false))
     }
 
