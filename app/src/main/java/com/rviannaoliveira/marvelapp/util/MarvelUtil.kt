@@ -13,11 +13,10 @@ import com.rviannaoliveira.marvelapp.R
  */
 object MarvelUtil {
 
-    fun setImageUrl(context: Context, url: String, image: ImageView, width: Int, height: Int) {
+    fun setImageUrl(context: Context, url: String, image: ImageView) {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
-                .override(width, height)
                 .error(R.drawable.image_broken)
                 .placeholder(R.drawable.ic_marvel_comics)
                 .into(image)

@@ -10,39 +10,39 @@ import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
-import java.util.*
 
 /**
  * Criado por rodrigo on 08/04/17.
  */
-class CharactersAdapter(private val characters: ArrayList<MarvelCharacter>) : RecyclerView.Adapter<CharactersAdapter.MarvelViewHolder>() {
+class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>() {
     private lateinit var context: Context
+    private var characters = ArrayList<MarvelCharacter>()
 
+    fun setCharacters(characters: ArrayList<MarvelCharacter>) {
+        this.characters = characters
+        notifyDataSetChanged()
+    }
 
-    override fun onBindViewHolder(holder: MarvelViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
+        this.context = parent.context
+        return CharactersViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.character_row, parent, false))
+    }
+
+    override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
         if (characters.isNotEmpty()) {
             val marvelCharacter = characters[position]
             holder.name.text = marvelCharacter.name
-            MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail.toString(), holder.image, 90, 90)
+            MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail.toString(), holder.image)
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarvelViewHolder {
-        this.context = parent.context
-        return MarvelViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.character_row, parent, false))
-    }
-
     override fun getItemCount(): Int {
+
         return characters.size
     }
 
-    fun clear() {
-        characters.clear()
-        notifyDataSetChanged()
-    }
-
-    inner class MarvelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var image = itemView.findViewById(R.id.image_item) as ImageView
         var name = itemView.findViewById(R.id.name_item) as TextView
     }

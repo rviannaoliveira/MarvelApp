@@ -3,15 +3,13 @@ package com.rviannaoliveira.marvelapp.model
 import com.google.gson.annotations.SerializedName
 
 /**
- * Criado por rodrigo on 08/04/17.
+ * Criado por rodrigo on 14/04/17.
  */
-
-class MarvelCharacterDataWrapperResponse {
+class MarvelComicDataWrapper {
     @SerializedName("code")
     val code: Int? = null
     @SerializedName("status")
     val status: String? = null
     @SerializedName("data")
-    val data: MarvelCharacterDataContainer? = null
-
+    val data: MarvelComicDataContainer? = null
 }

@@ -18,7 +18,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 class CharactersFragment : Fragment(), CharactersView {
     private val charactersPresenterImpl: CharactersPresenter = CharactersPresenterImpl(this)
-    private lateinit var charactersAdapter: CharactersAdapter
+    private var charactersAdapter: CharactersAdapter? = null
     private lateinit var progressbar: ProgressBar
     private lateinit var charactersRecyclerView: RecyclerView
 
@@ -26,17 +26,18 @@ class CharactersFragment : Fragment(), CharactersView {
         val view = inflater?.inflate(R.layout.fragment_characters, container, false)
         this.progressbar = view?.findViewById(R.id.progressbar) as ProgressBar
         this.charactersRecyclerView = view.findViewById(R.id.list_characters) as RecyclerView
+
+        loadView()
+        charactersPresenterImpl.getMarvelCharacters()
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-        charactersPresenterImpl.getMarvelCharacters()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        charactersAdapter.clear()
+    override fun loadView() {
+        charactersAdapter = CharactersAdapter()
+        charactersRecyclerView.adapter = charactersAdapter
+        val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
+        charactersRecyclerView.setHasFixedSize(true)
+        charactersRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
     }
 
     override fun showProgressBar() {
@@ -48,9 +49,6 @@ class CharactersFragment : Fragment(), CharactersView {
     }
 
     override fun loadCharacters(marvelCharacters: ArrayList<MarvelCharacter>) {
-        charactersAdapter = CharactersAdapter(marvelCharacters)
-        charactersRecyclerView.adapter = charactersAdapter
-        val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
-        charactersRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
+        charactersAdapter?.setCharacters(marvelCharacters)
     }
 }

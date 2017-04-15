@@ -15,10 +15,9 @@ class CharactersPresenterImpl(private val charactersView: CharactersView) : Char
         observableCharacters.subscribe({ marvelCharacters ->
             charactersView.loadCharacters(marvelCharacters)
             charactersView.hideProgressBar()
-        },
-                { error ->
-                    Log.e(">>>>", error.message)
-                })
+        }, { error ->
+            Log.e("error", error.message)
+        })
     }
 
 }

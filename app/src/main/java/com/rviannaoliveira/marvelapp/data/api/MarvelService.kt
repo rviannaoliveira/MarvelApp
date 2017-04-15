@@ -1,6 +1,7 @@
 package com.rviannaoliveira.marvelapp.data.api
 
-import com.rviannaoliveira.marvelapp.model.MarvelCharacterDataWrapperResponse
+import com.rviannaoliveira.marvelapp.model.MarvelCharacterDataWrapper
+import com.rviannaoliveira.marvelapp.model.MarvelComicDataWrapper
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,7 +14,10 @@ import retrofit2.http.QueryMap
 interface MarvelService {
 
     @GET("v1/public/characters")
-    fun getCharacters(@QueryMap options: Map<String, String>, @Query("limit") limit: Int): Observable<MarvelCharacterDataWrapperResponse>
+    fun getCharacters(@QueryMap options: Map<String, String>, @Query("limit") limit: Int): Observable<MarvelCharacterDataWrapper>
+
+    @GET("v1/public/comics")
+    fun getComics(@QueryMap options: Map<String, String>, @Query("limit") limit: Int): Observable<MarvelComicDataWrapper>
 }
 
 
