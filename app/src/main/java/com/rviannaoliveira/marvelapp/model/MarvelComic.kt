@@ -5,10 +5,8 @@ import com.google.gson.annotations.SerializedName
 /**
  * Criado por rodrigo on 14/04/17.
  */
-class MarvelComic {
+class MarvelComic : BaseMarvel() {
 
-    @SerializedName("id")
-    val id: Int? = null
     @SerializedName("title")
     val title: String? = null
     @SerializedName("description")

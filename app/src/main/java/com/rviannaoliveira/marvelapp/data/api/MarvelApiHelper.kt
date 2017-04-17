@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit
  * Criado por rodrigo on 09/04/17.
  */
 
-class MarvelApiHelper {
+class MarvelApiHelper : ApiData {
     private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)
     private var LIMIT_REGISTER = 10
 
-    fun getMarvelCharacters(): Observable<ArrayList<MarvelCharacter>> {
+    override fun getMarvelCharacters(): Observable<ArrayList<MarvelCharacter>> {
         val response = marvelService.getCharacters(getMapDefaultParams(), LIMIT_REGISTER)
 
         return response.subscribeOn(Schedulers.newThread())
@@ -31,7 +31,7 @@ class MarvelApiHelper {
     }
 
 
-    fun getMarvelComics(): Observable<ArrayList<MarvelComic>> {
+    override fun getMarvelComics(): Observable<ArrayList<MarvelComic>> {
         val response = marvelService.getComics(getMapDefaultParams(), LIMIT_REGISTER)
         return response.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.comics
+package com.rviannaoliveira.marvelapp.favorite
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,36 +9,35 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.rviannaoliveira.marvelapp.R
-import com.rviannaoliveira.marvelapp.model.MarvelComic
+import com.rviannaoliveira.marvelapp.comics.FavoritePresenterImpl
+import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 /**
- * Criado por rodrigo on 14/04/17.
+ * Criado por rodrigo on 15/04/17.
  */
-
-
-class ComicsFragment : Fragment(), ComicsView {
-    private val comicsPresenterImpl: ComicsPresenter = ComicsPresenterImpl(this)
-    private lateinit var comicsAdapter: ComicsAdapter
+class FavoriteFragment : Fragment(), FavoriteView {
+    private val favoritePresenterImpl: FavoritePresenter = FavoritePresenterImpl(this)
+    private lateinit var favoriteAdapter: FavoriteAdapter
     private lateinit var progressbar: ProgressBar
-    private lateinit var comicsRecyclerView: RecyclerView
+    private lateinit var favoriteRecyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_list, container, false)
-        comicsRecyclerView = view?.findViewById(R.id.list_recycler_view) as RecyclerView
+        favoriteRecyclerView = view?.findViewById(R.id.list_recycler_view) as RecyclerView
         progressbar = view.findViewById(R.id.progressbar) as ProgressBar
 
         loadView()
-        comicsPresenterImpl.getMarvelComics()
+        favoritePresenterImpl.getFavorites()
         return view
     }
 
     override fun loadView() {
-        comicsAdapter = ComicsAdapter()
-        comicsRecyclerView.adapter = comicsAdapter
+        favoriteAdapter = FavoriteAdapter()
+        favoriteRecyclerView.adapter = favoriteAdapter
         val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
-        comicsRecyclerView.setHasFixedSize(true)
-        comicsRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
+        favoriteRecyclerView.setHasFixedSize(true)
+        favoriteRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
     }
 
     override fun showProgressBar() {
@@ -49,8 +48,7 @@ class ComicsFragment : Fragment(), ComicsView {
         progressbar.visibility = View.GONE
     }
 
-    override fun loadComics(comics: ArrayList<MarvelComic>) {
-        comicsAdapter.setComics(comics)
+    override fun loadFavorite(favorites: ArrayList<Favorite>) {
+        favoriteAdapter.setFavorites(favorites)
     }
-
 }

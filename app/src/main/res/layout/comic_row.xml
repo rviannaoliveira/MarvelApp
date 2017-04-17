@@ -8,13 +8,13 @@
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="240dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="@android:color/white"
         card_view:cardElevation="5dp"
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintLeft_toLeftOf="parent"
@@ -23,37 +23,42 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent">
             <ImageView
                 android:id="@+id/image_item"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="180dp"
                 android:contentDescription="@string/character"
                 android:scaleType="fitXY"
-                tools:layout_conversion_absoluteHeight="1dp"
-                tools:layout_conversion_absoluteWidth="374dp"
-                tools:layout_conversion_absoluteX="5dp"
-                tools:layout_conversion_absoluteY="5dp"
                 tools:src="@drawable/captain"/>
 
-            <TextView
-                android:id="@+id/name_item"
-                style="@style/textItem"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:padding="5dp"
-                card_view:layout_constraintBottom_toBottomOf="parent"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toBottomOf="@+id/image_item"
-                tools:layout_conversion_absoluteHeight="1dp"
-                tools:layout_conversion_absoluteWidth="125dp"
-                tools:layout_conversion_absoluteX="130dp"
-                tools:layout_conversion_absoluteY="5dp"
-                tools:text="Captain America"/>
+                card_view:layout_constraintTop_toBottomOf="@+id/image_item">
+
+                <TextView
+                    android:id="@+id/name_item"
+                    style="@style/textItem"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
+                    tools:text="Captain America"/>
+
+                <ImageView
+                    android:id="@+id/check_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="8dp"
+                    android:contentDescription="@string/favorite"
+                    android:src="@drawable/ic_star_border_white_24px"/>
+            </RelativeLayout>
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>

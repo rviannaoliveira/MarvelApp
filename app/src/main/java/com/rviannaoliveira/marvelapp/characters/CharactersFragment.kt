@@ -23,9 +23,9 @@ class CharactersFragment : Fragment(), CharactersView {
     private lateinit var charactersRecyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_characters, container, false)
+        val view = inflater?.inflate(R.layout.fragment_list, container, false)
         this.progressbar = view?.findViewById(R.id.progressbar) as ProgressBar
-        this.charactersRecyclerView = view.findViewById(R.id.list_characters) as RecyclerView
+        this.charactersRecyclerView = view.findViewById(R.id.list_recycler_view) as RecyclerView
 
         loadView()
         charactersPresenterImpl.getMarvelCharacters()
@@ -33,7 +33,7 @@ class CharactersFragment : Fragment(), CharactersView {
     }
 
     override fun loadView() {
-        charactersAdapter = CharactersAdapter()
+        charactersAdapter = CharactersAdapter(charactersPresenterImpl)
         charactersRecyclerView.adapter = charactersAdapter
         val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
         charactersRecyclerView.setHasFixedSize(true)
