@@ -47,31 +47,37 @@ object DataManager {
     }
 
     private fun combineCharacter(characters: ArrayList<MarvelCharacter>, favorites: List<Favorite>): ArrayList<MarvelCharacter> {
-        val listIds = ArrayList<Int?>()
-        favorites.mapTo(listIds) { it.idMarvel }
-
-        if (listIds.isEmpty()) {
+        if (favorites.isEmpty()) {
             return characters
         }
 
-        for (character in characters) {
-            character.checkedFavorite = listIds.contains(character.id)
+        val mapFavorite = HashMap<Int?, Favorite>()
+
+        for (favorite in favorites) {
+            mapFavorite.put(favorite.idMarvel, favorite)
         }
 
+
+        for (character in characters) {
+            character.favorite = mapFavorite[character.id]
+        }
         return characters
     }
 
     private fun combineComic(comics: ArrayList<MarvelComic>, favorites: List<Favorite>): ArrayList<MarvelComic> {
-        val listIds = ArrayList<Int?>()
-        favorites.mapTo(listIds) { it.idMarvel }
-
-
-        if (listIds.isEmpty()) {
+        if (favorites.isEmpty()) {
             return comics
         }
 
+        val mapFavorite = HashMap<Int?, Favorite>()
+
+        for (favorite in favorites) {
+            mapFavorite.put(favorite.idMarvel, favorite)
+        }
+
+
         for (comic in comics) {
-            comic.checkedFavorite = listIds.contains(comic.id)
+            comic.favorite = mapFavorite[comic.id]
         }
 
         return comics

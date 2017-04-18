@@ -8,16 +8,16 @@ import io.realm.annotations.PrimaryKey
  */
 open class Favorite : RealmObject() {
     @PrimaryKey
-    var id: Int? = null
-    var idMarvel: Int? = null
-    var name: String? = null
-    var path: String? = null
-    var extension: String? = null
-    var group: Int? = null
+    open var id: Int? = null
+    open var idMarvel: Int? = null
+    open var name: String? = null
+    open var path: String? = null
+    open var extension: String? = null
+    open var group: Int? = null
 
 
     fun getThumbMail(): String {
-        return path + extension
+        return path + "." + extension
     }
 
 }

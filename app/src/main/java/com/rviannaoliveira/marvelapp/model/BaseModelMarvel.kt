@@ -6,11 +6,9 @@ import io.realm.annotations.Ignore
 /**
  * Criado por rodrigo on 16/04/17.
  */
-open class BaseMarvel {
+open class BaseModelMarvel {
     @SerializedName("id")
     val id: Int? = null
     @Ignore
-    var favorite: Favorite = Favorite()
-    @Ignore
-    var checkedFavorite: Boolean = false
+    var favorite: Favorite? = null
 }

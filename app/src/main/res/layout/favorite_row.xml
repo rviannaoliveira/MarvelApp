@@ -37,7 +37,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="60dp"
                 android:orientation="vertical"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                     tools:text="Captain America"/>
 
                 <ImageView
-                    android:id="@+id/check_favorite"
+                    android:id="@+id/delete_favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -61,7 +61,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:contentDescription="@string/favorite"
-                    android:src="@drawable/ic_star_border_white_24px"/>
+                    android:src="@drawable/ic_delete_white_24px"/>
             </RelativeLayout>
 
         </android.support.constraint.ConstraintLayout>

@@ -6,4 +6,8 @@
     <string name="history">History</string>
     <string name="series">Series</string>
     <string name="favorite">Favorite</string>
+    <string name="warning">Warning</string>
+    <string name="txt_delete">Do you want delete the favorite?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">cancel</string>
 </resources>

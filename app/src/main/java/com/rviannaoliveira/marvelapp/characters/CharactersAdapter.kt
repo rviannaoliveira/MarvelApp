@@ -9,6 +9,8 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
+import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
+import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.FavoriteGroup
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
@@ -16,7 +18,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 /**
  * Criado por rodrigo on 08/04/17.
  */
-class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>() {
+class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>(), BaseRecyclerView {
     private lateinit var context: Context
     private var characters = ArrayList<MarvelCharacter>()
 
@@ -35,27 +37,30 @@ class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerVi
             val marvelCharacter = characters[position]
             holder.name.text = marvelCharacter.name
             MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail.toString(), holder.image)
-            holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.checkedFavorite))
+            holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
             holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
         }
 
     }
 
-    private fun toggleFavorite(position: Int, view: View) {
+    override fun toggleFavorite(position: Int, view: View) {
         val checkView = view as CheckBox
         val character = characters[position]
-        toggleImage(checkView.isChecked)
+        checkView.setButtonDrawable(toggleImage(checkView.isChecked))
 
-        character.favorite.group = FavoriteGroup.CHARACTERS
-        character.favorite.extension = character.thumbMail?.extension
-        character.favorite.path = character.thumbMail?.path
-        character.favorite.name = character.name
-        character.favorite.idMarvel = character.id
+        if (character.favorite == null) {
+            character.favorite = Favorite()
+            character.favorite?.group = FavoriteGroup.CHARACTERS
+            character.favorite?.extension = character.thumbMail?.extension
+            character.favorite?.path = character.thumbMail?.path
+            character.favorite?.name = character.name
+            character.favorite?.idMarvel = character.id
+        }
+        character.favorite?.let { presenter.toggleFavorite(it, checkView.isChecked) }
 
-        presenter.toggleFavorite(character.favorite, checkView.isChecked)
     }
 
-    private fun toggleImage(checked: Boolean): Int {
+    override fun toggleImage(checked: Boolean): Int {
         return if (checked) R.drawable.ic_star_white_24px else R.drawable.ic_star_border_white_24px
     }
 
