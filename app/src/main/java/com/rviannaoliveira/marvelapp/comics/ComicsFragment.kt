@@ -18,7 +18,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 
 class ComicsFragment : Fragment(), ComicsView {
-    private val comicsPresenterImpl: ComicsPresenter = ComicsPresenterImpl(this)
+    private val comicsPresenter: ComicsPresenter = ComicsPresenterImpl(this)
     private lateinit var comicsAdapter: ComicsAdapter
     private lateinit var progressbar: ProgressBar
     private lateinit var comicsRecyclerView: RecyclerView
@@ -29,12 +29,12 @@ class ComicsFragment : Fragment(), ComicsView {
         progressbar = view.findViewById(R.id.progressbar) as ProgressBar
 
         loadView()
-        comicsPresenterImpl.getMarvelComics()
+        comicsPresenter.getMarvelComics()
         return view
     }
 
     override fun loadView() {
-        comicsAdapter = ComicsAdapter()
+        comicsAdapter = ComicsAdapter(comicsPresenter)
         comicsRecyclerView.adapter = comicsAdapter
         val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
         comicsRecyclerView.setHasFixedSize(true)

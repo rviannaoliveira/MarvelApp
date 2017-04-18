@@ -1,13 +1,10 @@
 package com.rviannaoliveira.marvelapp.characters
 
-import com.rviannaoliveira.marvelapp.model.Favorite
-import io.reactivex.Observable
+import com.rviannaoliveira.marvelapp.base.BasePresenterFavorite
 
 /**
  * Criado por rodrigo on 09/04/17.
  */
-interface CharactersPresenter {
+interface CharactersPresenter : BasePresenterFavorite {
     fun getMarvelCharacters()
-    fun getCharactersFavorites(): Observable<List<Favorite>>
-    fun toggleFavorite(favorite: Favorite, checked: Boolean)
 }

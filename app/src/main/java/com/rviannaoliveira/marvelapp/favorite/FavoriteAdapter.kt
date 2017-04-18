@@ -56,6 +56,7 @@ class FavoriteAdapter(private val favoritePresenterImpl: FavoritePresenter) : Re
     }
 
     private fun removeFavorite(favorite: Favorite, position: Int) {
+        favorites.remove(favorite)
         favoritePresenterImpl.deleteFavorite(favorite)
         notifyItemRemoved(position)
         notifyDataSetChanged()

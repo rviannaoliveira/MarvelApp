@@ -21,7 +21,7 @@ class CharactersPresenterImpl(private val charactersView: CharactersView) : Char
         })
     }
 
-    override fun getCharactersFavorites(): Observable<List<Favorite>> {
+    override fun getFavorites(): Observable<List<Favorite>> {
         return DataManager.getAllFavorites()
     }
 

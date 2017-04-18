@@ -48,7 +48,7 @@
                     android:layout_margin="5dp"
                     tools:text="Captain America"/>
 
-                <ImageView
+                <CheckBox
                     android:id="@+id/check_favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_margin="8dp"
                     android:contentDescription="@string/favorite"
-                    android:src="@drawable/ic_star_border_white_24px"/>
+                    android:button="@drawable/ic_star_border_white_24px"/>
             </RelativeLayout>
 
         </android.support.constraint.ConstraintLayout>
