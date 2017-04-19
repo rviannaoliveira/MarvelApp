@@ -9,5 +9,5 @@
     <string name="warning">Warning</string>
     <string name="txt_delete">Do you want delete the favorite?</string>
     <string name="ok">OK</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
 </resources>
