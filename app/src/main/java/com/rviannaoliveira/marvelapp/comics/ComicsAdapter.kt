@@ -54,7 +54,7 @@ class ComicsAdapter(private val presenter : ComicsPresenter) : RecyclerView.Adap
 
         if (comics.favorite == null) {
             comics.favorite = Favorite()
-            comics.favorite?.group = FavoriteGroup.CHARACTERS
+            comics.favorite?.group = FavoriteGroup.COMICS
             comics.favorite?.extension = comics.thumbMail?.extension
             comics.favorite?.path = comics.thumbMail?.path
             comics.favorite?.name = comics.title

@@ -5,8 +5,8 @@ import android.content.res.Configuration
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.rviannaoliveira.marvelapp.R
+import com.squareup.picasso.Picasso
 
 /**
  * Criado por rodrigo on 09/04/17.
@@ -14,9 +14,9 @@ import com.rviannaoliveira.marvelapp.R
 object MarvelUtil {
 
     fun setImageUrl(context: Context, url: String, image: ImageView) {
-        Glide.with(context)
+        Picasso.with(context)
                 .load(url)
-                .centerCrop()
+                .fit()
                 .error(R.drawable.image_broken)
                 .placeholder(R.drawable.ic_marvel_comics)
                 .into(image)

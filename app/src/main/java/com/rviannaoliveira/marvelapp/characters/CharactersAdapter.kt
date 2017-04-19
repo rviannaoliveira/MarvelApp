@@ -56,6 +56,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerVi
             character.favorite?.name = character.name
             character.favorite?.idMarvel = character.id
         }
+
         character.favorite?.let { presenter.toggleFavorite(it, checkView.isChecked) }
 
     }

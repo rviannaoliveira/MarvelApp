@@ -26,7 +26,8 @@ class RepositoryHelper : RepositoryData {
 
     override fun deleteFavorite(favorite: Favorite) {
         realm.beginTransaction()
-        favorite.deleteFromRealm()
+        val favoriteDeleted = realm.where(Favorite::class.java).equalTo(ID, favorite.id).findFirst()
+        favoriteDeleted.deleteFromRealm()
         realm.commitTransaction()
     }
 

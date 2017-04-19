@@ -30,7 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:contentDescription="@string/character"
-                android:scaleType="fitXY"
                 tools:src="@drawable/captain"/>
 
             <RelativeLayout
@@ -43,8 +42,8 @@
                 <TextView
                     android:id="@+id/name_item"
                     style="@style/textItem"
-                    android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:layout_margin="5dp"
                     tools:text="Captain America"/>
 
@@ -55,8 +54,8 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="8dp"
-                    android:contentDescription="@string/favorite"
-                    android:button="@drawable/ic_star_border_white_24px"/>
+                    android:button="@drawable/ic_star_border_white_24px"
+                    android:contentDescription="@string/favorite"/>
             </RelativeLayout>
 
         </android.support.constraint.ConstraintLayout>
