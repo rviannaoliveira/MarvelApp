@@ -28,7 +28,7 @@ object DataManager {
 
     fun getMarvelComics(): Observable<ArrayList<MarvelComic>> {
         val comics = apiData.getMarvelComics()
-        val favorites = repositoryData.getCharactersFavorites()
+        val favorites = repositoryData.getComicsFavorites()
         return Observable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>, ArrayList<MarvelComic>>({ comics, favorites ->
             combineComic(comics, favorites)
         }))

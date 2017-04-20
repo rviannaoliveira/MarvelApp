@@ -22,11 +22,11 @@ object MarvelUtil {
                 .into(image)
     }
 
-    fun showFragment(context: AppCompatActivity, id: Int, fragment: Fragment, addToBackStack: Boolean) {
+    fun showFragment(context: AppCompatActivity, id: Int, fragment: Fragment, addToBackStack: Boolean, tag: String) {
         val fragmentManager = context.supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
-        transaction.replace(id, fragment)
 
+        transaction.replace(id, fragment, tag)
         if (addToBackStack) {
             transaction.addToBackStack(null)
         }

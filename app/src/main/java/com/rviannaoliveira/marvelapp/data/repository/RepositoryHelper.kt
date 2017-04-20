@@ -10,6 +10,7 @@ import io.realm.Realm
  */
 class RepositoryHelper : RepositoryData {
     private val ID = "id"
+    private val GROUP = "group"
     private val realm = Realm.getDefaultInstance()
 
     override fun getAllFavorites(): Observable<List<Favorite>> {
@@ -33,7 +34,13 @@ class RepositoryHelper : RepositoryData {
 
     override fun getCharactersFavorites(): Observable<List<Favorite>> {
         val favorites: List<Favorite> = realm.where(Favorite::class.java)
-                .equalTo("group", FavoriteGroup.CHARACTERS).findAll()
+                .equalTo(GROUP, FavoriteGroup.CHARACTERS).findAll()
+        return Observable.fromArray(favorites)
+    }
+
+    override fun getComicsFavorites(): Observable<List<Favorite>> {
+        val favorites: List<Favorite> = realm.where(Favorite::class.java)
+                .equalTo(GROUP, FavoriteGroup.COMICS).findAll()
         return Observable.fromArray(favorites)
     }
 

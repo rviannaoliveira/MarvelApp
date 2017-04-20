@@ -9,6 +9,7 @@ import io.reactivex.Observable
 interface RepositoryData {
     fun getAllFavorites(): Observable<List<Favorite>>
     fun getCharactersFavorites(): Observable<List<Favorite>>
+    fun getComicsFavorites(): Observable<List<Favorite>>
     fun insertFavorite(favorite: Favorite)
     fun deleteFavorite(favorite: Favorite)
 

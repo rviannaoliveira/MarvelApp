@@ -18,14 +18,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         bottomNavigation = findViewById(R.id.bottom_navigation) as BottomNavigationView
         bottomNavigation.setOnNavigationItemSelectedListener { menuItem -> onNavigationItemReselectedListener(menuItem) }
-        MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false)
+
+        if (savedInstanceState == null) {
+            MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false, MarvelFragmentsConstant.CHARACTERS)
+        }
     }
 
     fun onNavigationItemReselectedListener(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
-            R.id.action_character -> MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false)
-            R.id.action_comic -> MarvelUtil.showFragment(this, R.id.content_main, ComicsFragment(), false)
-            R.id.action_favorite -> MarvelUtil.showFragment(this, R.id.content_main, FavoriteFragment(), false)
+            R.id.action_character -> MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false, MarvelFragmentsConstant.CHARACTERS)
+            R.id.action_comic -> MarvelUtil.showFragment(this, R.id.content_main, ComicsFragment(), false, MarvelFragmentsConstant.COMICS)
+            R.id.action_favorite -> MarvelUtil.showFragment(this, R.id.content_main, FavoriteFragment(), false, MarvelFragmentsConstant.FAVORITES)
         }
         return true
     }
