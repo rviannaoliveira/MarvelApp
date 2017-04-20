@@ -37,7 +37,7 @@ class ComicsAdapter(private val presenter : ComicsPresenter) : RecyclerView.Adap
         if (comics.isNotEmpty()) {
             val marvelComic = comics[position]
             holder.name.text = marvelComic.title
-            MarvelUtil.setImageUrl(context, marvelComic.thumbMail.toString(), holder.image)
+            MarvelUtil.setImageUrl(context, marvelComic.thumbMail?.getPathExtension(), holder.image)
             holder.favorite.setButtonDrawable(toggleImage(marvelComic.favorite != null))
             holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
         }

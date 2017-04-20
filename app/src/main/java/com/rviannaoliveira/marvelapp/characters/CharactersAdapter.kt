@@ -36,7 +36,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerVi
         if (characters.isNotEmpty()) {
             val marvelCharacter = characters[position]
             holder.name.text = marvelCharacter.name
-            MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail.toString(), holder.image)
+            MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
             holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
             holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
         }

@@ -1,10 +1,13 @@
 package com.rviannaoliveira.marvelapp.data.api
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * Criado por rodrigo on 08/04/17.
@@ -17,7 +20,9 @@ class MarvelClient {
 
     private val httpClient = OkHttpClient.Builder()
             .addInterceptor(logging)
+            .addInterceptor({chain -> createParametersDefault(chain)})
             .build()
+
     private val builder = Retrofit.Builder()
             .baseUrl(API_MARVEL_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -28,5 +33,17 @@ class MarvelClient {
         return retrofit.create(serviceClass)
     }
 
+    private fun createParametersDefault(chain: Interceptor.Chain): Response {
+        val timeStamp = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
+        var request = chain.request()
+        val builder = request.url().newBuilder()
 
+        builder.addQueryParameter("apikey",ApiKey.publicKey)
+                .addQueryParameter("hash", MarvelHashGenerate.generate(timeStamp, ApiKey.privateKey, ApiKey.publicKey))
+                .addQueryParameter("ts", timeStamp.toString())
+
+        request = request.newBuilder().url(builder.build()).build()
+        return chain.proceed(request)
+
+    }
 }

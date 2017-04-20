@@ -1,7 +1,6 @@
 package com.rviannaoliveira.marvelapp.model
 
 import com.google.gson.annotations.SerializedName
-import io.realm.annotations.Ignore
 
 /**
  * Criado por rodrigo on 16/04/17.
@@ -9,6 +8,10 @@ import io.realm.annotations.Ignore
 open class BaseModelMarvel {
     @SerializedName("id")
     val id: Int? = null
-    @Ignore
-    var favorite: Favorite? = null
+    @SerializedName("description")
+    val description: String? = null
+    @SerializedName("thumbnail")
+    val thumbMail: MarvelImage? = null
+    @SerializedName("title")
+    val title: String? = null
 }

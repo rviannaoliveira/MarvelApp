@@ -12,7 +12,7 @@ class MarvelImage {
     val extension: String? = null
 
 
-    override fun toString(): String {
+    fun getPathExtension(): String {
         return path + "." + extension
     }
 }

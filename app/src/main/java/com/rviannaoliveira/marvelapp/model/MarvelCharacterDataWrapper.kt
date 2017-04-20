@@ -6,12 +6,7 @@ import com.google.gson.annotations.SerializedName
  * Criado por rodrigo on 08/04/17.
  */
 
-class MarvelCharacterDataWrapper {
-    @SerializedName("code")
-    val code: Int? = null
-    @SerializedName("status")
-    val status: String? = null
+class MarvelCharacterDataWrapper : BaseModelMarvelWrapper(){
     @SerializedName("data")
     val data: MarvelCharacterDataContainer? = null
-
 }

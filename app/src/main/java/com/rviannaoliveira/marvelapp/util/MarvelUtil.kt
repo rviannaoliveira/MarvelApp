@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso
  */
 object MarvelUtil {
 
-    fun setImageUrl(context: Context, url: String, image: ImageView) {
+    fun setImageUrl(context: Context, url: String?, image: ImageView) {
         Picasso.with(context)
                 .load(url)
                 .fit()

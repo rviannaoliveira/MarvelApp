@@ -1,6 +1,7 @@
 package com.rviannaoliveira.marvelapp.model
 
 import com.google.gson.annotations.SerializedName
+import io.realm.annotations.Ignore
 
 /**
  * Criado por rodrigo on 08/04/17.
@@ -9,10 +10,14 @@ import com.google.gson.annotations.SerializedName
 class MarvelCharacter : BaseModelMarvel() {
     @SerializedName("name")
     val name: String? = null
-    @SerializedName("description")
-    val description: String? = null
-    @SerializedName("thumbnail")
-    val thumbMail: MarvelImage? = null
     @SerializedName("urls")
-    val urls: Array<MarvelUrl>? = null
+    val urls: ArrayList<MarvelUrl>? = null
+    @SerializedName("comics")
+    val comics : MarvelComicList? = null
+    @SerializedName("stories")
+    val stories : MarvelStoryList? = null
+    @SerializedName("series")
+    val series : MarvelSeriesList? = null
+    @Ignore
+    var favorite: Favorite? = null
 }

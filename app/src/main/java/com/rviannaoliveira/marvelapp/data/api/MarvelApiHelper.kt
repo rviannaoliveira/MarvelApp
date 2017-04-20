@@ -5,7 +5,6 @@ import com.rviannaoliveira.marvelapp.model.MarvelComic
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 
 /**
@@ -14,10 +13,10 @@ import java.util.concurrent.TimeUnit
 
 class MarvelApiHelper : ApiData {
     private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)
-    private var LIMIT_REGISTER = 10
+    private var LIMIT_REGISTER = 20
 
     override fun getMarvelCharacters(): Observable<ArrayList<MarvelCharacter>> {
-        val response = marvelService.getCharacters(getMapDefaultParams(), LIMIT_REGISTER)
+        val response = marvelService.getCharacters(LIMIT_REGISTER)
 
         return response.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -27,12 +26,10 @@ class MarvelApiHelper : ApiData {
                 .concatMap({ dataContainer ->
                     Observable.fromArray(dataContainer?.results)
                 })
-
     }
-
 
     override fun getMarvelComics(): Observable<ArrayList<MarvelComic>> {
-        val response = marvelService.getComics(getMapDefaultParams(), LIMIT_REGISTER)
+        val response = marvelService.getComics(LIMIT_REGISTER)
         return response.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
@@ -42,18 +39,4 @@ class MarvelApiHelper : ApiData {
                     Observable.fromArray(dataContainer?.results)
                 })
     }
-
-
-    fun getMapDefaultParams(): Map<String, String> {
-        val timeStamp = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
-        val data = HashMap<String, String>()
-
-        data.put("apikey", ApiKey.publicKey)
-        data.put("hash", MarvelHashGenerate.generate(timeStamp, ApiKey.privateKey, ApiKey.publicKey))
-        data.put("ts", timeStamp.toString())
-        return data
-
-    }
-
-
 }
