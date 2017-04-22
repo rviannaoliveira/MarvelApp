@@ -2,6 +2,7 @@ package com.rviannaoliveira.marvelapp.data.repository
 
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.FavoriteGroup
+import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import io.reactivex.Observable
 import io.realm.Realm
 
@@ -9,12 +10,10 @@ import io.realm.Realm
  * Criado por rodrigo on 15/04/17.
  */
 class RepositoryHelper : RepositoryData {
-    private val ID = "id"
-    private val GROUP = "group"
     private val realm = Realm.getDefaultInstance()
 
     override fun getAllFavorites(): Observable<List<Favorite>> {
-        val favorites: List<Favorite> = realm.where(Favorite::class.java).findAll().sort(ID)
+        val favorites: List<Favorite> = realm.where(Favorite::class.java).findAll()
         return Observable.fromArray(favorites)
     }
 
@@ -27,26 +26,26 @@ class RepositoryHelper : RepositoryData {
 
     override fun deleteFavorite(favorite: Favorite) {
         realm.beginTransaction()
-        val favoriteDeleted = realm.where(Favorite::class.java).equalTo(ID, favorite.id).findFirst()
+        val favoriteDeleted = realm.where(Favorite::class.java).equalTo(MarvelConstant.ID, favorite.id).findFirst()
         favoriteDeleted.deleteFromRealm()
         realm.commitTransaction()
     }
 
     override fun getCharactersFavorites(): Observable<List<Favorite>> {
         val favorites: List<Favorite> = realm.where(Favorite::class.java)
-                .equalTo(GROUP, FavoriteGroup.CHARACTERS).findAll()
+                .equalTo(MarvelConstant.GROUP, FavoriteGroup.CHARACTERS).findAll()
         return Observable.fromArray(favorites)
     }
 
     override fun getComicsFavorites(): Observable<List<Favorite>> {
         val favorites: List<Favorite> = realm.where(Favorite::class.java)
-                .equalTo(GROUP, FavoriteGroup.COMICS).findAll()
+                .equalTo(MarvelConstant.GROUP, FavoriteGroup.COMICS).findAll()
         return Observable.fromArray(favorites)
     }
 
     private fun getNextKey(): Int {
         try {
-            return realm.where(Favorite::class.java).max(ID).toInt() + 1
+            return realm.where(Favorite::class.java).max(MarvelConstant.ID).toInt() + 1
         } catch (e: Exception) {
             return 1
         }

@@ -8,6 +8,7 @@ import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.characters.CharactersFragment
 import com.rviannaoliveira.marvelapp.comics.ComicsFragment
 import com.rviannaoliveira.marvelapp.favorite.FavoriteFragment
+import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 class MainActivity : AppCompatActivity() {
@@ -20,15 +21,15 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener { menuItem -> onNavigationItemReselectedListener(menuItem) }
 
         if (savedInstanceState == null) {
-            MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false, MarvelFragmentsConstant.CHARACTERS)
+            MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false, MarvelConstant.CHARACTERS)
         }
     }
 
     fun onNavigationItemReselectedListener(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
-            R.id.action_character -> MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false, MarvelFragmentsConstant.CHARACTERS)
-            R.id.action_comic -> MarvelUtil.showFragment(this, R.id.content_main, ComicsFragment(), false, MarvelFragmentsConstant.COMICS)
-            R.id.action_favorite -> MarvelUtil.showFragment(this, R.id.content_main, FavoriteFragment(), false, MarvelFragmentsConstant.FAVORITES)
+            R.id.action_character -> MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false, MarvelConstant.CHARACTERS)
+            R.id.action_comic -> MarvelUtil.showFragment(this, R.id.content_main, ComicsFragment(), false, MarvelConstant.COMICS)
+            R.id.action_favorite -> MarvelUtil.showFragment(this, R.id.content_main, FavoriteFragment(), false, MarvelConstant.FAVORITES)
         }
         return true
     }

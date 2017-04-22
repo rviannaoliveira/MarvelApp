@@ -17,11 +17,17 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".main.MainActivity"
             android:label="@string/marvel"/>
+        <activity
+            android:name=".character.DetailCharacterActivity"
+            android:theme="@style/TransparentActionBar">
+        </activity>
     </application>
+
 </manifest>

@@ -1,6 +1,7 @@
 package com.rviannaoliveira.marvelapp.characters
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
+import com.rviannaoliveira.marvelapp.character.DetailCharacterActivity
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.FavoriteGroup
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
+import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 /**
@@ -39,8 +42,15 @@ class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerVi
             MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
             holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
             holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
+            holder.image.setOnClickListener { showDetail(marvelCharacter) }
         }
 
+    }
+
+    private fun showDetail(marvelCharacter: MarvelCharacter) {
+        val detailIntent = Intent(context, DetailCharacterActivity::class.java)
+        detailIntent.putExtra(MarvelConstant.ID, marvelCharacter.id)
+        context.startActivity(detailIntent)
     }
 
     override fun toggleFavorite(position: Int, view: View) {

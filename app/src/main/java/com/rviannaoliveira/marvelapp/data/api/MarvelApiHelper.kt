@@ -39,4 +39,17 @@ class MarvelApiHelper : ApiData {
                     Observable.fromArray(dataContainer?.results)
                 })
     }
+
+    override fun getDetailCharacter(id: Int): Observable<MarvelCharacter> {
+        val response = marvelService.getCharacter(id)
+        return response.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .concatMap({ dataWrappers ->
+                    Observable.fromArray(dataWrappers.data)
+                })
+                .concatMap({ dataContainer ->
+                    dataContainer?.let { Observable.just(dataContainer.results?.get(0)) }
+                })
+    }
+
 }

@@ -34,6 +34,10 @@ object DataManager {
         }))
     }
 
+    fun getDetailMarvelCharacter(id: Int): Observable<MarvelCharacter> {
+        return apiData.getDetailCharacter(id)
+    }
+
     fun getAllFavorites(): Observable<List<Favorite>> {
         return repositoryData.getAllFavorites()
     }
