@@ -8,16 +8,15 @@ import io.realm.annotations.Ignore
  */
 
 class MarvelCharacter : BaseModelMarvel() {
-    @SerializedName("name")
-    val name: String? = null
     @SerializedName("urls")
     val urls: ArrayList<MarvelUrl>? = null
     @SerializedName("comics")
-    val comics : MarvelComicList? = null
+    var comics: MarvelComicList? = null
     @SerializedName("stories")
     val stories : MarvelStoryList? = null
     @SerializedName("series")
     val series : MarvelSeriesList? = null
     @Ignore
     var favorite: Favorite? = null
+    val comicList: ArrayList<MarvelComic>? = null
 }

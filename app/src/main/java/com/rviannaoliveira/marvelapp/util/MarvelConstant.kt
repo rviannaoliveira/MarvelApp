@@ -8,7 +8,7 @@ object MarvelConstant {
     val CHARACTERS = "CHARACTERS"
     val FAVORITES = "FAVORITES"
     val CHARACTER = "CHARACTER"
-    val ID = "ID"
+    val ID = "id"
     val GROUP = "group"
 
 }

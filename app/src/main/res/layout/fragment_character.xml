@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.rviannaoliveira.marvelapp.character.DetailCharacterActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorThird">
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterActivity">
 
     <ImageView
         android:id="@+id/image"
+        style="@style/imageTransition"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:contentDescription="@string/character"
@@ -17,37 +23,45 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        style="@style/textTransition"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_margin="16dp"
         android:textColor="@color/textColorPrimary"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image"
-        app:layout_constraintVertical_bias="0.05"
-        tools:text="lalalalalala lalalala alalala alalal"/>
+        tools:text="Captain America"/>
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        style="@style/textDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.05"
         tools:text="lalalalalala lalalala alalala alalal"/>
 
-    <ProgressBar
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/description">
+
+            <TextView
+                android:id="@+id/txt_comic"
+                style="@style/textDetail"
+                android:text="@string/comics"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description"/>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager_comics"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </android.support.v4.view.ViewPager>
+        </LinearLayout>
+
+        <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,3 +74,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible"/>
 </android.support.constraint.ConstraintLayout>
+</ScrollView>

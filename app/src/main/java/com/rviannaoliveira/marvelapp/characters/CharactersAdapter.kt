@@ -2,6 +2,11 @@ package com.rviannaoliveira.marvelapp.characters
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
-import com.rviannaoliveira.marvelapp.character.DetailCharacterActivity
+import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterActivity
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.FavoriteGroup
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
@@ -21,7 +26,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 /**
  * Criado por rodrigo on 08/04/17.
  */
-class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>(), BaseRecyclerView {
+class CharactersAdapter(private val presenter: CharactersPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>(), BaseRecyclerView {
     private lateinit var context: Context
     private var characters = ArrayList<MarvelCharacter>()
 
@@ -32,7 +37,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
         this.context = parent.context
-        return CharactersViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.character_row, parent, false))
+        return CharactersViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row, parent, false))
     }
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
@@ -42,15 +47,23 @@ class CharactersAdapter(private val presenter: CharactersPresenter) : RecyclerVi
             MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
             holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
             holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
-            holder.image.setOnClickListener { showDetail(marvelCharacter) }
+            holder.image.setOnClickListener { showDetail(holder, marvelCharacter) }
         }
 
     }
 
-    private fun showDetail(marvelCharacter: MarvelCharacter) {
+    private fun showDetail(holder: CharactersViewHolder, marvelCharacter: MarvelCharacter) {
         val detailIntent = Intent(context, DetailCharacterActivity::class.java)
         detailIntent.putExtra(MarvelConstant.ID, marvelCharacter.id)
-        context.startActivity(detailIntent)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val imagePair = Pair.create(holder.image as View, holder.image.transitionName)
+            val holderPair = Pair.create(holder.name as View, holder.name.transitionName)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(appCompatActivity, imagePair, holderPair)
+            ActivityCompat.startActivity(context, detailIntent, options.toBundle())
+        } else {
+            context.startActivity(detailIntent)
+        }
     }
 
     override fun toggleFavorite(position: Int, view: View) {

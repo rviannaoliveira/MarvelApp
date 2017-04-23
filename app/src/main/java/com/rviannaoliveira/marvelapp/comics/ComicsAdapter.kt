@@ -29,7 +29,7 @@ class ComicsAdapter(private val presenter : ComicsPresenter) : RecyclerView.Adap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
         context = parent.context
-        return ComicViewHolder(LayoutInflater.from(context).inflate(R.layout.comic_row, parent, false))
+        return ComicViewHolder(LayoutInflater.from(context).inflate(R.layout.item_row, parent, false))
 
     }
 

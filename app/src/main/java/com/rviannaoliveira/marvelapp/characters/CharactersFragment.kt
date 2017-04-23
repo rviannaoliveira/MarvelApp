@@ -2,6 +2,7 @@ package com.rviannaoliveira.marvelapp.characters
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -33,7 +34,7 @@ class CharactersFragment : Fragment(), CharactersView {
     }
 
     override fun loadView() {
-        charactersAdapter = CharactersAdapter(charactersPresenterImpl)
+        charactersAdapter = CharactersAdapter(charactersPresenterImpl, activity as AppCompatActivity)
         charactersRecyclerView.adapter = charactersAdapter
         val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
         charactersRecyclerView.setHasFixedSize(true)

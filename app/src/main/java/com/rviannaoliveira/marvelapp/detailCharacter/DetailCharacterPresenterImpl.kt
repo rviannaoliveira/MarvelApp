@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.character
+package com.rviannaoliveira.marvelapp.detailCharacter
 
 import android.util.Log
 import com.rviannaoliveira.marvelapp.characters.DetailCharacterPresenter

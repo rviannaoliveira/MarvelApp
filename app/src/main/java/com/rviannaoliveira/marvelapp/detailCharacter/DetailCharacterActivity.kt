@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.character
+package com.rviannaoliveira.marvelapp.detailCharacter
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat

@@ -50,6 +50,16 @@ class MarvelApiHelper : ApiData {
                 .concatMap({ dataContainer ->
                     dataContainer?.let { Observable.just(dataContainer.results?.get(0)) }
                 })
+        //TODO pensar numa forma melhor
+//                .flatMap({ data ->
+//                   data?.comicList = marvelService.getCharacterComic(data?.id)
+//                            .concatMap({ dataWrappers ->
+//                                Observable.fromArray(dataWrappers.data)
+//                            })
+//                            .concatMap({ dataContainer ->
+//                                dataContainer?.let { Observable.fromArray(dataContainer.results)}
+//                            }) // Aqui que me perdi -.-
+//                })
     }
 
 }

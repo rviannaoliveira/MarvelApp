@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName
 open class BaseModelMarvel {
     @SerializedName("id")
     val id: Int? = null
+    @SerializedName("name")
+    val name: String? = null
     @SerializedName("description")
     val description: String? = null
     @SerializedName("thumbnail")
