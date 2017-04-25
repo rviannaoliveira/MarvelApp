@@ -61,7 +61,7 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         title.text = marvelCharacter.name
         description.text = if (marvelCharacter.description?.length == 0) getString(R.string.no_description) else marvelCharacter.description
         appActivity.supportActionBar?.title = marvelCharacter.name
-        marvelCharacter.comicList?.let { viewPagerComic.adapter = MarvelPagerAdapter(context, marvelCharacter.comicList) }
+        marvelCharacter.comicList?.let { viewPagerComic.adapter = MarvelPagerAdapter(context, marvelCharacter.comicList!!) }
     }
 
     override fun showProgressBar() {

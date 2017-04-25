@@ -8,6 +8,7 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 /**
  * Criado por rodrigo on 08/04/17.
@@ -24,8 +25,8 @@ interface MarvelService {
     @GET("/v1/public/characters/{characterId}")
     fun getCharacter(@Path("characterId") characterId: Int): Observable<MarvelCharacterDataWrapper>
 
-    @GET("/v1/public/characters/{characterId}/comics")
-    fun getCharacterComic(@Path("characterId") characterId: Int?): Observable<MarvelComicDataWrapper>
+    @GET
+    fun getCharacterComic(@Url url: String): Observable<MarvelComicDataWrapper>
 
     @GET("/v1/public/characters/{characterId}/series")
     fun getCharacterSeries(@Path("characterId") characterId: Int): Observable<MarvelSeriesDataWrapper>

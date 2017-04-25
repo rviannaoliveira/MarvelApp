@@ -33,7 +33,6 @@ class MarvelPagerAdapter(private val context: Context, private val comics: Array
 
     override fun destroyItem(container: ViewGroup?, position: Int, view: Any?) {
         container?.removeView(view as View)
-        super.destroyItem(container, position, view)
     }
 
     override fun getPageTitle(position: Int): CharSequence {

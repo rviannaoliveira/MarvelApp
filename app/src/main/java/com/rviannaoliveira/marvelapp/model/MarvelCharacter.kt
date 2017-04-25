@@ -18,5 +18,5 @@ class MarvelCharacter : BaseModelMarvel() {
     val series : MarvelSeriesList? = null
     @Ignore
     var favorite: Favorite? = null
-    val comicList: ArrayList<MarvelComic>? = null
+    var comicList: ArrayList<MarvelComic>? = null
 }

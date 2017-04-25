@@ -2,8 +2,11 @@ package com.rviannaoliveira.marvelapp.data.api
 
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.model.MarvelComic
+import com.rviannaoliveira.marvelapp.model.MarvelComicDataWrapper
 import io.reactivex.Observable
+import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
 
@@ -45,21 +48,23 @@ class MarvelApiHelper : ApiData {
         return response.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
-                    Observable.fromArray(dataWrappers.data)
+                    Observable.just(dataWrappers.data?.results?.get(0))
                 })
-                .concatMap({ dataContainer ->
-                    dataContainer?.let { Observable.just(dataContainer.results?.get(0)) }
+                .flatMap({ data ->
+                    Observable.zip(Observable.just(data),
+                            getMarvelCharacterComics(data),
+                            BiFunction<MarvelCharacter?, MarvelComicDataWrapper, MarvelCharacter>({ character, wrapper ->
+                                character?.comicList = wrapper.data?.results
+                                character
+                            }))
                 })
-        //TODO pensar numa forma melhor
-//                .flatMap({ data ->
-//                   data?.comicList = marvelService.getCharacterComic(data?.id)
-//                            .concatMap({ dataWrappers ->
-//                                Observable.fromArray(dataWrappers.data)
-//                            })
-//                            .concatMap({ dataContainer ->
-//                                dataContainer?.let { Observable.fromArray(dataContainer.results)}
-//                            }) // Aqui que me perdi -.-
-//                })
     }
 
+    private fun getMarvelCharacterComics(data: MarvelCharacter?): ObservableSource<MarvelComicDataWrapper>? {
+        return data?.comics?.collectionURI?.let {
+            marvelService.getCharacterComic(it)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+        }
+    }
 }
