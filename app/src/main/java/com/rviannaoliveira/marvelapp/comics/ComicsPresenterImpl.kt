@@ -1,9 +1,9 @@
 package com.rviannaoliveira.marvelapp.comics
 
-import android.util.Log
 import com.rviannaoliveira.marvelapp.data.DataManager
 import com.rviannaoliveira.marvelapp.model.Favorite
 import io.reactivex.Observable
+import timber.log.Timber
 
 /**
  * Criado por rodrigo on 14/04/17.
@@ -17,7 +17,9 @@ class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
             view.loadComics(marvelComics)
             view.hideProgressBar()
         }, { error ->
-            Log.e("error", error.message)
+            view.hideProgressBar()
+            view.error()
+            Timber.w(error.message)
         })
     }
 

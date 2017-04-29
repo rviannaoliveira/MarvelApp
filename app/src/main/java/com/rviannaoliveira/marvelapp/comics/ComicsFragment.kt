@@ -1,13 +1,17 @@
 package com.rviannaoliveira.marvelapp.comics
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.model.MarvelComic
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
@@ -51,6 +55,20 @@ class ComicsFragment : Fragment(), ComicsView {
 
     override fun loadComics(comics: ArrayList<MarvelComic>) {
         comicsAdapter.setComics(comics)
+    }
+
+    override fun error() {
+        if (this.isVisible) {
+            val includeProblem = view?.findViewById(R.id.include_problem_screen)
+            val imageProblem = view?.findViewById(R.id.image_problem) as ImageView
+            val textProblem = view?.findViewById(R.id.text_problem) as TextView
+            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.comic_error)
+
+            includeProblem?.visibility = View.VISIBLE
+            imageProblem.setImageBitmap(MarvelUtil.blur(context, bitmap))
+            textProblem.text = getString(R.string.problem_generic)
+            textProblem.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary))
+        }
     }
 
 }

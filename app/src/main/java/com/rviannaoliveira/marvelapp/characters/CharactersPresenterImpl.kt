@@ -1,9 +1,9 @@
 package com.rviannaoliveira.marvelapp.characters
 
-import android.util.Log
 import com.rviannaoliveira.marvelapp.data.DataManager
 import com.rviannaoliveira.marvelapp.model.Favorite
 import io.reactivex.Observable
+import timber.log.Timber
 
 /**
  * Criado por rodrigo on 09/04/17.
@@ -17,7 +17,9 @@ class CharactersPresenterImpl(private val charactersView: CharactersView) : Char
             charactersView.loadCharacters(marvelCharacters)
             charactersView.hideProgressBar()
         }, { error ->
-            Log.e("error", error.message)
+            charactersView.hideProgressBar()
+            charactersView.error()
+            Timber.w(error)
         })
     }
 

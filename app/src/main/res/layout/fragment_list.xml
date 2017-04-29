@@ -9,6 +9,7 @@
         android:id="@+id/list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="5dp"
         tools:listitem="@layout/item_row"/>
 
     <ProgressBar
@@ -17,5 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/include_problem_screen"
+        layout="@layout/problem_screen"
         android:visibility="gone"/>
 </RelativeLayout>

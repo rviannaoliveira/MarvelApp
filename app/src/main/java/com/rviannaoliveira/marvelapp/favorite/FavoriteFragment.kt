@@ -1,13 +1,17 @@
 package com.rviannaoliveira.marvelapp.favorite
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.comics.FavoritePresenterImpl
 import com.rviannaoliveira.marvelapp.model.Favorite
@@ -58,5 +62,34 @@ class FavoriteFragment : Fragment(), FavoriteView {
 
     override fun loadFavorite(favorites: List<Favorite>) {
         favoriteAdapter.setFavorites(favorites)
+
+        if (favorites.isEmpty()) {
+            favoriteEmpty()
+        }
     }
+
+    override fun error() {
+        val includeProblem = view?.findViewById(R.id.include_problem_screen)
+        val imageProblem = view?.findViewById(R.id.image_problem) as ImageView
+        val textProblem = view?.findViewById(R.id.text_problem) as TextView
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.captain_error)
+
+        includeProblem?.visibility = View.VISIBLE
+        imageProblem.setImageBitmap(bitmap)
+        textProblem.text = getString(R.string.favorite_empty)
+        textProblem.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary))
+    }
+
+    private fun favoriteEmpty() {
+        val includeProblem = view?.findViewById(R.id.include_problem_screen)
+        val imageProblem = view?.findViewById(R.id.image_problem) as ImageView
+        val textProblem = view?.findViewById(R.id.text_problem) as TextView
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.spiderman_empty)
+
+        includeProblem?.visibility = View.VISIBLE
+        imageProblem.setImageBitmap(bitmap)
+        textProblem.text = getString(R.string.favorite_empty)
+        textProblem.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary))
+    }
+
 }

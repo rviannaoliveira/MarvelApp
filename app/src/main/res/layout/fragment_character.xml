@@ -41,23 +41,31 @@
         tools:text="lalalalalala lalalala alalala alalal"/>
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/block_pager_view_comics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/description">
 
             <TextView
                 android:id="@+id/txt_comic"
-                style="@style/textDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="@string/comics"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description"/>
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager_comics"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="220dp">
             </android.support.v4.view.ViewPager>
         </LinearLayout>
 

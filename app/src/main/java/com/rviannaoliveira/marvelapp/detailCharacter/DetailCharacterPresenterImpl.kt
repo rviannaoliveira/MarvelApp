@@ -13,9 +13,10 @@ class DetailCharacterPresenterImpl(private val view: DetailCharacterView) : Deta
         view.showProgressBar()
         DataManager.getDetailMarvelCharacter(id)
                 .subscribe({ character ->
-                    view.loadCharacter(character)
                     view.hideProgressBar()
+                    view.loadCharacter(character)
                 }, { error ->
+                    view.hideProgressBar()
                     Log.e("error", error.message)
                 })
 

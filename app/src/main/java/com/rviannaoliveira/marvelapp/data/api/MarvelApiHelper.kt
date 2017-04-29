@@ -22,6 +22,7 @@ class MarvelApiHelper : ApiData {
         val response = marvelService.getCharacters(LIMIT_REGISTER)
 
         return response.subscribeOn(Schedulers.newThread())
+                .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
                     Observable.fromArray(dataWrappers.data)
@@ -34,6 +35,7 @@ class MarvelApiHelper : ApiData {
     override fun getMarvelComics(): Observable<ArrayList<MarvelComic>> {
         val response = marvelService.getComics(LIMIT_REGISTER)
         return response.subscribeOn(Schedulers.newThread())
+                .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
                     Observable.fromArray(dataWrappers.data)
@@ -46,6 +48,7 @@ class MarvelApiHelper : ApiData {
     override fun getDetailCharacter(id: Int): Observable<MarvelCharacter> {
         val response = marvelService.getCharacter(id)
         return response.subscribeOn(Schedulers.newThread())
+                .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
                     Observable.just(dataWrappers.data?.results?.get(0))

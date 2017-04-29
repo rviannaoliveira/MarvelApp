@@ -7,4 +7,5 @@ interface BaseView {
     fun showProgressBar()
     fun hideProgressBar()
     fun loadView()
+    fun error()
 }
