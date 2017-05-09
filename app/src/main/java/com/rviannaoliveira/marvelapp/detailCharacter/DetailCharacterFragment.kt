@@ -3,8 +3,9 @@ package com.rviannaoliveira.marvelapp.characters
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -16,7 +17,7 @@ import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterPresenterImpl
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterView
-import com.rviannaoliveira.marvelapp.detailCharacter.MarvelPagerAdapter
+import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicsAdapter
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
@@ -32,8 +33,9 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     private lateinit var title: TextView
     private lateinit var progressbar: ProgressBar
     private lateinit var appActivity: AppCompatActivity
-    private lateinit var viewPagerComic: ViewPager
     private lateinit var blockComics: LinearLayout
+    private lateinit var reclycerViewComic: RecyclerView
+    private lateinit var comicsAdapter: DetailComicsAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,8 +48,9 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         description = view.findViewById(R.id.description) as TextView
         progressbar = view.findViewById(R.id.progressbar) as ProgressBar
         title = view.findViewById(R.id.title) as TextView
-        viewPagerComic = view.findViewById(R.id.view_pager_comics) as ViewPager
         blockComics = view.findViewById(R.id.block_pager_view_comics) as LinearLayout
+        reclycerViewComic = view.findViewById(R.id.list_comic) as RecyclerView
+        loadView()
         detailCharacterPresenterImpl.getMarvelCharacter(arguments.get(MarvelConstant.ID) as Int)
         return view
     }
@@ -58,6 +61,10 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     }
 
     override fun loadView() {
+        comicsAdapter = DetailComicsAdapter()
+        reclycerViewComic.adapter = comicsAdapter
+        reclycerViewComic.setHasFixedSize(true)
+        reclycerViewComic.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun loadCharacter(marvelCharacter: MarvelCharacter) {
@@ -66,15 +73,8 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         description.text = if (marvelCharacter.description?.length == 0) getString(R.string.no_description) else marvelCharacter.description
         appActivity.supportActionBar?.title = marvelCharacter.name
         marvelCharacter.comicList?.let {
-            viewPagerComic.adapter = MarvelPagerAdapter(context, marvelCharacter.comicList!!)
-
-            if (viewPagerComic.adapter.count > 0) {
-                viewPagerComic.clipToPadding = false
-                viewPagerComic.setPadding(0, 0, 50, 0)
-                viewPagerComic.pageMargin = 80
-                viewPagerComic.offscreenPageLimit = 2
-                blockComics.visibility = View.VISIBLE
-            }
+            comicsAdapter.setComics(it)
+            blockComics.visibility = View.VISIBLE
         }
     }
 

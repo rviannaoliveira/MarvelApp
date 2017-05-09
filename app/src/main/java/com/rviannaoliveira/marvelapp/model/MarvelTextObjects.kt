@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 class MarvelTextObjects {
     @SerializedName("type")
     val type: String? = null
-    @SerializedName("text")
+    @SerializedName("name")
     val text: String? = null
     @SerializedName("language")
     val language: String? = null
