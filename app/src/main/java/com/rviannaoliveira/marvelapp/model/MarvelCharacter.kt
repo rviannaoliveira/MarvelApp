@@ -19,4 +19,5 @@ class MarvelCharacter : BaseModelMarvel() {
     @Ignore
     var favorite: Favorite? = null
     var comicList: ArrayList<MarvelComic>? = null
+    var seriesList: ArrayList<MarvelSeries>? = null
 }

@@ -28,6 +28,9 @@ interface MarvelService {
     @GET
     fun getCharacterComic(@Url url: String): Observable<MarvelComicDataWrapper>
 
+    @GET
+    fun getCharacterSeries(@Url url: String): Observable<MarvelSeriesDataWrapper>
+
     @GET("/v1/public/characters/{characterId}/series")
     fun getCharacterSeries(@Path("characterId") characterId: Int): Observable<MarvelSeriesDataWrapper>
 

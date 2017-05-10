@@ -3,10 +3,11 @@ package com.rviannaoliveira.marvelapp.data.api
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.model.MarvelComic
 import com.rviannaoliveira.marvelapp.model.MarvelComicDataWrapper
+import com.rviannaoliveira.marvelapp.model.MarvelSeriesDataWrapper
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function3
 import io.reactivex.schedulers.Schedulers
 
 
@@ -56,8 +57,10 @@ class MarvelApiHelper : ApiData {
                 .flatMap({ data ->
                     Observable.zip(Observable.just(data),
                             getMarvelCharacterComics(data),
-                            BiFunction<MarvelCharacter?, MarvelComicDataWrapper, MarvelCharacter>({ character, wrapper ->
-                                character?.comicList = wrapper.data?.results
+                            getMarvelCharacterSeries(data),
+                            Function3<MarvelCharacter?, MarvelComicDataWrapper, MarvelSeriesDataWrapper, MarvelCharacter>({ character, comics, series ->
+                                character?.comicList = comics.data?.results
+                                character?.seriesList = series.data?.results
                                 character
                             }))
                 })
@@ -66,6 +69,14 @@ class MarvelApiHelper : ApiData {
     private fun getMarvelCharacterComics(data: MarvelCharacter?): ObservableSource<MarvelComicDataWrapper>? {
         return data?.comics?.collectionURI?.let {
             marvelService.getCharacterComic(it)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+        }
+    }
+
+    private fun getMarvelCharacterSeries(data: MarvelCharacter?): ObservableSource<MarvelSeriesDataWrapper>? {
+        return data?.series?.collectionURI?.let {
+            marvelService.getCharacterSeries(it)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
         }

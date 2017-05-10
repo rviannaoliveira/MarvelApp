@@ -18,6 +18,7 @@ import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterPresenterImpl
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterView
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicsAdapter
+import com.rviannaoliveira.marvelapp.detailCharacter.DetailSeriesAdapter
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
@@ -34,8 +35,11 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     private lateinit var progressbar: ProgressBar
     private lateinit var appActivity: AppCompatActivity
     private lateinit var blockComics: LinearLayout
+    private lateinit var blockSeries: LinearLayout
     private lateinit var reclycerViewComic: RecyclerView
+    private lateinit var reclycerViewSeries: RecyclerView
     private lateinit var comicsAdapter: DetailComicsAdapter
+    private lateinit var seriesAdapter: DetailSeriesAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,8 +52,11 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         description = view.findViewById(R.id.description) as TextView
         progressbar = view.findViewById(R.id.progressbar) as ProgressBar
         title = view.findViewById(R.id.title) as TextView
-        blockComics = view.findViewById(R.id.block_pager_view_comics) as LinearLayout
+        blockComics = view.findViewById(R.id.block_comics) as LinearLayout
+        blockSeries = view.findViewById(R.id.block_series) as LinearLayout
         reclycerViewComic = view.findViewById(R.id.list_comic) as RecyclerView
+        reclycerViewSeries = view.findViewById(R.id.list_series) as RecyclerView
+
         loadView()
         detailCharacterPresenterImpl.getMarvelCharacter(arguments.get(MarvelConstant.ID) as Int)
         return view
@@ -62,9 +69,15 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
 
     override fun loadView() {
         comicsAdapter = DetailComicsAdapter()
+        seriesAdapter = DetailSeriesAdapter()
+
         reclycerViewComic.adapter = comicsAdapter
         reclycerViewComic.setHasFixedSize(true)
         reclycerViewComic.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        reclycerViewSeries.adapter = seriesAdapter
+        reclycerViewSeries.setHasFixedSize(true)
+        reclycerViewSeries.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun loadCharacter(marvelCharacter: MarvelCharacter) {
@@ -72,9 +85,14 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         title.text = marvelCharacter.name
         description.text = if (marvelCharacter.description?.length == 0) getString(R.string.no_description) else marvelCharacter.description
         appActivity.supportActionBar?.title = marvelCharacter.name
+
         marvelCharacter.comicList?.let {
             comicsAdapter.setComics(it)
             blockComics.visibility = View.VISIBLE
+        }
+        marvelCharacter.seriesList?.let {
+            seriesAdapter.setSeries(it)
+            blockSeries.visibility = View.VISIBLE
         }
     }
 
