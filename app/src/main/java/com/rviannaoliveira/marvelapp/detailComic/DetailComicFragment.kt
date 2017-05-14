@@ -27,7 +27,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  */
 
 class DetailComicFragment : Fragment(), DetailComicView {
-    private val detailCharacterPresenterImpl: DetailComicPresenter = DetailComicPresenterImpl(this)
+    private val detailComicPresenterImpl: DetailComicPresenter = DetailComicPresenterImpl(this)
     private lateinit var image: ImageView
     private lateinit var description: TextView
     private lateinit var progressbar: ProgressBar
@@ -50,7 +50,7 @@ class DetailComicFragment : Fragment(), DetailComicView {
         reclycerViewCharacter = view.findViewById(R.id.list_character) as RecyclerView
 
         loadView()
-        detailCharacterPresenterImpl.getMarvelComic(arguments.get(MarvelConstant.ID) as Int)
+        detailComicPresenterImpl.getMarvelComic(arguments.get(MarvelConstant.ID) as Int)
         return view
     }
 
@@ -89,6 +89,6 @@ class DetailComicFragment : Fragment(), DetailComicView {
     }
 
     override fun error() {
-        MarvelUtil.showErrorScreen(context, view, resources, R.drawable.wolverine_error)
+        MarvelUtil.showErrorScreen(context, view, resources, R.drawable.ciclope_error)
     }
 }
