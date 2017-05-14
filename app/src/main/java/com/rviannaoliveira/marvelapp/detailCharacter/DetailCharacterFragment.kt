@@ -1,6 +1,5 @@
 package com.rviannaoliveira.marvelapp.characters
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -31,7 +30,6 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     private val detailCharacterPresenterImpl: DetailCharacterPresenter = DetailCharacterPresenterImpl(this)
     private lateinit var image: ImageView
     private lateinit var description: TextView
-    private lateinit var title: TextView
     private lateinit var progressbar: ProgressBar
     private lateinit var appActivity: AppCompatActivity
     private lateinit var blockComics: LinearLayout
@@ -41,9 +39,9 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     private lateinit var comicsAdapter: DetailComicsAdapter
     private lateinit var seriesAdapter: DetailSeriesAdapter
 
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_character, container, false)
+
         appActivity = activity as AppCompatActivity
         appActivity.title = ""
         setHasOptionsMenu(true)
@@ -51,7 +49,6 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         image = view?.findViewById(R.id.image) as ImageView
         description = view.findViewById(R.id.description) as TextView
         progressbar = view.findViewById(R.id.progressbar) as ProgressBar
-        title = view.findViewById(R.id.title) as TextView
         blockComics = view.findViewById(R.id.block_comics) as LinearLayout
         blockSeries = view.findViewById(R.id.block_series) as LinearLayout
         reclycerViewComic = view.findViewById(R.id.list_comic) as RecyclerView
@@ -82,15 +79,20 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
 
     override fun loadCharacter(marvelCharacter: MarvelCharacter) {
         MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), image)
-        title.text = marvelCharacter.name
         description.text = if (marvelCharacter.description?.length == 0) getString(R.string.no_description) else marvelCharacter.description
         appActivity.supportActionBar?.title = marvelCharacter.name
 
         marvelCharacter.comicList?.let {
+            if (it.isEmpty()) {
+                return
+            }
             comicsAdapter.setComics(it)
             blockComics.visibility = View.VISIBLE
         }
         marvelCharacter.seriesList?.let {
+            if (it.isEmpty()) {
+                return
+            }
             seriesAdapter.setSeries(it)
             blockSeries.visibility = View.VISIBLE
         }
@@ -105,13 +107,6 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     }
 
     override fun error() {
-        val includeProblem = view?.findViewById(R.id.include_problem_screen)
-        val imageProblem = view?.findViewById(R.id.image_problem) as ImageView
-        val textProblem = view?.findViewById(R.id.text_problem) as TextView
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.deadpool_error)
-
-        includeProblem?.visibility = View.VISIBLE
-        imageProblem.setImageBitmap(MarvelUtil.blur(context, bitmap))
-        textProblem.text = getString(R.string.problem_generic)
+        MarvelUtil.showErrorScreen(context, view, resources, R.drawable.wolverine_error)
     }
 }

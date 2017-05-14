@@ -10,9 +10,9 @@ import timber.log.Timber
  */
 class CharactersPresenterImpl(private val charactersView: CharactersView) : CharactersPresenter {
 
-    override fun getMarvelCharacters() {
+    override fun getMarvelCharacters(offset: Int) {
         charactersView.showProgressBar()
-        val observableCharacters = DataManager.getMarvelCharacters()
+        val observableCharacters = DataManager.getMarvelCharacters(offset)
         observableCharacters.subscribe({ marvelCharacters ->
             charactersView.loadCharacters(marvelCharacters)
             charactersView.hideProgressBar()

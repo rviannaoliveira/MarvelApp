@@ -1,21 +1,19 @@
 package com.rviannaoliveira.marvelapp.characters
 
-import android.graphics.BitmapFactory
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
+
 
 /**
  * Criado por rodrigo on 09/04/17.
@@ -26,6 +24,7 @@ class CharactersFragment : Fragment(), CharactersView {
     private var charactersAdapter: CharactersAdapter? = null
     private lateinit var progressbar: ProgressBar
     private lateinit var charactersRecyclerView: RecyclerView
+    private var isLoading: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_list, container, false)
@@ -33,7 +32,7 @@ class CharactersFragment : Fragment(), CharactersView {
         this.charactersRecyclerView = view.findViewById(R.id.list_recycler_view) as RecyclerView
 
         loadView()
-        charactersPresenterImpl.getMarvelCharacters()
+        charactersPresenterImpl.getMarvelCharacters(0)
         return view
     }
 
@@ -43,6 +42,7 @@ class CharactersFragment : Fragment(), CharactersView {
         val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
         charactersRecyclerView.setHasFixedSize(true)
         charactersRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
+        charactersRecyclerView.addOnScrollListener(onScrollListener())
     }
 
     override fun showProgressBar() {
@@ -55,20 +55,30 @@ class CharactersFragment : Fragment(), CharactersView {
 
     override fun loadCharacters(marvelCharacters: ArrayList<MarvelCharacter>) {
         charactersAdapter?.setCharacters(marvelCharacters)
+        isLoading = false
     }
 
     override fun error() {
         if (this.isVisible) {
-            val includeProblem = view?.findViewById(R.id.include_problem_screen)
-            val imageProblem = view?.findViewById(R.id.image_problem) as ImageView
-            val textProblem = view?.findViewById(R.id.text_problem) as TextView
-            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.deadpool_error)
+            MarvelUtil.showErrorScreen(context, view, resources, R.drawable.deadpool_error)
+        }
+    }
 
-            includeProblem?.visibility = View.VISIBLE
-            imageProblem.setImageBitmap(MarvelUtil.blur(context, bitmap))
-            imageProblem.alpha = 0.80f
-            textProblem.text = getString(R.string.problem_generic)
-            textProblem.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary))
+    private fun onScrollListener(): RecyclerView.OnScrollListener {
+        return object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount = recyclerView.layoutManager.childCount
+                val totalItemCount = recyclerView.layoutManager.itemCount
+                val firstVisibleItemPosition = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
+
+                if (!isLoading && visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                        && firstVisibleItemPosition >= 0
+                        && totalItemCount >= PAGE_SIZE) {
+                    isLoading = true
+                    charactersPresenterImpl.getMarvelCharacters(totalItemCount)
+                }
+            }
         }
     }
 

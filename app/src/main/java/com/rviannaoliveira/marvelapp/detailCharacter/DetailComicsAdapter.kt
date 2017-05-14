@@ -15,7 +15,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  * Criado por rcalixto on 09/05/2017.
  */
 
-class DetailComicsAdapter() : RecyclerView.Adapter<DetailComicsAdapter.DetailComicViewHolder>() {
+class DetailComicsAdapter : RecyclerView.Adapter<DetailComicsAdapter.DetailComicViewHolder>() {
     private lateinit var context: Context
     private lateinit var comics: ArrayList<MarvelComic>
 

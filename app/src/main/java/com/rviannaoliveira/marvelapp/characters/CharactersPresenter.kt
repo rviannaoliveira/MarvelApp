@@ -6,5 +6,5 @@ import com.rviannaoliveira.marvelapp.base.BasePresenterFavorite
  * Criado por rodrigo on 09/04/17.
  */
 interface CharactersPresenter : BasePresenterFavorite {
-    fun getMarvelCharacters()
+    fun getMarvelCharacters(offset: Int)
 }

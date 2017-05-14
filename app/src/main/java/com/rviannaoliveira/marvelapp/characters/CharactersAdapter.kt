@@ -31,7 +31,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
     private var characters = ArrayList<MarvelCharacter>()
 
     fun setCharacters(characters: ArrayList<MarvelCharacter>) {
-        this.characters = characters
+        this.characters.addAll(characters)
         notifyDataSetChanged()
     }
 

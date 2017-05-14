@@ -9,7 +9,7 @@ import io.realm.annotations.Ignore
 class MarvelComic : BaseModelMarvel() {
     @SerializedName("pageCount")
     val pageCount: Int? = null
-    @SerializedName("ulrs")
+    @SerializedName("urls")
     val urls: ArrayList<MarvelUrl>? = null
     @SerializedName("collections")
     val collections: ArrayList<MarvelComicSummary>? = null
@@ -17,10 +17,14 @@ class MarvelComic : BaseModelMarvel() {
     val images: ArrayList<MarvelImage>? = null
     @SerializedName("characters")
     val characters: MarvelCharacterList? = null
+    @SerializedName("stories")
+    val stories: MarvelStoryList? = null
     @SerializedName("prices")
     val prices: ArrayList<MarvelComicPrice>? = null
     @SerializedName("textObjects")
     val textObjects: ArrayList<MarvelTextObjects>? = null
     @Ignore
     var favorite: Favorite? = null
+    var charactersList: ArrayList<MarvelCharacter>? = null
+    var storiesList: ArrayList<MarvelStory>? = null
 }

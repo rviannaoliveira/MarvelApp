@@ -26,8 +26,10 @@
             android:label="@string/marvel"/>
         <activity
             android:name=".detailCharacter.DetailCharacterActivity"
-            android:theme="@style/TransparentActionBar">
-        </activity>
+            android:theme="@style/TransparentActionBar"/>
+        <activity
+            android:name=".detailComic.DetailComicActivity"
+            android:theme="@style/TransparentActionBar"/>
     </application>
 
 </manifest>

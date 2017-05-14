@@ -17,8 +17,8 @@ object DataManager {
     private val apiData: ApiData = MarvelApiHelper()
     private val repositoryData: RepositoryData = RepositoryHelper()
 
-    fun getMarvelCharacters(): Observable<ArrayList<MarvelCharacter>> {
-        val characters = apiData.getMarvelCharacters()
+    fun getMarvelCharacters(offset: Int): Observable<ArrayList<MarvelCharacter>> {
+        val characters = apiData.getMarvelCharacters(offset)
         val favorites = repositoryData.getCharactersFavorites()
         return Observable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>, ArrayList<MarvelCharacter>>({ characters, favorites ->
             combineCharacter(characters, favorites)
@@ -36,6 +36,10 @@ object DataManager {
 
     fun getDetailMarvelCharacter(id: Int): Observable<MarvelCharacter> {
         return apiData.getDetailCharacter(id)
+    }
+
+    fun getDetailComicCharacter(id: Int): Observable<MarvelComic> {
+        return apiData.getDetailComic(id)
     }
 
     fun getAllFavorites(): Observable<List<Favorite>> {

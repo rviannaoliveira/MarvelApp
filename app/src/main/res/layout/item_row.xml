@@ -11,9 +11,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView android:id="@+id/image_item"
-                style="@style/imageTheme"
-                android:contentDescription="@string/character"
-                tools:src="@drawable/captain"/>
+                       style="@style/imageTheme"
+                       android:contentDescription="@string/stories"
+                       tools:src="@drawable/captain"/>
             <android.support.constraint.ConstraintLayout
                 style="@style/constraintLayoutInsideCard"
                 card_view:layout_constraintBottom_toBottomOf="@id/image_item"

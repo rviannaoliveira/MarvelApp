@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="5dp"
-    android:orientation="vertical"
-    tools:background="@color/colorThird">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:id="@+id/container_subdetail"
+                                             android:layout_width="wrap_content"
+                                             android:layout_height="wrap_content"
+                                             android:layout_marginEnd="5dp"
+                                             android:orientation="vertical"
+                                             tools:background="@color/colorThird">
 
     <ImageView
         android:id="@+id/image_item_subdetail"
@@ -25,5 +26,12 @@
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@+id/image_item_subdetail"
         tools:text="#1 Any description here" />
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:visibility="invisible"/>
 
 </android.support.constraint.ConstraintLayout>

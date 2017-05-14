@@ -10,8 +10,9 @@
     <string name="txt_delete">Do you want delete the favorite?</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="comics">Comics</string>
     <string name="no_description">Description is not available.</string>
     <string name="problem_generic">"Sorry… \n something happened, \n try again later."</string>
     <string name="favorite_empty">"There aren't favorite"</string>
+    <string name="characters">Characters</string>
+    <string name="stories">Stories</string>
 </resources>
