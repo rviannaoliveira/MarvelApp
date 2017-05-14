@@ -1,6 +1,7 @@
 package com.rviannaoliveira.marvelapp.model
 
 import io.realm.RealmObject
+import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
 
 /**
@@ -14,6 +15,10 @@ open class Favorite : RealmObject() {
     open var path: String? = null
     open var extension: String? = null
     open var group: Int? = null
+    @Ignore
+    val comics = ArrayList<Favorite>()
+    @Ignore
+    val characters = ArrayList<Favorite>()
 
 
     fun getThumbMail(): String {

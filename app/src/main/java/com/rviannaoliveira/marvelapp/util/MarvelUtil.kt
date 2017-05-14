@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
@@ -91,6 +92,14 @@ object MarvelUtil {
         imageProblem.setImageBitmap(MarvelUtil.blur(context, bitmap))
         textProblem.text = context.getString(R.string.problem_generic)
         textProblem.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary))
+    }
+
+    fun getMetricsScreen(context: Context): Int {
+        val displayMetrics = DisplayMetrics()
+        val windowsManager = context.applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        windowsManager.defaultDisplay.getMetrics(displayMetrics)
+        val deviceWidth = displayMetrics.widthPixels
+        return deviceWidth - (deviceWidth / 100 * 10)
     }
 
 }

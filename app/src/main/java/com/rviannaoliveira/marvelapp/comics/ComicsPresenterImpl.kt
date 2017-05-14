@@ -2,7 +2,6 @@ package com.rviannaoliveira.marvelapp.comics
 
 import com.rviannaoliveira.marvelapp.data.DataManager
 import com.rviannaoliveira.marvelapp.model.Favorite
-import io.reactivex.Observable
 import timber.log.Timber
 
 /**
@@ -23,9 +22,6 @@ class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
         })
     }
 
-    override fun getFavorites(): Observable<List<Favorite>> {
-        return DataManager.getAllFavorites()
-    }
     override fun toggleFavorite(favorite: Favorite, checked: Boolean) {
         if (checked) {
             DataManager.insertFavorite(favorite)

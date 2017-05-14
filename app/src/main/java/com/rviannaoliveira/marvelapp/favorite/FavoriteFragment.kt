@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
@@ -22,15 +23,21 @@ import com.rviannaoliveira.marvelapp.model.Favorite
 class FavoriteFragment : Fragment(), FavoriteView {
 
     private val favoritePresenterImpl: FavoritePresenter = FavoritePresenterImpl(this)
-    private lateinit var favoriteAdapter: FavoriteAdapter
+    private lateinit var characterFavoriteAdapter: FavoriteAdapter
+    private lateinit var comicFavoriteAdapter: FavoriteAdapter
     private lateinit var progressbar: ProgressBar
-    private lateinit var favoriteRecyclerView: RecyclerView
+    private lateinit var characterFavoriteRecyclerView: RecyclerView
+    private lateinit var comicFavoriteRecyclerView: RecyclerView
+    private lateinit var blockCharacter: LinearLayout
+    private lateinit var blockComic: LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_list, container, false)
-        favoriteRecyclerView = view?.findViewById(R.id.list_recycler_view) as RecyclerView
+        val view = inflater?.inflate(R.layout.fragment_favorite, container, false)
+        characterFavoriteRecyclerView = view?.findViewById(R.id.list_character) as RecyclerView
+        comicFavoriteRecyclerView = view.findViewById(R.id.list_comic) as RecyclerView
         progressbar = view.findViewById(R.id.progressbar) as ProgressBar
-
+        blockCharacter = view.findViewById(R.id.block_character) as LinearLayout
+        blockComic = view.findViewById(R.id.block_comics) as LinearLayout
         loadView()
         return view
     }
@@ -41,15 +48,20 @@ class FavoriteFragment : Fragment(), FavoriteView {
     }
 
     override fun onStop() {
-        favoriteAdapter.clear()
+        characterFavoriteAdapter.clear()
         super.onStop()
     }
 
     override fun loadView() {
-        favoriteAdapter = FavoriteAdapter(favoritePresenterImpl)
-        favoriteRecyclerView.adapter = favoriteAdapter
-        favoriteRecyclerView.setHasFixedSize(true)
-        favoriteRecyclerView.layoutManager = LinearLayoutManager(context)
+        characterFavoriteAdapter = FavoriteAdapter(favoritePresenterImpl)
+        characterFavoriteRecyclerView.adapter = characterFavoriteAdapter
+        characterFavoriteRecyclerView.setHasFixedSize(true)
+        characterFavoriteRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        comicFavoriteAdapter = FavoriteAdapter(favoritePresenterImpl)
+        comicFavoriteRecyclerView.adapter = comicFavoriteAdapter
+        comicFavoriteRecyclerView.setHasFixedSize(true)
+        comicFavoriteRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun showProgressBar() {
@@ -60,10 +72,11 @@ class FavoriteFragment : Fragment(), FavoriteView {
         progressbar.visibility = View.GONE
     }
 
-    override fun loadFavorite(favorites: List<Favorite>) {
-        favoriteAdapter.setFavorites(favorites)
+    override fun loadFavorite(favorites: Favorite) {
+        characterFavoriteAdapter.setFavorites(favorites.characters, blockCharacter)
+        comicFavoriteAdapter.setFavorites(favorites.comics, blockComic)
 
-        if (favorites.isEmpty()) {
+        if (favorites.comics.isEmpty() && favorites.characters.isEmpty()) {
             favoriteEmpty()
         }
     }

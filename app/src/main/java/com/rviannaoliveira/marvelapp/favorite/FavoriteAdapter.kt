@@ -3,11 +3,13 @@ package com.rviannaoliveira.marvelapp.favorite
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.model.Favorite
@@ -20,8 +22,13 @@ class FavoriteAdapter(private val favoritePresenterImpl: FavoritePresenter) : Re
     private lateinit var context: Context
     private var favorites = ArrayList<Favorite>()
 
-    fun setFavorites(favorites: List<Favorite>) {
+    fun setFavorites(favorites: List<Favorite>, block: LinearLayout) {
         this.favorites.addAll(favorites)
+
+        if (favorites.isNotEmpty()) {
+            block.visibility = View.VISIBLE
+        }
+
         notifyDataSetChanged()
     }
 
@@ -33,6 +40,7 @@ class FavoriteAdapter(private val favoritePresenterImpl: FavoritePresenter) : Re
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         if (favorites.isNotEmpty()) {
             val favorite = favorites[position]
+            holder.row.maxWidth = MarvelUtil.getMetricsScreen(context)
             holder.name.text = favorite.name
             MarvelUtil.setImageUrl(context, favorite.getThumbMail(), holder.image)
             holder.delete.setOnClickListener {
@@ -66,5 +74,6 @@ class FavoriteAdapter(private val favoritePresenterImpl: FavoritePresenter) : Re
         var image = itemView.findViewById(R.id.image_item) as ImageView
         var name = itemView.findViewById(R.id.name_item) as TextView
         var delete = itemView.findViewById(R.id.delete_favorite) as ImageView
+        var row = itemView.findViewById(R.id.row) as ConstraintLayout
     }
 }
