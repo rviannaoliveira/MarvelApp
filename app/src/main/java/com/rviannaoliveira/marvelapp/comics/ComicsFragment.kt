@@ -1,6 +1,8 @@
 package com.rviannaoliveira.marvelapp.comics
 
+import android.nfc.tech.MifareUltralight
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -23,6 +25,9 @@ class ComicsFragment : Fragment(), ComicsView {
     private lateinit var comicsAdapter: ComicsAdapter
     private lateinit var progressbar: ProgressBar
     private lateinit var comicsRecyclerView: RecyclerView
+    private var isLoading: Boolean = false
+    private val LIST_STATE_KEY = "123"
+    private var listState: Parcelable? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_list, container, false)
@@ -30,8 +35,23 @@ class ComicsFragment : Fragment(), ComicsView {
         progressbar = view.findViewById(R.id.progressbar) as ProgressBar
 
         loadView()
-        comicsPresenter.getMarvelComics()
+        comicsPresenter.getMarvelComics(0)
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        comicsRecyclerView.layoutManager.onRestoreInstanceState(listState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        listState = savedInstanceState?.getParcelable<Parcelable>(LIST_STATE_KEY)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelable(LIST_STATE_KEY, comicsRecyclerView.layoutManager.onSaveInstanceState())
     }
 
     override fun loadView() {
@@ -40,6 +60,7 @@ class ComicsFragment : Fragment(), ComicsView {
         val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
         comicsRecyclerView.setHasFixedSize(true)
         comicsRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
+        comicsRecyclerView.addOnScrollListener(onScrollListener())
     }
 
     override fun showProgressBar() {
@@ -60,4 +81,21 @@ class ComicsFragment : Fragment(), ComicsView {
         }
     }
 
+    private fun onScrollListener(): RecyclerView.OnScrollListener {
+        return object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount = recyclerView.layoutManager.childCount
+                val totalItemCount = recyclerView.layoutManager.itemCount
+                val firstVisibleItemPosition = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
+
+                if (!isLoading && visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                        && firstVisibleItemPosition >= 0
+                        && totalItemCount >= MifareUltralight.PAGE_SIZE) {
+                    isLoading = true
+                    comicsPresenter.getMarvelComics(totalItemCount)
+                }
+            }
+        }
+    }
 }

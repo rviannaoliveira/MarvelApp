@@ -31,7 +31,7 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
     private var comics = ArrayList<MarvelComic>()
 
     fun setComics(comics: ArrayList<MarvelComic>) {
-        this.comics = comics
+        this.comics.addAll(comics)
         notifyDataSetChanged()
     }
 

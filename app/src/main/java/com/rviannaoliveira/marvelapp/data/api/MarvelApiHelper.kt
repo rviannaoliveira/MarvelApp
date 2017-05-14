@@ -15,8 +15,12 @@ import io.reactivex.schedulers.Schedulers
 
 class MarvelApiHelper : ApiData {
     private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)
-    private var LIMIT_REGISTER = 20
+    private var LIMIT_REGISTER = 30
     private var charactersCache = ArrayList<MarvelCharacter>()
+    private var comicsCache = ArrayList<MarvelComic>()
+    private var detailCharacterCache = HashMap<Int, MarvelCharacter>()
+    private var detailComicCache = HashMap<Int, MarvelComic>()
+
 
     override fun getMarvelCharacters(offset: Int): Observable<ArrayList<MarvelCharacter>> {
         if (offset == 0 && charactersCache.isNotEmpty()) {
@@ -33,17 +37,28 @@ class MarvelApiHelper : ApiData {
                     Observable.fromArray(results)
                 })
     }
-    override fun getMarvelComics(): Observable<ArrayList<MarvelComic>> {
-        val response = marvelService.getComics(LIMIT_REGISTER)
+
+    override fun getMarvelComics(offset: Int): Observable<ArrayList<MarvelComic>> {
+        if (offset == 0 && comicsCache.isNotEmpty()) {
+            return Observable.fromArray(comicsCache)
+        }
+
+        val response = marvelService.getComics(LIMIT_REGISTER, offset)
         return response.subscribeOn(Schedulers.newThread())
                 .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
+                    val results = dataWrappers.data?.results
+                    results?.let { comicsCache.addAll(it) }
                     Observable.fromArray(dataWrappers.data?.results)
                 })
     }
 
     override fun getDetailCharacter(id: Int): Observable<MarvelCharacter> {
+        if (detailCharacterCache.containsKey(id)) {
+            return Observable.just(detailCharacterCache[id])
+        }
+
         val response = marvelService.getCharacter(id)
         return response.subscribeOn(Schedulers.newThread())
                 .retry(1)
@@ -58,12 +73,17 @@ class MarvelApiHelper : ApiData {
                             Function3<MarvelCharacter?, MarvelComicDataWrapper, MarvelSeriesDataWrapper, MarvelCharacter>({ character, comics, series ->
                                 character?.comicList = comics.data?.results
                                 character?.seriesList = series.data?.results
+                                character?.id?.let { detailCharacterCache.put(it, character) }
                                 character
                             }))
                 })
     }
 
     override fun getDetailComic(id: Int): Observable<MarvelComic> {
+        if (detailComicCache.containsKey(id)) {
+            return Observable.just(detailComicCache[id])
+        }
+
         val response = marvelService.getComic(id)
         return response.subscribeOn(Schedulers.newThread())
                 .retry(1)
@@ -76,6 +96,7 @@ class MarvelApiHelper : ApiData {
                             getMarvelComicCharacter(data),
                             BiFunction<MarvelComic?, MarvelCharacterDataWrapper, MarvelComic>({ comic, characters ->
                                 comic?.charactersList = characters.data?.results
+                                comic?.id?.let { detailComicCache.put(it, comic) }
                                 comic
                             }))
                 })

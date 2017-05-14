@@ -19,7 +19,7 @@ interface MarvelService {
     fun getCharacters(@Query("limit") limit: Int, @Query("offset") offset: Int): Observable<MarvelCharacterDataWrapper>
 
     @GET("v1/public/comics")
-    fun getComics( @Query("limit") limit: Int): Observable<MarvelComicDataWrapper>
+    fun getComics(@Query("limit") limit: Int, @Query("offset") offset: Int): Observable<MarvelComicDataWrapper>
 
     @GET("/v1/public/characters/{characterId}")
     fun getCharacter(@Path("characterId") characterId: Int): Observable<MarvelCharacterDataWrapper>

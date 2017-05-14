@@ -9,7 +9,7 @@ import io.reactivex.Observable
  */
 interface ApiData {
     fun getMarvelCharacters(offset: Int): Observable<ArrayList<MarvelCharacter>>
-    fun getMarvelComics(): Observable<ArrayList<MarvelComic>>
+    fun getMarvelComics(offset: Int): Observable<ArrayList<MarvelComic>>
     fun getDetailCharacter(id: Int): Observable<MarvelCharacter>
     fun getDetailComic(id: Int): Observable<MarvelComic>
 }

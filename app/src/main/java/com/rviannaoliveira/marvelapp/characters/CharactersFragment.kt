@@ -2,6 +2,7 @@ package com.rviannaoliveira.marvelapp.characters
 
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -25,6 +26,8 @@ class CharactersFragment : Fragment(), CharactersView {
     private lateinit var progressbar: ProgressBar
     private lateinit var charactersRecyclerView: RecyclerView
     private var isLoading: Boolean = false
+    private val LIST_STATE_KEY = "123"
+    private var listState: Parcelable? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_list, container, false)
@@ -34,6 +37,21 @@ class CharactersFragment : Fragment(), CharactersView {
         loadView()
         charactersPresenterImpl.getMarvelCharacters(0)
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        charactersRecyclerView.layoutManager.onRestoreInstanceState(listState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        listState = savedInstanceState?.getParcelable<Parcelable>(LIST_STATE_KEY)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelable(LIST_STATE_KEY, charactersRecyclerView.layoutManager.onSaveInstanceState())
     }
 
     override fun loadView() {
