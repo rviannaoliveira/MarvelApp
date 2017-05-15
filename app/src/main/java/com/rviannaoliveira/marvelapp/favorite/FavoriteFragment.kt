@@ -31,17 +31,18 @@ class FavoriteFragment : Fragment(), FavoriteView {
     private lateinit var comicFavoriteRecyclerView: RecyclerView
     private lateinit var blockCharacter: LinearLayout
     private lateinit var blockComic: LinearLayout
+    private lateinit var viewFavorite: View
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_favorite, container, false)
-        characterFavoriteRecyclerView = view?.findViewById(R.id.list_character) as RecyclerView
-        comicFavoriteRecyclerView = view.findViewById(R.id.list_comic) as RecyclerView
-        progressbar = view.findViewById(R.id.progressbar) as ProgressBar
-        blockCharacter = view.findViewById(R.id.block_character) as LinearLayout
-        blockComic = view.findViewById(R.id.block_comics) as LinearLayout
+        viewFavorite = inflater?.inflate(R.layout.fragment_favorite, container, false) as View
+        characterFavoriteRecyclerView = viewFavorite.findViewById(R.id.list_character) as RecyclerView
+        comicFavoriteRecyclerView = viewFavorite.findViewById(R.id.list_comic) as RecyclerView
+        progressbar = viewFavorite.findViewById(R.id.progressbar) as ProgressBar
+        blockCharacter = viewFavorite.findViewById(R.id.block_character) as LinearLayout
+        blockComic = viewFavorite.findViewById(R.id.block_comics) as LinearLayout
         loadView()
         favoritePresenterImpl.getFavorites()
-        return view
+        return viewFavorite
     }
 
     override fun loadView() {
@@ -86,9 +87,9 @@ class FavoriteFragment : Fragment(), FavoriteView {
     }
 
     private fun favoriteEmpty() {
-        val includeProblem = view?.findViewById(R.id.include_problem_screen)
-        val imageProblem = view?.findViewById(R.id.image_problem) as ImageView
-        val textProblem = view?.findViewById(R.id.text_problem) as TextView
+        val includeProblem = viewFavorite.findViewById(R.id.include_problem_screen)
+        val imageProblem = viewFavorite.findViewById(R.id.image_problem) as ImageView
+        val textProblem = viewFavorite.findViewById(R.id.text_problem) as TextView
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.spiderman_empty)
 
         includeProblem?.visibility = View.VISIBLE

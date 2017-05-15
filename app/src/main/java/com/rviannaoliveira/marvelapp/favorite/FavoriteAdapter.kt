@@ -31,10 +31,11 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private val favoritePresenterImpl: FavoritePresenter) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
     private lateinit var context: Context
     private var favorites = ArrayList<Favorite>()
+    private lateinit var block: LinearLayout
 
     fun setFavorites(favorites: List<Favorite>, block: LinearLayout) {
         this.favorites.addAll(favorites)
-
+        this.block = block
         if (favorites.isNotEmpty()) {
             block.visibility = View.VISIBLE
         }
@@ -82,16 +83,15 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
         return favorites.size
     }
 
-    fun clear() {
-        favorites.clear()
-        notifyDataSetChanged()
-    }
-
     private fun removeFavorite(favorite: Favorite, position: Int) {
         favorites.remove(favorite)
         favoritePresenterImpl.deleteFavorite(favorite)
         notifyItemRemoved(position)
         notifyDataSetChanged()
+
+        if (favorites.isEmpty()) {
+            block.visibility = View.GONE
+        }
     }
 
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

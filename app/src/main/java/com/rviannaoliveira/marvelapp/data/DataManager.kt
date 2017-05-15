@@ -5,7 +5,6 @@ import com.rviannaoliveira.marvelapp.data.api.MarvelApiHelper
 import com.rviannaoliveira.marvelapp.data.repository.RepositoryData
 import com.rviannaoliveira.marvelapp.data.repository.RepositoryHelper
 import com.rviannaoliveira.marvelapp.model.Favorite
-import com.rviannaoliveira.marvelapp.model.FavoriteGroup
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.model.MarvelComic
 import io.reactivex.Observable
@@ -44,18 +43,7 @@ object DataManager {
     }
 
     fun getAllFavorites(): Observable<Favorite> {
-        val favorite = Favorite()
-        repositoryData.getAllFavorites()
-                .flatMapIterable({ list -> list })
-                .forEach({ item ->
-                    if (FavoriteGroup.CHARACTERS == item.group) {
-                        favorite.characters.add(item)
-                    } else {
-                        favorite.comics.add(item)
-                    }
-                })
-
-        return Observable.just(favorite)
+        return repositoryData.getAllFavorites()
     }
 
     fun insertFavorite(favorite: Favorite) {

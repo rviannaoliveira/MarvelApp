@@ -12,9 +12,20 @@ import io.realm.Realm
 class RepositoryHelper : RepositoryData {
     private val realm = Realm.getDefaultInstance()
 
-    override fun getAllFavorites(): Observable<List<Favorite>> {
+    override fun getAllFavorites(): Observable<Favorite> {
         val favorites: List<Favorite> = realm.where(Favorite::class.java).findAll()
-        return Observable.fromArray(favorites)
+        val favorite = Favorite()
+
+        Observable.fromArray(favorites)
+                .flatMapIterable({ list -> list })
+                .forEach({ item ->
+                    if (FavoriteGroup.CHARACTERS == item.group) {
+                        favorite.characters.add(item)
+                    } else {
+                        favorite.comics.add(item)
+                    }
+                })
+        return Observable.just(favorite)
     }
 
     override fun insertFavorite(favorite: Favorite) {

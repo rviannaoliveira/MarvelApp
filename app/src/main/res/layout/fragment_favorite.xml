@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorThird">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/block_character"
@@ -27,7 +31,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/character"
             android:textColor="@color/textColorPrimary"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_character"
@@ -35,7 +39,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:listitem="@layout/favorite_row"/>
+            tools:listitem="@layout/favorite_row" />
     </LinearLayout>
 
 
@@ -60,7 +64,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/comic"
             android:textColor="@color/textColorPrimary"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_comic"
@@ -68,7 +72,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:listitem="@layout/favorite_row"/>
+            tools:listitem="@layout/favorite_row" />
     </LinearLayout>
 
     <ProgressBar
@@ -82,12 +86,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <include
         android:id="@+id/include_problem_screen"
         layout="@layout/problem_screen"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
