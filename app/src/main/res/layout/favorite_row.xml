@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:id="@+id/row"
-                                             style="@style/constraintThemeItem">
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row"
+    style="@style/constraintThemeItem"
+    android:paddingBottom="5dp">
 
     <android.support.v7.widget.CardView
         style="@style/cardConstraintTheme"
         card_view:cardBackgroundColor="@color/colorAccent"
         card_view:cardElevation="5dp">
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView android:id="@+id/image_item"
-                       style="@style/imageTheme"
-                       android:contentDescription="@string/stories"
-                       tools:src="@drawable/captain"/>
+
+            <ImageView
+                android:id="@+id/image_item"
+                style="@style/imageTheme"
+                android:contentDescription="@string/stories"
+                tools:src="@drawable/captain"/>
+
             <android.support.constraint.ConstraintLayout
                 style="@style/constraintLayoutInsideCard"
                 card_view:layout_constraintBottom_toBottomOf="@id/image_item"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent">
+
                 <TextView
                     android:id="@+id/name_item"
                     style="@style/textItem"
@@ -29,6 +36,7 @@
                     card_view:layout_constraintStart_toStartOf="parent"
                     tools:text="Zap imoveis"/>
             </android.support.constraint.ConstraintLayout>
+
             <ImageView
                 android:id="@+id/delete_favorite"
                 android:layout_width="wrap_content"

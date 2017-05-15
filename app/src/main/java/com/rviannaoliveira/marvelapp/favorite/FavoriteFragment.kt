@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -39,26 +40,17 @@ class FavoriteFragment : Fragment(), FavoriteView {
         blockCharacter = view.findViewById(R.id.block_character) as LinearLayout
         blockComic = view.findViewById(R.id.block_comics) as LinearLayout
         loadView()
+        favoritePresenterImpl.getFavorites()
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-        favoritePresenterImpl.getFavorites()
-    }
-
-    override fun onStop() {
-        characterFavoriteAdapter.clear()
-        super.onStop()
-    }
-
     override fun loadView() {
-        characterFavoriteAdapter = FavoriteAdapter(favoritePresenterImpl)
+        characterFavoriteAdapter = FavoriteAdapter(activity as AppCompatActivity, favoritePresenterImpl)
         characterFavoriteRecyclerView.adapter = characterFavoriteAdapter
         characterFavoriteRecyclerView.setHasFixedSize(true)
         characterFavoriteRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        comicFavoriteAdapter = FavoriteAdapter(favoritePresenterImpl)
+        comicFavoriteAdapter = FavoriteAdapter(activity as AppCompatActivity, favoritePresenterImpl)
         comicFavoriteRecyclerView.adapter = comicFavoriteAdapter
         comicFavoriteRecyclerView.setHasFixedSize(true)
         comicFavoriteRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
