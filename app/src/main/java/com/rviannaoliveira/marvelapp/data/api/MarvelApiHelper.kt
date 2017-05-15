@@ -125,4 +125,27 @@ class MarvelApiHelper : ApiData {
                     .observeOn(AndroidSchedulers.mainThread())
         }
     }
+
+    override fun removeFavoriteCharacter(idMarvel: Int?) {
+        Observable.fromArray(charactersCache)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMapIterable({ list -> list })
+                .filter({ item -> item.id == idMarvel })
+                .subscribe({ item ->
+                    item.favorite = null
+                })
+    }
+
+    override fun removeFavoriteComic(idMarvel: Int?) {
+        Observable.fromArray(comicsCache)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMapIterable({ list -> list })
+                .filter({ item -> item.id == idMarvel })
+                .subscribe({ item ->
+                    item.favorite = null
+                })
+    }
+
 }

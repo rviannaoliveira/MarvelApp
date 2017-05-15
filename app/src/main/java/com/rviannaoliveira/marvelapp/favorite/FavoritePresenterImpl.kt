@@ -24,8 +24,8 @@ class FavoritePresenterImpl(private val view: FavoriteView) : FavoritePresenter 
         })
     }
 
-    override fun deleteFavorite(favorite: Favorite) {
-        DataManager.deleteFavorite(favorite)
+    override fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean) {
+        DataManager.deleteFavorite(favorite, removeCharacter)
     }
 
 

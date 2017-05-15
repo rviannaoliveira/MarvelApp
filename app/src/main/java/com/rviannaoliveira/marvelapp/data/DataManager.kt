@@ -54,6 +54,11 @@ object DataManager {
         repositoryData.deleteFavorite(favorite)
     }
 
+    fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean) {
+        if (removeCharacter) apiData.removeFavoriteCharacter(favorite.idMarvel) else apiData.removeFavoriteComic(favorite.idMarvel)
+        repositoryData.deleteFavorite(favorite)
+    }
+
     private fun combineCharacter(characters: ArrayList<MarvelCharacter>, favorites: List<Favorite>): ArrayList<MarvelCharacter> {
         if (favorites.isEmpty()) {
             return characters

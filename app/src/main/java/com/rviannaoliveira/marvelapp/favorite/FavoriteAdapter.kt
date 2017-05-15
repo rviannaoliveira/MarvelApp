@@ -85,7 +85,7 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
 
     private fun removeFavorite(favorite: Favorite, position: Int) {
         favorites.remove(favorite)
-        favoritePresenterImpl.deleteFavorite(favorite)
+        favoritePresenterImpl.deleteFavorite(favorite, block.id == R.id.block_character)
         notifyItemRemoved(position)
         notifyDataSetChanged()
 
