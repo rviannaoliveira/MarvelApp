@@ -55,6 +55,12 @@ object MarvelUtil {
 
     }
 
+    fun isLand(context: Context): Boolean {
+        val intOrientation = context.resources.configuration.orientation
+        return Configuration.ORIENTATION_LANDSCAPE == intOrientation
+
+    }
+
     fun convertDpToPixel(dp: Int, context: Context): Int {
         val metrics = context.resources.displayMetrics
         return (dp * Math.round((metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT).toDouble())).toInt()
@@ -94,12 +100,28 @@ object MarvelUtil {
         textProblem.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary))
     }
 
-    fun getMetricsScreen(context: Context): Int {
+    fun getMetricsScreenList(context: Context): Int {
         val displayMetrics = DisplayMetrics()
         val windowsManager = context.applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         windowsManager.defaultDisplay.getMetrics(displayMetrics)
         val deviceWidth = displayMetrics.widthPixels
         return deviceWidth - (deviceWidth / 100 * 10)
+    }
+
+    fun getHeightScreen(context: Context): Int {
+        return getDisplayMetrics(context).heightPixels
+    }
+
+    fun getWidthScreen(context: Context): Int {
+        return getDisplayMetrics(context).widthPixels
+    }
+
+
+    private fun getDisplayMetrics(context: Context): DisplayMetrics {
+        val displayMetrics = DisplayMetrics()
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        wm.defaultDisplay.getMetrics(displayMetrics)
+        return displayMetrics
     }
 
 }

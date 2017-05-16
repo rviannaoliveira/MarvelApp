@@ -1,5 +1,6 @@
 package com.rviannaoliveira.marvelapp.favorite
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -17,6 +18,8 @@ import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.comics.FavoritePresenterImpl
 import com.rviannaoliveira.marvelapp.model.Favorite
+import com.rviannaoliveira.marvelapp.util.MarvelUtil
+
 
 /**
  * Criado por rodrigo on 15/04/17.
@@ -91,9 +94,10 @@ class FavoriteFragment : Fragment(), FavoriteView {
         val imageProblem = viewFavorite.findViewById(R.id.image_problem) as ImageView
         val textProblem = viewFavorite.findViewById(R.id.text_problem) as TextView
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.spiderman_empty)
+        val resized = Bitmap.createScaledBitmap(bitmap, (MarvelUtil.getWidthScreen(context) * 0.8).toInt(), (MarvelUtil.getHeightScreen(context) * 0.8).toInt(), true)
 
         includeProblem?.visibility = View.VISIBLE
-        imageProblem.setImageBitmap(bitmap)
+        imageProblem.setImageBitmap(resized)
         textProblem.text = getString(R.string.favorite_empty)
         textProblem.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary))
     }

@@ -74,6 +74,7 @@ class CharactersFragment : Fragment(), CharactersView {
     override fun loadCharacters(marvelCharacters: ArrayList<MarvelCharacter>) {
         charactersAdapter?.setCharacters(marvelCharacters)
         isLoading = false
+        charactersAdapter?.showLoading(isLoading)
     }
 
     override fun error() {
@@ -94,6 +95,7 @@ class CharactersFragment : Fragment(), CharactersView {
                         && firstVisibleItemPosition >= 0
                         && totalItemCount >= PAGE_SIZE) {
                     isLoading = true
+                    charactersAdapter?.showLoading(isLoading)
                     charactersPresenterImpl.getMarvelCharacters(totalItemCount)
                 }
             }

@@ -73,6 +73,8 @@ class ComicsFragment : Fragment(), ComicsView {
 
     override fun loadComics(comics: ArrayList<MarvelComic>) {
         comicsAdapter.setComics(comics)
+        isLoading = false
+        comicsAdapter.showLoading(isLoading)
     }
 
     override fun error() {
@@ -93,6 +95,7 @@ class ComicsFragment : Fragment(), ComicsView {
                         && firstVisibleItemPosition >= 0
                         && totalItemCount >= MifareUltralight.PAGE_SIZE) {
                     isLoading = true
+                    comicsAdapter.showLoading(isLoading)
                     comicsPresenter.getMarvelComics(totalItemCount)
                 }
             }

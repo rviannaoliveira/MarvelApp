@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
@@ -26,31 +27,56 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 /**
  * Criado por rodrigo on 14/04/17.
  */
-class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<ComicsAdapter.ComicViewHolder>(), BaseRecyclerView {
+class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BaseRecyclerView {
     private lateinit var context: Context
     private var comics = ArrayList<MarvelComic>()
+    private val VIEW_ITEM = 1
+    private val VIEW_LOADER = 2
+    private var showLoader: Boolean = false
 
     fun setComics(comics: ArrayList<MarvelComic>) {
         this.comics.addAll(comics)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
-        context = parent.context
-        return ComicViewHolder(LayoutInflater.from(context).inflate(R.layout.item_row, parent, false))
+    override fun getItemViewType(position: Int): Int {
+        if (position != 0 &&
+                (MarvelUtil.isPortrait(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2)) ||
+                (MarvelUtil.isLand(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2 || position == itemCount - 3))) {
+            return VIEW_LOADER
+        }
 
+        return VIEW_ITEM
     }
 
-    override fun onBindViewHolder(holder: ComicViewHolder, position: Int) {
-        if (comics.isNotEmpty()) {
-            val marvelComic = comics[position]
-            holder.name.text = marvelComic.title
-            MarvelUtil.setImageUrl(context, marvelComic.thumbMail?.getPathExtension(), holder.image)
-            holder.favorite.setButtonDrawable(toggleImage(marvelComic.favorite != null))
-            holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
-            holder.image.setOnClickListener { showDetail(holder, marvelComic) }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        this.context = parent.context
+        if (viewType == VIEW_ITEM) {
+            return ComicViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row, parent, false))
+        } else {
+            return LoaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.loader_item_layout, parent, false))
         }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (comics.isNotEmpty()) {
+            if (holder is ComicsAdapter.ComicViewHolder) {
+                val marvelCharacter = comics[position]
+                holder.name.text = marvelCharacter.title
+                MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
+                holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
+                holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
+                holder.image.setOnClickListener { showDetail(holder, marvelCharacter) }
+            } else {
+                if (showLoader) {
+                    (holder as ComicsAdapter.LoaderViewHolder).progressBar.visibility = View.VISIBLE
+                } else {
+                    (holder as ComicsAdapter.LoaderViewHolder).progressBar.visibility = View.VISIBLE
+                }
+            }
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -91,9 +117,17 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
         }
     }
 
+    fun showLoading(status: Boolean) {
+        showLoader = status
+    }
+
     inner class ComicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var image = itemView.findViewById(R.id.image_item) as ImageView
         var name = itemView.findViewById(R.id.name_item) as TextView
         var favorite = itemView.findViewById(R.id.check_favorite) as CheckBox
+    }
+
+    inner class LoaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var progressBar = itemView.findViewById(R.id.progressbar) as ProgressBar
     }
 }

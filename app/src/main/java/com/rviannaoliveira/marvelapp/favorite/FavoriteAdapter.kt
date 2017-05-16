@@ -51,7 +51,7 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         if (favorites.isNotEmpty()) {
             val favorite = favorites[position]
-            holder.row.maxWidth = MarvelUtil.getMetricsScreen(context)
+            holder.row.maxWidth = MarvelUtil.getMetricsScreenList(context)
             holder.name.text = favorite.name
             MarvelUtil.setImageUrl(context, favorite.getThumbMail(), holder.image)
             holder.delete.setOnClickListener {

@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
@@ -26,28 +27,53 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 /**
  * Criado por rodrigo on 08/04/17.
  */
-class CharactersAdapter(private val presenter: CharactersPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>(), BaseRecyclerView {
+class CharactersAdapter(private val presenter: CharactersPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BaseRecyclerView {
     private lateinit var context: Context
     private var characters = ArrayList<MarvelCharacter>()
+    private var showLoader: Boolean = false
+    private val VIEW_ITEM = 1
+    private val VIEW_LOADER = 2
 
     fun setCharacters(characters: ArrayList<MarvelCharacter>) {
         this.characters.addAll(characters)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
-        this.context = parent.context
-        return CharactersViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row, parent, false))
+    override fun getItemViewType(position: Int): Int {
+        if (position != 0 &&
+                (MarvelUtil.isPortrait(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2)) ||
+                (MarvelUtil.isLand(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2 || position == itemCount - 3))) {
+            return VIEW_LOADER
+        }
+
+        return VIEW_ITEM
     }
 
-    override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        this.context = parent.context
+        if (viewType == VIEW_ITEM) {
+            return CharactersViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row, parent, false))
+        } else {
+            return LoaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.loader_item_layout, parent, false))
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (characters.isNotEmpty()) {
-            val marvelCharacter = characters[position]
-            holder.name.text = marvelCharacter.name
-            MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
-            holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
-            holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
-            holder.image.setOnClickListener { showDetail(holder, marvelCharacter) }
+            if (holder is CharactersViewHolder) {
+                val marvelCharacter = characters[position]
+                holder.name.text = marvelCharacter.name
+                MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
+                holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
+                holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
+                holder.image.setOnClickListener { showDetail(holder, marvelCharacter) }
+            } else {
+                if (showLoader) {
+                    (holder as LoaderViewHolder).progressBar.visibility = View.VISIBLE
+                } else {
+                    (holder as LoaderViewHolder).progressBar.visibility = View.VISIBLE
+                }
+            }
         }
 
     }
@@ -92,11 +118,17 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
         return characters.size
     }
 
+    fun showLoading(status: Boolean) {
+        showLoader = status
+    }
+
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var image = itemView.findViewById(R.id.image_item) as ImageView
         var name = itemView.findViewById(R.id.name_item) as TextView
         var favorite = itemView.findViewById(R.id.check_favorite) as CheckBox
     }
 
-
+    inner class LoaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var progressBar = itemView.findViewById(R.id.progressbar) as ProgressBar
+    }
 }
