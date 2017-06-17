@@ -9,7 +9,7 @@
 This repository i want to use many differents libraries and tools. The project will have Marvel's theme and use its API.
 
 ## **Goals of use of the Architeture and Libraries**
-* Architeture MVP with DataManager ✔︎
+* Architeture MVP with DataManager -> https://labs.ribot.co.uk/android-application-architecture-8b6e34acda65 ✔︎
 * Rxjava -> http://reactivex.io/ ✔︎
 * Realm -> https://realm.io/docs/java/latest/ ✔︎
 * Kotlin -> https://kotlinlang.org/ ✔︎
@@ -23,12 +23,12 @@ This repository i want to use many differents libraries and tools. The project w
 
 ## **ScreenShot**
 <p>
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/zero.png" width="170" height="300" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/first.png" width="170" height="300" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/second.png" width="170" height="300" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/third.png" width="170" height="300" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/forth.png" width="170" height="300" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/fifth.png" width="170" height="300" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/zero.png" width="190" height="320" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/first.png" width="190" height="320" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/second.png" width="190" height="320" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/third.png" width="190" height="320" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/forth.png" width="190" height="320" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/fifth.png" width="190" height="320" margin="10xp"> 
 
 </p>
 
