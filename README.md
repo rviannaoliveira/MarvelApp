@@ -23,12 +23,12 @@ This repository i want to use many differents libraries and tools. The project w
 
 ## **ScreenShot**
 <p>
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/zero.png" width="190" height="320" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/first.png" width="190" height="320" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/second.png" width="190" height="320" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/third.png" width="190" height="320" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/forth.png" width="190" height="320" margin="10xp"> 
-<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/fifth.png" width="190" height="320" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/zero.png" width="210" height="340" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/first.png" width="210" height="340" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/second.png" width="210" height="340" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/third.png" width="210" height="340" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/fourth.png" width="210" height="340" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/fifth.png" width="210" height="340" margin="10xp"> 
 
 </p>
 
