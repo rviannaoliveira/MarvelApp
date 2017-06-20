@@ -30,17 +30,20 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BaseRecyclerView {
     private lateinit var context: Context
     private var comics = ArrayList<MarvelComic>()
+    private var comicsOriginal = ArrayList<MarvelComic>()
     private val VIEW_ITEM = 1
     private val VIEW_LOADER = 2
     private var showLoader: Boolean = false
 
     fun setComics(comics: ArrayList<MarvelComic>) {
         this.comics.addAll(comics)
+        this.comicsOriginal.addAll(comics)
         notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position != 0 &&
+        if (comics.size == comicsOriginal.size &&
+                position != 0 &&
                 (MarvelUtil.isPortrait(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2)) ||
                 (MarvelUtil.isLand(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2 || position == itemCount - 3))) {
             return VIEW_LOADER
@@ -119,6 +122,20 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
 
     fun showLoading(status: Boolean) {
         showLoader = status
+    }
+
+    override fun filter(text: String?) {
+        comics.clear()
+        text?.let {
+            //TODO ver uma solucao melhor
+            if (it.isEmpty()) {
+                comics.addAll(comicsOriginal)
+            } else {
+                comicsOriginal.filter { it.name != null && it.name.toString().contains(text, true) }
+                        .map { comics.add(it) }
+            }
+            notifyDataSetChanged()
+        }
     }
 
     inner class ComicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

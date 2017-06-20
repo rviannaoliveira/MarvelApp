@@ -15,4 +15,5 @@
     <string name="favorite_empty">"There aren't favorite"</string>
     <string name="characters">Characters</string>
     <string name="stories">Stories</string>
+    <string name="search">search</string>
 </resources>

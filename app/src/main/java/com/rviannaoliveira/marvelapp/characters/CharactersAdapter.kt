@@ -30,17 +30,21 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 class CharactersAdapter(private val presenter: CharactersPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BaseRecyclerView {
     private lateinit var context: Context
     private var characters = ArrayList<MarvelCharacter>()
+    private var charactersOriginal = ArrayList<MarvelCharacter>()
     private var showLoader: Boolean = false
     private val VIEW_ITEM = 1
     private val VIEW_LOADER = 2
 
+
     fun setCharacters(characters: ArrayList<MarvelCharacter>) {
+        charactersOriginal.addAll(characters)
         this.characters.addAll(characters)
         notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position != 0 &&
+        if (characters.size == charactersOriginal.size &&
+                position != 0 &&
                 (MarvelUtil.isPortrait(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2)) ||
                 (MarvelUtil.isLand(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2 || position == itemCount - 3))) {
             return VIEW_LOADER
@@ -120,6 +124,20 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
 
     fun showLoading(status: Boolean) {
         showLoader = status
+    }
+
+    override fun filter(text: String?) {
+        characters.clear()
+        text?.let {
+            if (it.isEmpty()) {
+                characters.addAll(charactersOriginal)
+            } else {
+                charactersOriginal.filter { it.name != null && it.name.toString().contains(text, true) }
+                        .map { characters.add(it) }
+
+            }
+            notifyDataSetChanged()
+        }
     }
 
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
