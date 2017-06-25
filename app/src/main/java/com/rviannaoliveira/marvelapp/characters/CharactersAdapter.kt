@@ -23,6 +23,7 @@ import com.rviannaoliveira.marvelapp.model.FavoriteGroup
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
+import timber.log.Timber
 
 /**
  * Criado por rodrigo on 08/04/17.
@@ -34,16 +35,21 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
     private var showLoader: Boolean = false
     private val VIEW_ITEM = 1
     private val VIEW_LOADER = 2
+    private var listForLetter: Boolean = false
 
+    fun isListForLetter() = listForLetter
 
-    fun setCharacters(characters: ArrayList<MarvelCharacter>) {
+    fun setCharacters(characters: ArrayList<MarvelCharacter>, listForLetter: Boolean) {
         charactersOriginal.addAll(characters)
         this.characters.addAll(characters)
+        this.listForLetter = listForLetter
         notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (characters.size == charactersOriginal.size &&
+        Timber.w(">>>>>> " + listForLetter)
+        if (!this.listForLetter &&
+                characters.size == charactersOriginal.size &&
                 position != 0 &&
                 (MarvelUtil.isPortrait(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2)) ||
                 (MarvelUtil.isLand(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2 || position == itemCount - 3))) {
@@ -132,12 +138,19 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
             if (it.isEmpty()) {
                 characters.addAll(charactersOriginal)
             } else {
-                charactersOriginal.filter { it.name != null && it.name.toString().contains(text, true) }
+                charactersOriginal
+                        .filter { it.name != null && it.name.toString().contains(text, true) }
                         .map { characters.add(it) }
 
             }
             notifyDataSetChanged()
         }
+    }
+
+    override fun clear() {
+        characters.clear()
+        charactersOriginal.clear()
+        notifyDataSetChanged()
     }
 
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

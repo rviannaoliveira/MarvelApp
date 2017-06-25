@@ -28,6 +28,10 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  * Criado por rodrigo on 14/04/17.
  */
 class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BaseRecyclerView {
+    override fun clear() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private lateinit var context: Context
     private var comics = ArrayList<MarvelComic>()
     private var comicsOriginal = ArrayList<MarvelComic>()

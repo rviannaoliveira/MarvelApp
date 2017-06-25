@@ -38,6 +38,18 @@ class MarvelApiHelper : ApiData {
                 })
     }
 
+    override fun getMarvelCharactersBeginLetter(letter: String): Observable<ArrayList<MarvelCharacter>> {
+
+        val response = marvelService.getCharactersBeginLetter(100, letter)
+        return response.subscribeOn(Schedulers.newThread())
+                .retry(1)
+                .observeOn(AndroidSchedulers.mainThread())
+                .concatMap({ dataWrappers ->
+                    val results = dataWrappers.data?.results
+                    Observable.fromArray(results)
+                })
+    }
+
     override fun getMarvelComics(offset: Int): Observable<ArrayList<MarvelComic>> {
         if (offset == 0 && comicsCache.isNotEmpty()) {
             return Observable.fromArray(comicsCache)

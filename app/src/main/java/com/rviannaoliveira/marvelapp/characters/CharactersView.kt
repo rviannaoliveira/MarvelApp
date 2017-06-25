@@ -8,4 +8,5 @@ import com.rviannaoliveira.marvelapp.model.MarvelCharacter
  */
 interface CharactersView : BaseView {
     fun loadCharacters(marvelCharacters: ArrayList<MarvelCharacter>)
+    fun loadFilterCharacters(marvelCharacters: ArrayList<MarvelCharacter>)
 }

@@ -2,10 +2,12 @@ package com.rviannaoliveira.marvelapp.characters
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.DialogInterface
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -13,6 +15,7 @@ import android.support.v7.widget.SearchView
 import android.view.*
 import android.widget.ProgressBar
 import com.rviannaoliveira.marvelapp.R
+import com.rviannaoliveira.marvelapp.extensions.createFilterCustom
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
@@ -55,6 +58,22 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         searchView.setOnQueryTextListener(this)
         super.onCreateOptionsMenu(menu, inflater)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_filter) {
+            var positionFilter = 0
+
+            AlertDialog.Builder(context).createFilterCustom(context, DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
+                val letter = context.resources.getStringArray(R.array.alphabetic)[positionFilter]
+                charactersAdapter?.clear()
+                if (positionFilter == 0) charactersPresenterImpl.getMarvelCharacters(0) else charactersPresenterImpl.getMarvelCharactersBeginLetter(letter)
+                d.dismiss()
+            }).show()
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         listState = savedInstanceState?.getParcelable<Parcelable>(LIST_STATE_KEY)
@@ -83,9 +102,7 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
     }
 
     override fun loadCharacters(marvelCharacters: ArrayList<MarvelCharacter>) {
-        charactersAdapter?.setCharacters(marvelCharacters)
-        isLoading = false
-        charactersAdapter?.showLoading(isLoading)
+        this.loadCharactersRecycleView(marvelCharacters, false)
     }
 
     override fun error() {
@@ -102,7 +119,7 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
                 val totalItemCount = recyclerView.layoutManager.itemCount
                 val firstVisibleItemPosition = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
 
-                if (!isLoading && visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                if (!(charactersAdapter?.isListForLetter() as Boolean) && !isLoading && visibleItemCount + firstVisibleItemPosition >= totalItemCount
                         && firstVisibleItemPosition >= 0
                         && totalItemCount >= PAGE_SIZE) {
                     isLoading = true
@@ -116,8 +133,19 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
     override fun onQueryTextSubmit(query: String?): Boolean = false
 
     override fun onQueryTextChange(newText: String?): Boolean {
+        isLoading = !newText.isNullOrEmpty()
         charactersAdapter?.filter(newText)
         return true
+    }
+
+    override fun loadFilterCharacters(marvelCharacters: ArrayList<MarvelCharacter>) {
+        loadCharactersRecycleView(marvelCharacters, true)
+    }
+
+    private fun loadCharactersRecycleView(marvelCharacters: ArrayList<MarvelCharacter>, refresh: Boolean) {
+        charactersAdapter?.setCharacters(marvelCharacters, refresh)
+        isLoading = false
+        charactersAdapter?.showLoading(isLoading)
     }
 
 }
