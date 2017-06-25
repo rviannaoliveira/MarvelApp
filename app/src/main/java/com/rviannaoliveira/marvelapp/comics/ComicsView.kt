@@ -8,4 +8,5 @@ import com.rviannaoliveira.marvelapp.model.MarvelComic
  */
 interface ComicsView : BaseView {
     fun loadComics(comics: ArrayList<MarvelComic>)
+    fun loadFilterComics(comics: ArrayList<MarvelComic>)
 }

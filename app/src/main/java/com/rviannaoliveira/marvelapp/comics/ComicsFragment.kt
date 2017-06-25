@@ -2,10 +2,12 @@ package com.rviannaoliveira.marvelapp.comics
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.DialogInterface
 import android.nfc.tech.MifareUltralight
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -13,6 +15,7 @@ import android.support.v7.widget.SearchView
 import android.view.*
 import android.widget.ProgressBar
 import com.rviannaoliveira.marvelapp.R
+import com.rviannaoliveira.marvelapp.extensions.createFilterCustom
 import com.rviannaoliveira.marvelapp.model.MarvelComic
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
@@ -66,6 +69,22 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_filter) {
+            var positionFilter = 0
+
+            AlertDialog.Builder(context).createFilterCustom(context, DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
+                val letter = context.resources.getStringArray(R.array.alphabetic)[positionFilter]
+                comicsAdapter.clear()
+                if (positionFilter == 0) comicsPresenter.getMarvelComics(0) else comicsPresenter.getMarvelComicsBeginLetter(letter)
+                d.dismiss()
+            }).show()
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
     override fun loadView() {
         comicsAdapter = ComicsAdapter(comicsPresenter, activity as AppCompatActivity)
         comicsRecyclerView.adapter = comicsAdapter
@@ -84,10 +103,19 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener {
     }
 
     override fun loadComics(comics: ArrayList<MarvelComic>) {
-        comicsAdapter.setComics(comics)
+        loadComicRecyclerView(comics, false)
+    }
+
+    private fun loadComicRecyclerView(comics: ArrayList<MarvelComic>, listForLetter: Boolean) {
+        comicsAdapter.setComics(comics, listForLetter)
         isLoading = false
         comicsAdapter.showLoading(isLoading)
     }
+
+    override fun loadFilterComics(comics: ArrayList<MarvelComic>) {
+        loadComicRecyclerView(comics, true)
+    }
+
 
     override fun error() {
         if (this.isVisible) {
@@ -103,7 +131,8 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener {
                 val totalItemCount = recyclerView.layoutManager.itemCount
                 val firstVisibleItemPosition = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
 
-                if (!isLoading && visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                if (!(comicsAdapter.isListForLetter()) &&
+                        !isLoading && visibleItemCount + firstVisibleItemPosition >= totalItemCount
                         && firstVisibleItemPosition >= 0
                         && totalItemCount >= MifareUltralight.PAGE_SIZE) {
                     isLoading = true

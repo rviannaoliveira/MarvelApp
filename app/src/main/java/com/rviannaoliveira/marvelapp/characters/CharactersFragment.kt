@@ -142,8 +142,8 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         loadCharactersRecycleView(marvelCharacters, true)
     }
 
-    private fun loadCharactersRecycleView(marvelCharacters: ArrayList<MarvelCharacter>, refresh: Boolean) {
-        charactersAdapter?.setCharacters(marvelCharacters, refresh)
+    private fun loadCharactersRecycleView(marvelCharacters: ArrayList<MarvelCharacter>, listForLetter: Boolean) {
+        charactersAdapter?.setCharacters(marvelCharacters, listForLetter)
         isLoading = false
         charactersAdapter?.showLoading(isLoading)
     }

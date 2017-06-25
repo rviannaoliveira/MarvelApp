@@ -24,6 +24,19 @@ class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
         })
     }
 
+    override fun getMarvelComicsBeginLetter(letter: String) {
+        view.showProgressBar()
+        val observableComics = DataManager.getMarvelComicsBeginLetter(letter)
+        observableComics.subscribe({ marvelComics ->
+            view.loadFilterComics(marvelComics)
+            view.hideProgressBar()
+        }, { error ->
+            view.hideProgressBar()
+            view.error()
+            Timber.w(error.message)
+        })
+    }
+
     override fun toggleFavorite(favorite: Favorite, checked: Boolean) {
         if (checked) {
             DataManager.insertFavorite(favorite)

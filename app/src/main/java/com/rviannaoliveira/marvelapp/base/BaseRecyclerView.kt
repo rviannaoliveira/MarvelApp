@@ -10,4 +10,5 @@ interface BaseRecyclerView {
     fun toggleImage(checked: Boolean): Int
     fun filter(text: String?)
     fun clear()
+    fun isListForLetter(): Boolean
 }

@@ -15,4 +15,5 @@ interface ApiData {
     fun removeFavoriteCharacter(idMarvel: Int?)
     fun removeFavoriteComic(idMarvel: Int?)
     fun getMarvelCharactersBeginLetter(letter: String): Observable<ArrayList<MarvelCharacter>>
+    fun getMarvelComicsBeginLetter(letter: String): Observable<ArrayList<MarvelComic>>
 }

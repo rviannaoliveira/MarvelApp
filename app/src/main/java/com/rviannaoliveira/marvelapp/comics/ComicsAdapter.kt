@@ -28,25 +28,26 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  * Criado por rodrigo on 14/04/17.
  */
 class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompatActivity: AppCompatActivity) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BaseRecyclerView {
-    override fun clear() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     private lateinit var context: Context
     private var comics = ArrayList<MarvelComic>()
     private var comicsOriginal = ArrayList<MarvelComic>()
     private val VIEW_ITEM = 1
     private val VIEW_LOADER = 2
     private var showLoader: Boolean = false
+    private var listForLetter: Boolean = false
 
-    fun setComics(comics: ArrayList<MarvelComic>) {
+    override fun isListForLetter() = listForLetter
+
+    fun setComics(comics: ArrayList<MarvelComic>, listForLetter: Boolean) {
         this.comics.addAll(comics)
         this.comicsOriginal.addAll(comics)
+        this.listForLetter = listForLetter
         notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (comics.size == comicsOriginal.size &&
+        if (!this.listForLetter &&
+                comics.size == comicsOriginal.size &&
                 position != 0 &&
                 (MarvelUtil.isPortrait(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2)) ||
                 (MarvelUtil.isLand(appCompatActivity) && (position == itemCount - 1 || position == itemCount - 2 || position == itemCount - 3))) {
@@ -126,6 +127,12 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
 
     fun showLoading(status: Boolean) {
         showLoader = status
+    }
+
+    override fun clear() {
+        comics.clear()
+        comicsOriginal.clear()
+        notifyDataSetChanged()
     }
 
     override fun filter(text: String?) {

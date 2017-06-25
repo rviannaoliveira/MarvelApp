@@ -23,7 +23,6 @@ import com.rviannaoliveira.marvelapp.model.FavoriteGroup
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
-import timber.log.Timber
 
 /**
  * Criado por rodrigo on 08/04/17.
@@ -37,7 +36,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
     private val VIEW_LOADER = 2
     private var listForLetter: Boolean = false
 
-    fun isListForLetter() = listForLetter
+    override fun isListForLetter() = listForLetter
 
     fun setCharacters(characters: ArrayList<MarvelCharacter>, listForLetter: Boolean) {
         charactersOriginal.addAll(characters)
@@ -47,7 +46,6 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
     }
 
     override fun getItemViewType(position: Int): Int {
-        Timber.w(">>>>>> " + listForLetter)
         if (!this.listForLetter &&
                 characters.size == charactersOriginal.size &&
                 position != 0 &&

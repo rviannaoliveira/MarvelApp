@@ -7,4 +7,5 @@ import com.rviannaoliveira.marvelapp.base.BasePresenterFavorite
  */
 interface ComicsPresenter : BasePresenterFavorite{
     fun getMarvelComics(offset: Int)
+    fun getMarvelComicsBeginLetter(letter: String)
 }
