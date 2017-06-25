@@ -19,7 +19,6 @@ This repository i want to use many differents libraries and tools. The project w
 * Retrofit -> http://square.github.io/retrofit/ ✔︎
 * ConstraintLayout -> https://developer.android.com/training/constraint-layout/index.html ✔︎
 * Test Unit and Test Espresso
-* MockWebServer
 
 ## **ScreenShot**
 <p>
@@ -29,6 +28,7 @@ This repository i want to use many differents libraries and tools. The project w
 <img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/third.png" width="170" height="300" margin="10xp"> 
 <img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/forth.png" width="170" height="300" margin="10xp"> 
 <img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/fifth.png" width="170" height="300" margin="10xp"> 
+<img src="https://github.com/rviannaoliveira/MarvelApp/blob/master/images/sixth.png" width="170" height="300" margin="10xp">
 
 </p>
 
