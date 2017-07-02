@@ -1,5 +1,6 @@
 package com.rviannaoliveira.marvelapp.data.api
 
+import com.rviannaoliveira.marvelapp.MarvelApplication
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -20,15 +21,21 @@ class MarvelClient {
 
     private val httpClient = OkHttpClient.Builder()
             .addInterceptor(logging)
-            .addInterceptor({chain -> createParametersDefault(chain)})
+            .addInterceptor({ chain -> createParametersDefault(chain) })
             .build()
 
-    private val builder = Retrofit.Builder()
-            .baseUrl(API_MARVEL_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
 
     fun <MarvelService> createService(serviceClass: Class<MarvelService>): MarvelService {
+        val builder = Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+
+        if (MarvelApplication.URL == null) {
+            builder.baseUrl(API_MARVEL_URL)
+        } else {
+            builder.baseUrl(MarvelApplication.URL)
+        }
+
         val retrofit: Retrofit = builder.client(httpClient).build()
         return retrofit.create(serviceClass)
     }
@@ -38,7 +45,7 @@ class MarvelClient {
         var request = chain.request()
         val builder = request.url().newBuilder()
 
-        builder.addQueryParameter("apikey",ApiKey.publicKey)
+        builder.addQueryParameter("apikey", ApiKey.publicKey)
                 .addQueryParameter("hash", MarvelHashGenerate.generate(timeStamp, ApiKey.privateKey, ApiKey.publicKey))
                 .addQueryParameter("ts", timeStamp.toString())
 

@@ -31,7 +31,7 @@ class CharactersTest {
     fun setUp() {
         server = MockWebServer()
         robo = RoboCharacters()
-
+        server.initMockServer()
         activityRule.launchActivity(Intent())
         server.enqueue(MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(server.readFileFromAssets(activityRule.activity, "characters.json")))
     }
@@ -39,8 +39,6 @@ class CharactersTest {
     @Test
     @Throws(Exception::class)
     fun search_for_abomination_character() {
-        server.initMockServer()
-
         robo.clickSearchButton()
                 .findCharacters("Abom")
                 .checkCharacterScreen("Abomination (Emil")
@@ -52,7 +50,6 @@ class CharactersTest {
     @Throws(Exception::class)
     fun filter_for_letter_d() {
         server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "d_characters.json")))
-        server.initMockServer()
 
         robo.clickFilterButton()
                 .chooseLetterFilter("D")
@@ -63,8 +60,6 @@ class CharactersTest {
     @Test
     @Throws(Exception::class)
     fun filter_for_all() {
-        server.initMockServer()
-
         robo.clickFilterButton()
                 .chooseLetterFilter("ALL")
                 .clickButtonOkDialogFilter()
@@ -75,7 +70,6 @@ class CharactersTest {
     @Throws(Exception::class)
     fun click_item_list_and_back() {
         server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "aim.json")))
-        server.initMockServer()
 
         robo.clickItem(2)
                 .backToList()
@@ -84,8 +78,6 @@ class CharactersTest {
     @Test
     @Throws(Exception::class)
     fun click_favorite() {
-        server.initMockServer()
-
         robo.clickOnFavoriteItem(2)
                 .clickOffFavoriteItem(2)
     }

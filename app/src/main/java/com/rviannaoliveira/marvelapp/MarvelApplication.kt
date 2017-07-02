@@ -4,6 +4,7 @@ import android.app.Application
 import com.facebook.stetho.Stetho
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider
 import io.realm.Realm
+import okhttp3.HttpUrl
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -31,5 +32,9 @@ class MarvelApplication : Application() {
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                         .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                         .build())
+    }
+
+    companion object {
+        var URL: HttpUrl? = null
     }
 }

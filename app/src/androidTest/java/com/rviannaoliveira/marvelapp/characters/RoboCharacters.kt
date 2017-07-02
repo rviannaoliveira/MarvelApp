@@ -66,6 +66,7 @@ class RoboCharacters {
     }
 
     fun backToList(): RoboCharacters {
+        sleep(3000)
         onView(withContentDescription("Navigate up")).perform(click())
         return this
     }

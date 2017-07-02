@@ -33,24 +33,23 @@ class ComicsTest {
         server.initMockServer()
         robo = RoboComic()
         activityRule.launchActivity(Intent())
+        server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "characters.json")))
+        server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "comics.json")))
     }
 
     @Test
     @Throws(Exception::class)
     fun search_for_civilwar_comic() {
-        server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "comics.json")))
-
         robo.clickComicMenu()
                 .clickSearchButton()
                 .findComics("Cap Transport")
-                .checkComicScreen("Cap Transport (2005) #18")
+                .checkComicScreen("Cap Transport (2005) #20")
                 .closeSearchButton()
     }
 
     @Test
     @Throws(Exception::class)
     fun filter_for_letter_d() {
-        server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "comics.json")))
         server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "d_comics.json")))
 
         robo.clickComicMenu()
@@ -63,19 +62,16 @@ class ComicsTest {
     @Test
     @Throws(Exception::class)
     fun filter_for_all() {
-        server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "comics.json")))
-
         robo.clickComicMenu()
                 .clickFilterButton()
                 .chooseLetterFilter("ALL")
                 .clickButtonOkDialogFilter()
-                .checkComicScreen("Magician:")
+                .checkComicScreen("Halo")
     }
 
     @Test
     @Throws(Exception::class)
     fun click_item_list_and_back() {
-        server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "comics.json")))
         server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "civil.json")))
 
         robo.clickComicMenu()
@@ -86,8 +82,6 @@ class ComicsTest {
     @Test
     @Throws(Exception::class)
     fun click_favorite() {
-        server.enqueue(MockResponse().setBody(server.readFileFromAssets(activityRule.activity, "comics.json")))
-
         robo.clickComicMenu()
                 .clickOnFavoriteItem(2)
                 .clickOffFavoriteItem(2)

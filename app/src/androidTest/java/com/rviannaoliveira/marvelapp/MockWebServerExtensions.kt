@@ -15,22 +15,23 @@ import java.io.InputStreamReader
 fun MockWebServer.initMockServer() {
     this.start()
     this.url("/v1/marvel/")
-    }
+    MarvelApplication.URL = this.url("/v1/marvel/")
+}
 
 fun MockWebServer.readFileFromAssets(cx: Context, fileName: String): String {
-        val builder = StringBuilder()
-        try {
-            val stream = cx.assets.open(fileName)
-            val bReader = BufferedReader(InputStreamReader(stream, "UTF-8"))
-            var line = bReader.readLine()
+    val builder = StringBuilder()
+    try {
+        val stream = cx.assets.open(fileName)
+        val bReader = BufferedReader(InputStreamReader(stream, "UTF-8"))
+        var line = bReader.readLine()
 
-            while (line != null) {
-                builder.append(line)
-                line = bReader.readLine()
-            }
-        } catch (e: IOException) {
-            Timber.e(e)
+        while (line != null) {
+            builder.append(line)
+            line = bReader.readLine()
         }
-
-        return builder.toString().substring(0)
+    } catch (e: IOException) {
+        Timber.e(e)
     }
+
+    return builder.toString().substring(0)
+}
