@@ -40,7 +40,7 @@ class DetailComicsAdapter : RecyclerView.Adapter<DetailComicsAdapter.DetailComic
     override fun getItemCount(): Int = comics.size
 
     inner class DetailComicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image = itemView.findViewById(R.id.image_item_subdetail) as ImageView
-        var name = itemView.findViewById(R.id.text_item_subdetail) as TextView
+        var image = itemView.findViewById<ImageView>(R.id.image_item_subdetail)
+        var name = itemView.findViewById<TextView>(R.id.text_item_subdetail)
     }
 }

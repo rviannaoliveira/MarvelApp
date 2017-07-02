@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.characters
+package com.rviannaoliveira.marvelapp.detailCharacter
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,10 +14,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
-import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterPresenterImpl
-import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterView
-import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicsAdapter
-import com.rviannaoliveira.marvelapp.detailCharacter.DetailSeriesAdapter
+import com.rviannaoliveira.marvelapp.characters.DetailCharacterPresenter
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
@@ -46,13 +43,13 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         appActivity.title = ""
         setHasOptionsMenu(true)
 
-        image = view?.findViewById(R.id.image) as ImageView
-        description = view.findViewById(R.id.description) as TextView
-        progressbar = view.findViewById(R.id.progressbar) as ProgressBar
-        blockComics = view.findViewById(R.id.block_comics) as LinearLayout
-        blockSeries = view.findViewById(R.id.block_series) as LinearLayout
-        reclycerViewComic = view.findViewById(R.id.list_comic) as RecyclerView
-        reclycerViewSeries = view.findViewById(R.id.list_series) as RecyclerView
+        image = view?.findViewById<ImageView>(R.id.image) as ImageView
+        description = view.findViewById<TextView>(R.id.description) as TextView
+        progressbar = view.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
+        blockComics = view.findViewById<LinearLayout>(R.id.block_comics) as LinearLayout
+        blockSeries = view.findViewById<LinearLayout>(R.id.block_series) as LinearLayout
+        reclycerViewComic = view.findViewById<RecyclerView>(R.id.list_comic) as RecyclerView
+        reclycerViewSeries = view.findViewById<RecyclerView>(R.id.list_series) as RecyclerView
 
         loadView()
         detailCharacterPresenterImpl.getMarvelCharacter(arguments.get(MarvelConstant.ID) as Int)
@@ -78,23 +75,25 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     }
 
     override fun loadCharacter(marvelCharacter: MarvelCharacter) {
-        MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), image)
-        description.text = if (marvelCharacter.description?.length == 0) getString(R.string.no_description) else marvelCharacter.description
-        appActivity.supportActionBar?.title = marvelCharacter.name
+        if (this.isVisible) {
+            MarvelUtil.setImageUrl(activity, marvelCharacter.thumbMail?.getPathExtension(), image)
+            description.text = if (marvelCharacter.description?.length == 0) getString(R.string.no_description) else marvelCharacter.description
+            appActivity.supportActionBar?.title = marvelCharacter.name
 
-        marvelCharacter.comicList?.let {
-            if (it.isEmpty()) {
-                return
+            marvelCharacter.comicList?.let {
+                if (it.isEmpty()) {
+                    return
+                }
+                comicsAdapter.setComics(it)
+                blockComics.visibility = View.VISIBLE
             }
-            comicsAdapter.setComics(it)
-            blockComics.visibility = View.VISIBLE
-        }
-        marvelCharacter.seriesList?.let {
-            if (it.isEmpty()) {
-                return
+            marvelCharacter.seriesList?.let {
+                if (it.isEmpty()) {
+                    return
+                }
+                seriesAdapter.setSeries(it)
+                blockSeries.visibility = View.VISIBLE
             }
-            seriesAdapter.setSeries(it)
-            blockSeries.visibility = View.VISIBLE
         }
     }
 
@@ -107,6 +106,8 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     }
 
     override fun error() {
-        MarvelUtil.showErrorScreen(context, view, resources, R.drawable.wolverine_error)
+        if (this.isVisible) {
+            MarvelUtil.showErrorScreen(context, view, resources, R.drawable.wolverine_error)
+        }
     }
 }

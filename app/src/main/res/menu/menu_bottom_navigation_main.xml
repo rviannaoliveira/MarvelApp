@@ -5,7 +5,7 @@
         android:id="@+id/action_character"
         android:enabled="true"
         android:icon="@drawable/ic_spiderman"
-        android:title="@string/stories"
+        android:title="@string/characters"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_favorite"

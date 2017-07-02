@@ -89,9 +89,9 @@ object MarvelUtil {
     }
 
     fun showErrorScreen(context: Context, view: View?, resources: Resources, @DrawableRes drawable: Int) {
-        val includeProblem = view?.findViewById(R.id.include_problem_screen)
-        val imageProblem = view?.findViewById(R.id.image_problem) as ImageView
-        val textProblem = view.findViewById(R.id.text_problem) as TextView
+        val includeProblem = view?.findViewById<View>(R.id.include_problem_screen)
+        val imageProblem = view?.findViewById<ImageView>(R.id.image_problem) as ImageView
+        val textProblem = view.findViewById<TextView>(R.id.text_problem)
         val bitmap = BitmapFactory.decodeResource(resources, drawable)
 
         includeProblem?.visibility = View.VISIBLE

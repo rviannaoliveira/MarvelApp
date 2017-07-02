@@ -95,9 +95,9 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
     }
 
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image = itemView.findViewById(R.id.image_item) as ImageView
-        var name = itemView.findViewById(R.id.name_item) as TextView
-        var delete = itemView.findViewById(R.id.delete_favorite) as ImageView
-        var row = itemView.findViewById(R.id.row) as ConstraintLayout
+        var image = itemView.findViewById<ImageView>(R.id.image_item)
+        var name = itemView.findViewById<TextView>(R.id.name_item)
+        var delete = itemView.findViewById<ImageView>(R.id.delete_favorite)
+        var row = itemView.findViewById<ConstraintLayout>(R.id.row)
     }
 }

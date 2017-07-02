@@ -152,12 +152,12 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
     }
 
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image = itemView.findViewById(R.id.image_item) as ImageView
-        var name = itemView.findViewById(R.id.name_item) as TextView
-        var favorite = itemView.findViewById(R.id.check_favorite) as CheckBox
+        var image = itemView.findViewById<ImageView>(R.id.image_item)
+        var name = itemView.findViewById<TextView>(R.id.name_item)
+        var favorite = itemView.findViewById<CheckBox>(R.id.check_favorite)
     }
 
     inner class LoaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var progressBar = itemView.findViewById(R.id.progressbar) as ProgressBar
+        var progressBar = itemView.findViewById<ProgressBar>(R.id.progressbar)
     }
 }
