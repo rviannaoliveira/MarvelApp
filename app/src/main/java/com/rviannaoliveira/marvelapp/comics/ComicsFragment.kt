@@ -36,8 +36,8 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_list, container, false)
-        comicsRecyclerView = view?.findViewById<RecyclerView>(R.id.list_recycler_view) as RecyclerView
-        progressbar = view.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
+        comicsRecyclerView = view?.findViewById(R.id.list_recycler_view) as RecyclerView
+        progressbar = view.findViewById(R.id.progressbar) as ProgressBar
         setHasOptionsMenu(true)
 
         loadView()

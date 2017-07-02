@@ -1,0 +1,1657 @@
+{
+  "code": 200,
+  "status": "Ok",
+  "copyright": "© 2017 MARVEL",
+  "attributionText": "Data provided by Marvel. © 2017 MARVEL",
+  "attributionHTML": "<a href=\"http://marvel.com\">Data provided by Marvel. © 2017 MARVEL</a>",
+  "etag": "9e0db4ae1b14c2b9dba5d1b6b6752db7228547c6",
+  "data": {
+    "offset": 0,
+    "limit": 20,
+    "total": 3038,
+    "count": 20,
+    "results": [
+      {
+        "id": 59539,
+        "digitalId": 0,
+        "title": "Doctor Strange (2015) #10 (Henderson Mighty Men Variant)",
+        "issueNumber": 10,
+        "variantDescription": "Henderson Mighty Men Variant",
+        "description": null,
+        "modified": "2016-07-21T16:36:52-0400",
+        "isbn": "",
+        "upc": "75960608301501021",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/59539",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/59539/doctor_strange_2015_10_henderson_mighty_men_variant/henderson_mighty_men_variant?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/20457",
+          "name": "Doctor Strange (2015 - Present)"
+        },
+        "variants": [
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/55424",
+            "name": "Doctor Strange (2015) #10"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/60068",
+            "name": "Doctor Strange (2015) #10 (Broccardo Death of X Variant)"
+          }
+        ],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2029-12-31T00:00:00-0500"
+          },
+          {
+            "type": "focDate",
+            "date": "2016-07-13T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [
+          {
+            "path": "http://i.annihil.us/u/prod/marvel/i/mg/d/00/56f45f95cdd1e",
+            "extension": "jpg"
+          }
+        ],
+        "creators": {
+          "available": 2,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/59539/creators",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/12464",
+              "name": "Erica Henderson",
+              "role": "penciller (cover)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/4300",
+              "name": "Nick Lowe",
+              "role": "editor"
+            }
+          ],
+          "returned": 2
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/59539/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 2,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/59539/stories",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/129584",
+              "name": "cover from Doctor Strange (2015) #10 (HENDERSON MOP VARIANT)",
+              "type": "cover"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/129585",
+              "name": "story from Doctor Strange (2015) #10 (HENDERSON MOP VARIANT)",
+              "type": "interiorStory"
+            }
+          ],
+          "returned": 2
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/59539/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 59927,
+        "digitalId": 0,
+        "title": "Darth Vader (2015) #25 (Christopher Action Figure Black and White Variant)",
+        "issueNumber": 25,
+        "variantDescription": "Christopher Action Figure Black and White Variant",
+        "description": null,
+        "modified": "2016-08-25T12:39:05-0400",
+        "isbn": "",
+        "upc": "759606081241002531",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 48,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/59927",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/59927/darth_vader_2015_25_christopher_action_figure_black_and_white_variant/christopher_action_figure_black_and_white_variant?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/19379",
+          "name": "Darth Vader (2015 - Present)"
+        },
+        "variants": [
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/55405",
+            "name": "Darth Vader (2015) #25"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59933",
+            "name": "Darth Vader (2015) #25 (Samnee Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59934",
+            "name": "Darth Vader (2015) #25 (Pichelli Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59935",
+            "name": "Darth Vader (2015) #25 (Chiang Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/60282",
+            "name": "Darth Vader (2015) #25 (Quesada Sketch Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/60350",
+            "name": "Darth Vader (2015) #25 (Quesada Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59574",
+            "name": "Darth Vader (2015) #25 (Christopher Action Figure Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59928",
+            "name": "Darth Vader (2015) #25 (Granov Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59929",
+            "name": "Darth Vader (2015) #25 (Larroca Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59930",
+            "name": "Darth Vader (2015) #25 (Michael Cho Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59931",
+            "name": "Darth Vader (2015) #25 (Mckelvie Variant)"
+          },
+          {
+            "resourceURI": "http://gateway.marvel.com/v1/public/comics/59932",
+            "name": "Darth Vader (2015) #25 (Shirahama Variant)"
+          }
+        ],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2029-12-31T00:00:00-0500"
+          },
+          {
+            "type": "focDate",
+            "date": "2016-08-17T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 4.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 2,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/59927/creators",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/10405",
+              "name": "John Tyler Christopher",
+              "role": "penciller (cover)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/8822",
+              "name": "Jordan White",
+              "role": "editor"
+            }
+          ],
+          "returned": 2
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/59927/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 2,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/59927/stories",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/130360",
+              "name": "cover from Darth Vader (2015) #25 (CHRISTOPHER ACTION FIGURE BLACK AND WHITE VARIANT)",
+              "type": "cover"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/130361",
+              "name": "story from Darth Vader (2015) #25 (CHRISTOPHER ACTION FIGURE BLACK AND WHITE VARIANT)",
+              "type": "interiorStory"
+            }
+          ],
+          "returned": 2
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/59927/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 58697,
+        "digitalId": 0,
+        "title": "Deadpool: Bad Blood (Hardcover)",
+        "issueNumber": 0,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-18T10:28:25-0400",
+        "isbn": "978-1-302-90153-0",
+        "upc": "",
+        "diamondCode": "",
+        "ean": "9781302 901530 52499",
+        "issn": "",
+        "format": "Hardcover",
+        "pageCount": 112,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/58697",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/collection/58697/deadpool_bad_blood_hardcover?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          },
+          {
+            "type": "purchase",
+            "url": "http://comicstore.marvel.com/Deadpool-Bad-Blood-0/digital-comic/44334?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/21421",
+          "name": "Deadpool: Bad Blood (2016)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2020-12-31T00:00:00-0500"
+          },
+          {
+            "type": "focDate",
+            "date": "2020-12-02T00:00:00-0500"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 24.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/58697/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/58697/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/58697/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/58697/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 64526,
+        "digitalId": 0,
+        "title": "DEADPOOL: WORLD'S GREATEST VOL. 9 - DEADPOOL IN SPACE TPB (Trade Paperback)",
+        "issueNumber": 0,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-06-13T09:22:53-0400",
+        "isbn": "978-1-302-90760-0",
+        "upc": "",
+        "diamondCode": "",
+        "ean": "9781302 907600 51599",
+        "issn": "",
+        "format": "Trade Paperback",
+        "pageCount": 112,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/64526",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/collection/64526/deadpool_worlds_greatest_vol_9_-_deadpool_in_space_tpb_trade_paperback?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23510",
+          "name": "DEADPOOL: WORLD'S GREATEST VOL. 9 - DEADPOOL IN SPACE TPB (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-09-13T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-24T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 15.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64526/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64526/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64526/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64526/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 60610,
+        "digitalId": 0,
+        "title": "Deadpool (2015) #36",
+        "issueNumber": 36,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-06-13T09:22:49-0400",
+        "isbn": "",
+        "upc": "75960608332903611",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "1946-9292",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/60610",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/60610/deadpool_2015_36?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/20613",
+          "name": "Deadpool (2015 - Present)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-09-13T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-08-21T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60610/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60610/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60610/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 1,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60610/events",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/336",
+              "name": "Secret Empire"
+            }
+          ],
+          "returned": 1
+        }
+      },
+      {
+        "id": 64527,
+        "digitalId": 0,
+        "title": "Defenders (2017) #5",
+        "issueNumber": 5,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-06-13T09:22:54-0400",
+        "isbn": "",
+        "upc": "75960608667200511",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/64527",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/64527/defenders_2017_5?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23074",
+          "name": "Defenders (2017 - Present)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-09-13T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-08-21T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64527/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64527/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64527/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64527/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 60590,
+        "digitalId": 0,
+        "title": "Daredevil (2015) #26",
+        "issueNumber": 26,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-06-07T09:18:55-0400",
+        "isbn": "",
+        "upc": "75960608350302611",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "0279-8271",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/60590",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/60590/daredevil_2015_26?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/20780",
+          "name": "Daredevil (2015 - Present)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-09-06T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-08-14T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60590/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60590/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60590/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60590/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 64293,
+        "digitalId": 0,
+        "title": "DOCTOR STRANGE/PUNISHER: MAGIC BULLETS TPB (Trade Paperback)",
+        "issueNumber": 0,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-24T09:18:39-0400",
+        "isbn": "978-1-302-90718-1",
+        "upc": "",
+        "diamondCode": "MAY170962",
+        "ean": "9781302 907181 51599",
+        "issn": "",
+        "format": "Trade Paperback",
+        "pageCount": 128,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/64293",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/collection/64293/doctor_strangepunisher_magic_bullets_tpb_trade_paperback?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23426",
+          "name": "DOCTOR STRANGE/PUNISHER: MAGIC BULLETS TPB (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-30T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-10T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 15.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64293/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64293/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64293/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64293/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 64292,
+        "digitalId": 0,
+        "title": "DEADPOOL VS. THE PUNISHER TPB (Trade Paperback)",
+        "issueNumber": 0,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-24T09:18:35-0400",
+        "isbn": "978-1-302-90748-8",
+        "upc": "",
+        "diamondCode": "MAY170963",
+        "ean": "9781302 907488 51599",
+        "issn": "",
+        "format": "Trade Paperback",
+        "pageCount": 112,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/64292",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/collection/64292/deadpool_vs_the_punisher_tpb_trade_paperback?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23425",
+          "name": "DEADPOOL VS. THE PUNISHER TPB (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-30T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-10T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 15.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64292/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64292/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64292/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64292/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 64246,
+        "digitalId": 0,
+        "title": "Deadpool Kills the Marvel Universe Again (2017) #4",
+        "issueNumber": 4,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-23T09:15:29-0400",
+        "isbn": "",
+        "upc": "75960608706800411",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/64246",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/64246/deadpool_kills_the_marvel_universe_again_2017_4?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23144",
+          "name": "Deadpool Kills the Marvel Universe Again (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-23T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-31T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64246/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64246/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64246/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64246/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 62135,
+        "digitalId": 0,
+        "title": "DEADPOOL: WORLD'S GREATEST VOL. 8 - 'TIL DEATH DO US... TPB (Trade Paperback)",
+        "issueNumber": 0,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-23T09:15:33-0400",
+        "isbn": "978-1-302-90543-9",
+        "upc": "",
+        "diamondCode": "MAY170956",
+        "ean": "9781302 905439 51799",
+        "issn": "",
+        "format": "Trade Paperback",
+        "pageCount": 136,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/62135",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/collection/62135/deadpool_worlds_greatest_vol_8_-_til_death_do_us._tpb_trade_paperback?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/22762",
+          "name": "DEADPOOL: WORLD'S GREATEST VOL. 8 - 'TIL DEATH DO US... TPB (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-23T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-03T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 17.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/62135/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/62135/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/62135/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/62135/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 57834,
+        "digitalId": 0,
+        "title": "DEADPOOL 2099 TPB (Trade Paperback)",
+        "issueNumber": 0,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-16T09:23:30-0400",
+        "isbn": "978-1-302-90092-2",
+        "upc": "",
+        "diamondCode": "MAY170969",
+        "ean": "9781302 900922 51499",
+        "issn": "",
+        "format": "Trade Paperback",
+        "pageCount": 112,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/57834",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/collection/57834/deadpool_2099_tpb_trade_paperback?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/21065",
+          "name": "DEADPOOL 2099 TPB (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-16T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-06-26T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 14.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/57834/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/57834/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/57834/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/57834/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 64138,
+        "digitalId": 0,
+        "title": "Defenders (2017) #4",
+        "issueNumber": 4,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-09T09:22:35-0400",
+        "isbn": "",
+        "upc": "75960608667200411",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/64138",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/64138/defenders_2017_4?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23074",
+          "name": "Defenders (2017 - Present)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-09T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-17T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64138/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64138/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64138/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64138/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 60609,
+        "digitalId": 0,
+        "title": "Deadpool (2015) #35",
+        "issueNumber": 35,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-09T09:22:30-0400",
+        "isbn": "",
+        "upc": "75960608332903511",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "1946-9292",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/60609",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/60609/deadpool_2015_35?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/20613",
+          "name": "Deadpool (2015 - Present)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-09T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-17T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60609/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60609/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60609/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60609/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 61475,
+        "digitalId": 0,
+        "title": "Doctor Strange And The Sorcerers Supreme (2016) #11",
+        "issueNumber": 11,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-09T09:22:39-0400",
+        "isbn": "",
+        "upc": "75960608608501111",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/61475",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/61475/doctor_strange_and_the_sorcerers_supreme_2016_11?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/22560",
+          "name": "Doctor Strange And The Sorcerers Supreme (2016 - Present)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-09T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-17T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/61475/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/61475/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/61475/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/61475/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 64164,
+        "digitalId": 0,
+        "title": "Deadpool Kills the Marvel Universe Again (2017) #3",
+        "issueNumber": 3,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-10T09:18:16-0400",
+        "isbn": "",
+        "upc": "75960608706800311",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/64164",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/64164/deadpool_kills_the_marvel_universe_again_2017_3?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23144",
+          "name": "Deadpool Kills the Marvel Universe Again (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-09T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-17T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64164/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64164/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64164/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64164/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 64276,
+        "digitalId": 0,
+        "title": "Darth Vader (2017) #4",
+        "issueNumber": 4,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-05-23T17:09:18-0400",
+        "isbn": "",
+        "upc": "75960608666500411",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/64276",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/64276/darth_vader_2017_4?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23095",
+          "name": "Darth Vader (2017 - Present)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-08-02T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-07-10T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64276/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64276/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64276/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/64276/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 60973,
+        "digitalId": 0,
+        "title": "Doctor Strange (2015) #23",
+        "issueNumber": 23,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-06-29T12:00:03-0400",
+        "isbn": "",
+        "upc": "75960608301502311",
+        "diamondCode": "MAY170791",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 32,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/60973",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/60973/doctor_strange_2015_23?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/20457",
+          "name": "Doctor Strange (2015 - Present)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-07-19T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-06-26T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 3.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60973/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60973/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60973/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 1,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/60973/events",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/336",
+              "name": "Secret Empire"
+            }
+          ],
+          "returned": 1
+        }
+      },
+      {
+        "id": 62132,
+        "digitalId": 0,
+        "title": "DAREDEVIL: BACK IN BLACK VOL. 4 - IDENTITY TPB (Trade Paperback)",
+        "issueNumber": 0,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-06-29T11:56:23-0400",
+        "isbn": "978-1-302-90562-0",
+        "upc": "",
+        "diamondCode": "APR171159",
+        "ean": "9781302 905620 51799",
+        "issn": "",
+        "format": "Trade Paperback",
+        "pageCount": 136,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/62132",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/collection/62132/daredevil_back_in_black_vol_4_-_identity_tpb_trade_paperback?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/22759",
+          "name": "DAREDEVIL: BACK IN BLACK VOL. 4 - IDENTITY TPB (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-07-19T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-05-29T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 17.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/62132/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/62132/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/62132/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/62132/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 63844,
+        "digitalId": 0,
+        "title": "DEADPOOL CLASSIC VOL. 18: DEADPOOL VS. MARVEL TPB (Trade Paperback)",
+        "issueNumber": 0,
+        "variantDescription": "",
+        "description": null,
+        "modified": "2017-06-29T11:58:28-0400",
+        "isbn": "978-1-302-90685-6",
+        "upc": "",
+        "diamondCode": "APR171170",
+        "ean": "9781302 906856 53999",
+        "issn": "",
+        "format": "Trade Paperback",
+        "pageCount": 488,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/63844",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/collection/63844/deadpool_classic_vol_18_deadpool_vs_marvel_tpb_trade_paperback?utm_campaign=apiRef&utm_source=15e69ffe02879d498e25896062349bc4"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/23264",
+          "name": "DEADPOOL CLASSIC VOL. 18: DEADPOOL VS. MARVEL TPB (2017)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2017-07-19T00:00:00-0400"
+          },
+          {
+            "type": "focDate",
+            "date": "2017-05-29T00:00:00-0400"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 39.99
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/63844/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/63844/characters",
+          "items": [],
+          "returned": 0
+        },
+        "stories": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/63844/stories",
+          "items": [],
+          "returned": 0
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/63844/events",
+          "items": [],
+          "returned": 0
+        }
+      }
+    ]
+  }
+}

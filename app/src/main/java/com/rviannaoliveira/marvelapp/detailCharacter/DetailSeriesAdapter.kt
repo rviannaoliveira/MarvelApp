@@ -40,7 +40,7 @@ class DetailSeriesAdapter : RecyclerView.Adapter<DetailSeriesAdapter.DetailSerie
     override fun getItemCount(): Int = series.size
 
     inner class DetailSeriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image = itemView.findViewById<ImageView>(R.id.image_item_subdetail)
-        var name = itemView.findViewById<TextView>(R.id.text_item_subdetail)
+        var image = itemView.findViewById(R.id.image_item_subdetail) as ImageView
+        var name = itemView.findViewById(R.id.text_item_subdetail) as TextView
     }
 }

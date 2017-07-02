@@ -1,40 +1,38 @@
 package com.rviannaoliveira.marvelapp
 
-import android.content.Context
-import okhttp3.mockwebserver.MockWebServer
-import timber.log.Timber
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
+import android.support.test.espresso.UiController
+import android.support.test.espresso.ViewAction
+import android.view.View
+import io.realm.Realm
+import io.realm.RealmConfiguration
+import org.hamcrest.Matcher
 
 
 /**
- * Criado por rodrigo on 25/06/17.
+ * Criado por rodrigo on 02/07/17.
  */
+
 object TestUtil {
 
-    fun initMockServer(): MockWebServer {
-        val server = MockWebServer()
-        server.start()
-        server.url("/v1/marvel/")
-        return server
+    fun clickChildViewWithId(id: Int): ViewAction {
+        return object : ViewAction {
+            override fun getConstraints(): Matcher<View>? {
+                return null
+            }
+
+            override fun getDescription(): String {
+                return "Click on a child view with specified id."
+            }
+
+            override fun perform(uiController: UiController, view: View) {
+                val v = view.findViewById(id)
+                v.performClick()
+            }
+        }
     }
 
-    fun readFileFromAssets(cx: Context, fileName: String): String {
-        val builder = StringBuilder()
-        try {
-            val stream = cx.assets.open(fileName)
-            val bReader = BufferedReader(InputStreamReader(stream, "UTF-8"))
-            var line = bReader.readLine()
-
-            while (line != null) {
-                builder.append(line)
-                line = bReader.readLine()
-            }
-        } catch (e: IOException) {
-            Timber.e(e)
-        }
-
-        return builder.toString().substring(0)
+    fun initRealmTest(): Realm {
+        val testConfig = RealmConfiguration.Builder().inMemory().name("class_Favorite").build()
+        return Realm.getInstance(testConfig)
     }
 }

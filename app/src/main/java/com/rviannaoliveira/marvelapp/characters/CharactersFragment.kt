@@ -36,8 +36,8 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_list, container, false)
-        this.progressbar = view?.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
-        this.charactersRecyclerView = view.findViewById<RecyclerView>(R.id.list_recycler_view) as RecyclerView
+        this.progressbar = view?.findViewById(R.id.progressbar) as ProgressBar
+        this.charactersRecyclerView = view.findViewById(R.id.list_recycler_view) as RecyclerView
         setHasOptionsMenu(true)
 
         loadView()

@@ -138,11 +138,10 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
     override fun filter(text: String?) {
         comics.clear()
         text?.let {
-            //TODO ver uma solucao melhor
             if (it.isEmpty()) {
                 comics.addAll(comicsOriginal)
             } else {
-                comicsOriginal.filter { it.name != null && it.name.toString().contains(text, true) }
+                comicsOriginal.filter { it.title != null && it.title.toString().contains(text, true) }
                         .map { comics.add(it) }
             }
             notifyDataSetChanged()
@@ -150,12 +149,12 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
     }
 
     inner class ComicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image = itemView.findViewById<ImageView>(R.id.image_item)
-        var name = itemView.findViewById<TextView>(R.id.name_item)
-        var favorite = itemView.findViewById<CheckBox>(R.id.check_favorite)
+        var image = itemView.findViewById(R.id.image_item) as ImageView
+        var name = itemView.findViewById(R.id.name_item) as TextView
+        var favorite = itemView.findViewById(R.id.check_favorite) as CheckBox
     }
 
     inner class LoaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var progressBar = itemView.findViewById<ProgressBar>(R.id.progressbar)
+        var progressBar = itemView.findViewById(R.id.progressbar) as ProgressBar
     }
 }

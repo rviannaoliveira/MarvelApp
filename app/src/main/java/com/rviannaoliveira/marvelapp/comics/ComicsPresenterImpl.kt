@@ -15,7 +15,7 @@ class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
         }
         val observableComics = DataManager.getMarvelComics(offset)
         observableComics.subscribe({ marvelComics ->
-            view.loadComics(marvelComics)
+            view.loadComics(ArrayList(marvelComics.distinct()))
             view.hideProgressBar()
         }, { error ->
             view.hideProgressBar()
