@@ -15,7 +15,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  * Criado por rcalixto on 09/05/2017.
  */
 
-class DetailCharacterAdapter() : RecyclerView.Adapter<DetailCharacterAdapter.DetailCharacterViewHolder>() {
+class DetailCharacterAdapter : RecyclerView.Adapter<DetailCharacterAdapter.DetailCharacterViewHolder>() {
     private lateinit var context: Context
     private lateinit var character: ArrayList<MarvelCharacter>
 

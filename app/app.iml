@@ -22,45 +22,24 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="1">
-        <option name="compilerInfo">
-          <KotlinCompilerInfo>
-            <option name="compilerSettings">
-              <CompilerSettings />
-            </option>
-            <option name="k2jsCompilerArguments">
-              <K2JSCompilerArguments />
-            </option>
-            <option name="k2jvmCompilerArguments">
-              <K2JVMCompilerArguments />
-            </option>
-            <option name="_commonCompilerArguments">
-              <DummyImpl>
-                <option name="languageVersion" value="1.1" />
-                <option name="apiVersion" value="1.1" />
-                <option name="pluginClasspaths">
-                  <array />
-                </option>
-                <option name="coroutinesWarn" value="true" />
-                <option name="pluginOptions">
-                  <array />
-                </option>
-              </DummyImpl>
-            </option>
-          </KotlinCompilerInfo>
-        </option>
-        <option name="useProjectSettings" value="false" />
-        <option name="versionInfo">
-          <KotlinVersionInfo>
-            <option name="apiLevel" value="1.1" />
-            <option name="languageLevel" value="1.1" />
-            <option name="targetPlatformName" value="JVM 1.8" />
-          </KotlinVersionInfo>
-        </option>
+      <configuration version="2" platform="JVM 1.6" useProjectSettings="false">
+        <compilerSettings />
+        <compilerArguments>
+          <option name="jvmTarget" value="1.6" />
+          <option name="languageVersion" value="1.1" />
+          <option name="apiVersion" value="1.1" />
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="coroutinesWarn" value="true" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+        </compilerArguments>
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/debug" />
     <exclude-output />
@@ -73,7 +52,6 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/kapt/debugUnitTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/kapt/debugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/debug" isTestSource="true" generated="true" />
@@ -82,6 +60,7 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/kapt/debugUnitTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />

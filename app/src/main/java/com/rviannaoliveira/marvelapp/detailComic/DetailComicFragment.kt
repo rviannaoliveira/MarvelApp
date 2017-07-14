@@ -67,18 +67,16 @@ class DetailComicFragment : Fragment(), DetailComicView {
     }
 
     override fun loadComic(marvelComic: MarvelComic) {
-        if (this.isVisible) {
-            MarvelUtil.setImageUrl(context, marvelComic.thumbMail?.getPathExtension(), image)
-            description.text = if (marvelComic.description?.length == 0) getString(R.string.no_description) else marvelComic.description
-            appActivity.supportActionBar?.title = marvelComic.title
+        MarvelUtil.setImageUrl(context, marvelComic.thumbMail?.getPathExtension(), image)
+        description.text = if (marvelComic.description?.length == 0) getString(R.string.no_description) else marvelComic.description
+        appActivity.supportActionBar?.title = marvelComic.title
 
-            marvelComic.charactersList?.let {
-                if (it.isEmpty()) {
-                    return
-                }
-                characterAdapter.setCharacter(it)
-                blockCharacter.visibility = View.VISIBLE
+        marvelComic.charactersList?.let {
+            if (it.isEmpty()) {
+                return
             }
+            characterAdapter.setCharacter(it)
+            blockCharacter.visibility = View.VISIBLE
         }
     }
 
