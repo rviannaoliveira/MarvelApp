@@ -13,28 +13,27 @@ class CharactersPresenterImpl(private val charactersView: CharactersView) : Char
         if (offset == 0) {
             charactersView.showProgressBar()
         }
+
         val observableCharacters = DataManager.getMarvelCharacters(offset)
+
         observableCharacters.subscribe({ marvelCharacters ->
             charactersView.loadCharacters(marvelCharacters)
-            charactersView.hideProgressBar()
         }, { error ->
-            charactersView.hideProgressBar()
             charactersView.error()
             Timber.w(error)
-        })
+        }, { charactersView.hideProgressBar() })
     }
 
     override fun getMarvelCharactersBeginLetter(letter: String) {
         charactersView.showProgressBar()
         val observableCharacters = DataManager.getMarvelCharactersBeginLetter(letter)
+
         observableCharacters.subscribe({ marvelCharacters ->
             charactersView.loadFilterCharacters(marvelCharacters)
-            charactersView.hideProgressBar()
         }, { error ->
-            charactersView.hideProgressBar()
             charactersView.error()
             Timber.w(error)
-        })
+        }, { charactersView.hideProgressBar() })
     }
 
     override fun toggleFavorite(favorite: Favorite, checked: Boolean) {

@@ -55,10 +55,10 @@ class RepositoryHelper : RepositoryData {
     }
 
     private fun getNextKey(): Int {
-        try {
-            return realm.where(Favorite::class.java).max(MarvelConstant.ID).toInt() + 1
+        return try {
+            realm.where(Favorite::class.java).max(MarvelConstant.ID).toInt() + 1
         } catch (e: Exception) {
-            return 1
+            1
         }
 
     }

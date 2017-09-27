@@ -77,7 +77,7 @@ class MarvelApiHelper : ApiData {
                 })
     }
 
-    override fun getDetailCharacter(id: Int): Observable<MarvelCharacter> {
+    override fun getDetailCharacter(id: Int?): Observable<MarvelCharacter> {
         if (detailCharacterCache.containsKey(id)) {
             return Observable.just(detailCharacterCache[id])
         }
@@ -94,15 +94,15 @@ class MarvelApiHelper : ApiData {
                             getMarvelCharacterComics(data),
                             getMarvelCharacterSeries(data),
                             Function3<MarvelCharacter?, MarvelComicDataWrapper, MarvelSeriesDataWrapper, MarvelCharacter>({ character, comics, series ->
-                                character?.comicList = comics.data?.results
-                                character?.seriesList = series.data?.results
-                                character?.id?.let { detailCharacterCache.put(it, character) }
+                                character.comicList = comics.data?.results
+                                character.seriesList = series.data?.results
+                                character.id?.let { detailCharacterCache.put(it, character) }
                                 character
                             }))
                 })
     }
 
-    override fun getDetailComic(id: Int): Observable<MarvelComic> {
+    override fun getDetailComic(id: Int?): Observable<MarvelComic> {
         if (detailComicCache.containsKey(id)) {
             return Observable.just(detailComicCache[id])
         }
@@ -118,8 +118,8 @@ class MarvelApiHelper : ApiData {
                     Observable.zip(Observable.just(data),
                             getMarvelComicCharacter(data),
                             BiFunction<MarvelComic?, MarvelCharacterDataWrapper, MarvelComic>({ comic, characters ->
-                                comic?.charactersList = characters.data?.results
-                                comic?.id?.let { detailComicCache.put(it, comic) }
+                                comic.charactersList = characters.data?.results
+                                comic.id?.let { detailComicCache.put(it, comic) }
                                 comic
                             }))
                 })
@@ -169,6 +169,10 @@ class MarvelApiHelper : ApiData {
                 .subscribe({ item ->
                     item.favorite = null
                 })
+    }
+
+    override fun getDetailCharacterCache(id: Int?): Observable<MarvelCharacter> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

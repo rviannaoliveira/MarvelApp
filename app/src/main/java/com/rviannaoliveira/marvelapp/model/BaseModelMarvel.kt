@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName
  */
 open class BaseModelMarvel {
     @SerializedName("id")
-    val id: Int? = null
+    var id: Int? = null
     @SerializedName("name")
-    val name: String? = null
+    var name: String? = null
     @SerializedName("description")
-    val description: String? = null
+    var description: String? = null
     @SerializedName("thumbnail")
-    val thumbMail: MarvelImage? = null
+    var thumbMail: MarvelImage? = null
     @SerializedName("title")
-    val title: String? = null
+    var title: String? = null
 }

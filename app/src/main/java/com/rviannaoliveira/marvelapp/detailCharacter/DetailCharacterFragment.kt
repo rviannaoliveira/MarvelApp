@@ -43,13 +43,13 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         appActivity.title = ""
         setHasOptionsMenu(true)
 
-        image = view?.findViewById(R.id.image) as ImageView
-        description = view.findViewById(R.id.description) as TextView
-        progressbar = view.findViewById(R.id.progressbar) as ProgressBar
-        blockComics = view.findViewById(R.id.block_comics) as LinearLayout
-        blockSeries = view.findViewById(R.id.block_series) as LinearLayout
-        reclycerViewComic = view.findViewById(R.id.list_comic) as RecyclerView
-        reclycerViewSeries = view.findViewById(R.id.list_series) as RecyclerView
+        image = view?.findViewById<ImageView>(R.id.image) as ImageView
+        description = view.findViewById<TextView>(R.id.description) as TextView
+        progressbar = view.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
+        blockComics = view.findViewById<LinearLayout>(R.id.block_comics) as LinearLayout
+        blockSeries = view.findViewById<LinearLayout>(R.id.block_series) as LinearLayout
+        reclycerViewComic = view.findViewById<RecyclerView>(R.id.list_comic) as RecyclerView
+        reclycerViewSeries = view.findViewById<RecyclerView>(R.id.list_series) as RecyclerView
 
         loadView()
         detailCharacterPresenterImpl.getMarvelCharacter(arguments.get(MarvelConstant.ID) as Int)

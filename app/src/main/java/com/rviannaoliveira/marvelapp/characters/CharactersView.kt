@@ -7,6 +7,6 @@ import com.rviannaoliveira.marvelapp.model.MarvelCharacter
  * Criado por rodrigo on 09/04/17.
  */
 interface CharactersView : BaseView {
-    fun loadCharacters(marvelCharacters: ArrayList<MarvelCharacter>)
-    fun loadFilterCharacters(marvelCharacters: ArrayList<MarvelCharacter>)
+    fun loadCharacters(marvelCharacters: List<MarvelCharacter>)
+    fun loadFilterCharacters(marvelCharacters: List<MarvelCharacter>)
 }

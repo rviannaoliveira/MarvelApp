@@ -1,5 +1,6 @@
 package com.rviannaoliveira.marvelapp.data
 
+import android.support.annotation.VisibleForTesting
 import com.rviannaoliveira.marvelapp.data.api.ApiData
 import com.rviannaoliveira.marvelapp.data.api.MarvelApiHelper
 import com.rviannaoliveira.marvelapp.data.repository.RepositoryData
@@ -14,8 +15,10 @@ import io.reactivex.functions.BiFunction
  * Criado por rodrigo on 09/04/17.
  */
 object DataManager {
-    private val apiData: ApiData = MarvelApiHelper()
-    private val repositoryData: RepositoryData = RepositoryHelper()
+    var apiData: ApiData = MarvelApiHelper()
+        @VisibleForTesting
+        set
+    var repositoryData: RepositoryData = RepositoryHelper()
 
     fun getMarvelCharacters(offset: Int): Observable<ArrayList<MarvelCharacter>> {
         val characters = apiData.getMarvelCharacters(offset)
@@ -51,11 +54,11 @@ object DataManager {
         }))
     }
 
-    fun getDetailMarvelCharacter(id: Int): Observable<MarvelCharacter> {
+    fun getDetailMarvelCharacter(id: Int?): Observable<MarvelCharacter> {
         return apiData.getDetailCharacter(id)
     }
 
-    fun getDetailComicCharacter(id: Int): Observable<MarvelComic> {
+    fun getDetailComicCharacter(id: Int?): Observable<MarvelComic> {
         return apiData.getDetailComic(id)
     }
 

@@ -10,8 +10,9 @@ import io.reactivex.Observable
 interface ApiData {
     fun getMarvelCharacters(offset: Int): Observable<ArrayList<MarvelCharacter>>
     fun getMarvelComics(offset: Int): Observable<ArrayList<MarvelComic>>
-    fun getDetailCharacter(id: Int): Observable<MarvelCharacter>
-    fun getDetailComic(id: Int): Observable<MarvelComic>
+    fun getDetailCharacter(id: Int?): Observable<MarvelCharacter>
+    fun getDetailCharacterCache(id: Int?): Observable<MarvelCharacter>
+    fun getDetailComic(id: Int?): Observable<MarvelComic>
     fun removeFavoriteCharacter(idMarvel: Int?)
     fun removeFavoriteComic(idMarvel: Int?)
     fun getMarvelCharactersBeginLetter(letter: String): Observable<ArrayList<MarvelCharacter>>

@@ -28,10 +28,10 @@ interface MarvelService {
     fun getComicsBeginLetter(@Query("limit") limit: Int, @Query("titleStartsWith") titleStartsWith: String): Observable<MarvelComicDataWrapper>
 
     @GET("/v1/public/characters/{characterId}")
-    fun getCharacter(@Path("characterId") characterId: Int): Observable<MarvelCharacterDataWrapper>
+    fun getCharacter(@Path("characterId") characterId: Int?): Observable<MarvelCharacterDataWrapper>
 
     @GET("/v1/public/comics/{comicId}")
-    fun getComic(@Path("comicId") characterId: Int): Observable<MarvelComicDataWrapper>
+    fun getComic(@Path("comicId") characterId: Int?): Observable<MarvelComicDataWrapper>
 
     @GET
     fun getGenericComic(@Url url: String): Observable<MarvelComicDataWrapper>

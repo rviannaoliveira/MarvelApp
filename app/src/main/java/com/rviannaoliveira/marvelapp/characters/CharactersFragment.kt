@@ -36,8 +36,8 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_list, container, false)
-        this.progressbar = view?.findViewById(R.id.progressbar) as ProgressBar
-        this.charactersRecyclerView = view.findViewById(R.id.list_recycler_view) as RecyclerView
+        this.progressbar = view?.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
+        this.charactersRecyclerView = view.findViewById<RecyclerView>(R.id.list_recycler_view) as RecyclerView
         setHasOptionsMenu(true)
 
         loadView()
@@ -101,7 +101,7 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         progressbar.visibility = View.GONE
     }
 
-    override fun loadCharacters(marvelCharacters: ArrayList<MarvelCharacter>) {
+    override fun loadCharacters(marvelCharacters: List<MarvelCharacter>) {
         this.loadCharactersRecycleView(marvelCharacters, false)
     }
 
@@ -138,11 +138,11 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         return true
     }
 
-    override fun loadFilterCharacters(marvelCharacters: ArrayList<MarvelCharacter>) {
+    override fun loadFilterCharacters(marvelCharacters: List<MarvelCharacter>) {
         loadCharactersRecycleView(marvelCharacters, true)
     }
 
-    private fun loadCharactersRecycleView(marvelCharacters: ArrayList<MarvelCharacter>, listForLetter: Boolean) {
+    private fun loadCharactersRecycleView(marvelCharacters: List<MarvelCharacter>, listForLetter: Boolean) {
         charactersAdapter?.setCharacters(marvelCharacters, listForLetter)
         isLoading = false
         charactersAdapter?.showLoading(isLoading)

@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        bottomNavigation = findViewById(R.id.bottom_navigation) as BottomNavigationView
+        bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation) as BottomNavigationView
         bottomNavigation.setOnNavigationItemSelectedListener { menuItem -> onNavigationItemReselectedListener(menuItem) }
 
         if (savedInstanceState == null) {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun onNavigationItemReselectedListener(menuItem: MenuItem): Boolean {
+    private fun onNavigationItemReselectedListener(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.action_character -> MarvelUtil.showFragment(this, R.id.content_main, CharactersFragment(), false, MarvelConstant.CHARACTERS)
             R.id.action_comic -> MarvelUtil.showFragment(this, R.id.content_main, ComicsFragment(), false, MarvelConstant.COMICS)
