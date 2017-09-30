@@ -66,7 +66,7 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
     }
 
     private fun showDetail(holder: FavoriteViewHolder, favorite: Favorite) {
-        val detailIntent = if (KeyDatabase.FavoriteGroup.CHARACTERS == favorite.group) Intent(context, DetailCharacterActivity::class.java) else Intent(context, DetailComicActivity::class.java)
+        val detailIntent = if (KeyDatabase.FavoriteGroup.CHARACTERS == favorite.groupType) Intent(context, DetailCharacterActivity::class.java) else Intent(context, DetailComicActivity::class.java)
         detailIntent.putExtra(KeyDatabase.ID, favorite.idMarvel)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

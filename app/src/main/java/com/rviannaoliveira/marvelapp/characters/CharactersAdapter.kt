@@ -106,7 +106,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
 
         if (character.favorite == null) {
             character.favorite = Favorite()
-            character.favorite?.group = KeyDatabase.FavoriteGroup.CHARACTERS
+            character.favorite?.groupType = KeyDatabase.FavoriteGroup.CHARACTERS
             character.favorite?.extension = character.thumbMail?.extension
             character.favorite?.path = character.thumbMail?.path
             character.favorite?.name = character.name

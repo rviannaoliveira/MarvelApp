@@ -97,7 +97,7 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
 
         if (comics.favorite == null) {
             comics.favorite = Favorite()
-            comics.favorite?.group = KeyDatabase.FavoriteGroup.COMICS
+            comics.favorite?.groupType = KeyDatabase.FavoriteGroup.COMICS
             comics.favorite?.extension = comics.thumbMail?.extension
             comics.favorite?.path = comics.thumbMail?.path
             comics.favorite?.name = comics.title

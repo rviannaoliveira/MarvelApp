@@ -16,7 +16,7 @@ class RepositoryHelper : RepositoryData {
         favorites
                 .flatMapIterable({ list -> list })
                 .forEach({ item ->
-                    if (KeyDatabase.FavoriteGroup.CHARACTERS == item.group) {
+                    if (KeyDatabase.FavoriteGroup.CHARACTERS == item.groupType) {
                         favorite.characters.add(item)
                     } else {
                         favorite.comics.add(item)

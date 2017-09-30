@@ -15,7 +15,7 @@ open class Favorite {
     open var name: String? = null
     open var path: String? = null
     open var extension: String? = null
-    open var group: Int? = null
+    open var groupType: Int? = null
     @Ignore
     val comics = ArrayList<Favorite>()
     @Ignore
