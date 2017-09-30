@@ -1,8 +1,8 @@
 package com.rviannaoliveira.marvelapp.data.api
 
 import com.rviannaoliveira.marvelapp.model.*
+import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function3
@@ -22,9 +22,9 @@ class MarvelApiHelper : ApiData {
     private var detailComicCache = HashMap<Int, MarvelComic>()
 
 
-    override fun getMarvelCharacters(offset: Int): Observable<ArrayList<MarvelCharacter>> {
+    override fun getMarvelCharacters(offset: Int): Flowable<ArrayList<MarvelCharacter>> {
         if (offset == 0 && charactersCache.isNotEmpty()) {
-            return Observable.fromArray(charactersCache)
+            return Flowable.fromArray(charactersCache)
         }
 
         val response = marvelService.getCharacters(LIMIT_REGISTER, offset)
@@ -34,11 +34,11 @@ class MarvelApiHelper : ApiData {
                 .concatMap({ dataWrappers ->
                     val results = dataWrappers.data?.results
                     results?.let { charactersCache.addAll(it) }
-                    Observable.fromArray(results)
+                    Flowable.fromArray(results)
                 })
     }
 
-    override fun getMarvelCharactersBeginLetter(letter: String): Observable<ArrayList<MarvelCharacter>> {
+    override fun getMarvelCharactersBeginLetter(letter: String): Flowable<ArrayList<MarvelCharacter>> {
 
         val response = marvelService.getCharactersBeginLetter(100, letter)
         return response.subscribeOn(Schedulers.newThread())
@@ -46,24 +46,24 @@ class MarvelApiHelper : ApiData {
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
                     val results = dataWrappers.data?.results
-                    Observable.fromArray(results)
+                    Flowable.fromArray(results)
                 })
     }
 
-    override fun getMarvelComicsBeginLetter(letter: String): Observable<ArrayList<MarvelComic>> {
+    override fun getMarvelComicsBeginLetter(letter: String): Flowable<ArrayList<MarvelComic>> {
         val response = marvelService.getComicsBeginLetter(100, letter)
         return response.subscribeOn(Schedulers.newThread())
                 .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
                     val results = dataWrappers.data?.results
-                    Observable.fromArray(results)
+                    Flowable.fromArray(results)
                 })
     }
 
-    override fun getMarvelComics(offset: Int): Observable<ArrayList<MarvelComic>> {
+    override fun getMarvelComics(offset: Int): Flowable<ArrayList<MarvelComic>> {
         if (offset == 0 && comicsCache.isNotEmpty()) {
-            return Observable.fromArray(comicsCache)
+            return Flowable.fromArray(comicsCache)
         }
 
         val response = marvelService.getComics(LIMIT_REGISTER, offset)
@@ -73,13 +73,13 @@ class MarvelApiHelper : ApiData {
                 .concatMap({ dataWrappers ->
                     val results = dataWrappers.data?.results
                     results?.let { comicsCache.addAll(it) }
-                    Observable.fromArray(dataWrappers.data?.results)
+                    Flowable.fromArray(dataWrappers.data?.results)
                 })
     }
 
-    override fun getDetailCharacter(id: Int?): Observable<MarvelCharacter> {
+    override fun getDetailCharacter(id: Int?): Flowable<MarvelCharacter> {
         if (detailCharacterCache.containsKey(id)) {
-            return Observable.just(detailCharacterCache[id])
+            return Flowable.just(detailCharacterCache[id])
         }
 
         val response = marvelService.getCharacter(id)
@@ -87,10 +87,10 @@ class MarvelApiHelper : ApiData {
                 .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
-                    Observable.just(dataWrappers.data?.results?.get(0))
+                    Flowable.just(dataWrappers.data?.results?.get(0))
                 })
                 .flatMap({ data ->
-                    Observable.zip(Observable.just(data),
+                    Flowable.zip(Flowable.just(data),
                             getMarvelCharacterComics(data),
                             getMarvelCharacterSeries(data),
                             Function3<MarvelCharacter?, MarvelComicDataWrapper, MarvelSeriesDataWrapper, MarvelCharacter>({ character, comics, series ->
@@ -102,9 +102,9 @@ class MarvelApiHelper : ApiData {
                 })
     }
 
-    override fun getDetailComic(id: Int?): Observable<MarvelComic> {
+    override fun getDetailComic(id: Int?): Flowable<MarvelComic> {
         if (detailComicCache.containsKey(id)) {
-            return Observable.just(detailComicCache[id])
+            return Flowable.just(detailComicCache[id])
         }
 
         val response = marvelService.getComic(id)
@@ -112,10 +112,10 @@ class MarvelApiHelper : ApiData {
                 .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->
-                    Observable.just(dataWrappers.data?.results?.get(0))
+                    Flowable.just(dataWrappers.data?.results?.get(0))
                 })
                 .flatMap({ data ->
-                    Observable.zip(Observable.just(data),
+                    Flowable.zip(Flowable.just(data),
                             getMarvelComicCharacter(data),
                             BiFunction<MarvelComic?, MarvelCharacterDataWrapper, MarvelComic>({ comic, characters ->
                                 comic.charactersList = characters.data?.results
@@ -125,7 +125,7 @@ class MarvelApiHelper : ApiData {
                 })
     }
 
-    private fun getMarvelCharacterComics(data: MarvelCharacter?): ObservableSource<MarvelComicDataWrapper>? {
+    private fun getMarvelCharacterComics(data: MarvelCharacter?): Flowable<MarvelComicDataWrapper>? {
         return data?.comics?.collectionURI?.let {
             marvelService.getGenericComic(it)
                     .subscribeOn(Schedulers.newThread())
@@ -133,7 +133,7 @@ class MarvelApiHelper : ApiData {
         }
     }
 
-    private fun getMarvelCharacterSeries(data: MarvelCharacter?): ObservableSource<MarvelSeriesDataWrapper>? {
+    private fun getMarvelCharacterSeries(data: MarvelCharacter?): Flowable<MarvelSeriesDataWrapper>? {
         return data?.series?.collectionURI?.let {
             marvelService.getGenericSeries(it)
                     .subscribeOn(Schedulers.newThread())
@@ -141,7 +141,7 @@ class MarvelApiHelper : ApiData {
         }
     }
 
-    private fun getMarvelComicCharacter(data: MarvelComic?): ObservableSource<MarvelCharacterDataWrapper>? {
+    private fun getMarvelComicCharacter(data: MarvelComic?): Flowable<MarvelCharacterDataWrapper>? {
         return data?.characters?.collectionURI?.let {
             marvelService.getGenericCharacter(it)
                     .subscribeOn(Schedulers.newThread())
@@ -169,10 +169,6 @@ class MarvelApiHelper : ApiData {
                 .subscribe({ item ->
                     item.favorite = null
                 })
-    }
-
-    override fun getDetailCharacterCache(id: Int?): Observable<MarvelCharacter> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

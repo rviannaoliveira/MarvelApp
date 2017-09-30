@@ -8,7 +8,7 @@ import com.rviannaoliveira.marvelapp.data.repository.RepositoryHelper
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.model.MarvelComic
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.functions.BiFunction
 
 /**
@@ -20,45 +20,45 @@ object DataManager {
     @VisibleForTesting
     private var repositoryData: RepositoryData = RepositoryHelper()
 
-    fun getMarvelCharacters(offset: Int): Observable<ArrayList<MarvelCharacter>> {
+    fun getMarvelCharacters(offset: Int): Flowable<ArrayList<MarvelCharacter>> {
         val characters = apiData.getMarvelCharacters(offset)
         val favorites = repositoryData.getCharactersFavorites()
-        return Observable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>,
+        return Flowable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>,
                 ArrayList<MarvelCharacter>>(this::combineCharacter))
 
     }
 
-    fun getMarvelCharactersBeginLetter(letter: String): Observable<ArrayList<MarvelCharacter>> {
+    fun getMarvelCharactersBeginLetter(letter: String): Flowable<ArrayList<MarvelCharacter>> {
         val characters = apiData.getMarvelCharactersBeginLetter(letter)
         val favorites = repositoryData.getCharactersFavorites()
-        return Observable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>,
+        return Flowable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>,
                 ArrayList<MarvelCharacter>>(this::combineCharacter))
 
     }
 
-    fun getMarvelComics(offset: Int): Observable<ArrayList<MarvelComic>> {
+    fun getMarvelComics(offset: Int): Flowable<ArrayList<MarvelComic>> {
         val comics = apiData.getMarvelComics(offset)
         val favorites = repositoryData.getComicsFavorites()
-        return Observable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>,
+        return Flowable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>,
                 ArrayList<MarvelComic>>(this::combineComic))
     }
 
-    fun getMarvelComicsBeginLetter(letter: String): Observable<ArrayList<MarvelComic>> {
+    fun getMarvelComicsBeginLetter(letter: String): Flowable<ArrayList<MarvelComic>> {
         val comics = apiData.getMarvelComicsBeginLetter(letter)
         val favorites = repositoryData.getComicsFavorites()
-        return Observable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>,
+        return Flowable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>,
                 ArrayList<MarvelComic>>(this::combineComic))
     }
 
-    fun getDetailMarvelCharacter(id: Int?): Observable<MarvelCharacter> {
+    fun getDetailMarvelCharacter(id: Int?): Flowable<MarvelCharacter> {
         return apiData.getDetailCharacter(id)
     }
 
-    fun getDetailComicCharacter(id: Int?): Observable<MarvelComic> {
+    fun getDetailComicCharacter(id: Int?): Flowable<MarvelComic> {
         return apiData.getDetailComic(id)
     }
 
-    fun getAllFavorites(): Observable<Favorite> {
+    fun getAllFavorites(): Flowable<Favorite> {
         return repositoryData.getAllFavorites()
     }
 

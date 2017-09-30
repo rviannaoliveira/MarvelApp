@@ -18,11 +18,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
+import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterActivity
 import com.rviannaoliveira.marvelapp.detailComic.DetailComicActivity
 import com.rviannaoliveira.marvelapp.model.Favorite
-import com.rviannaoliveira.marvelapp.model.FavoriteGroup
-import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 /**
@@ -67,8 +66,8 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
     }
 
     private fun showDetail(holder: FavoriteViewHolder, favorite: Favorite) {
-        val detailIntent = if (FavoriteGroup.CHARACTERS == favorite.group) Intent(context, DetailCharacterActivity::class.java) else Intent(context, DetailComicActivity::class.java)
-        detailIntent.putExtra(MarvelConstant.ID, favorite.idMarvel)
+        val detailIntent = if (KeyDatabase.FavoriteGroup.CHARACTERS == favorite.group) Intent(context, DetailCharacterActivity::class.java) else Intent(context, DetailComicActivity::class.java)
+        detailIntent.putExtra(KeyDatabase.ID, favorite.idMarvel)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val imagePair = Pair.create(holder.image as View, holder.image.transitionName)

@@ -15,11 +15,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.characters.DetailComicPresenter
+import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterAdapter
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicPresenterImpl
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicView
 import com.rviannaoliveira.marvelapp.model.MarvelComic
-import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 /**
@@ -50,7 +50,7 @@ class DetailComicFragment : Fragment(), DetailComicView {
         reclycerViewCharacter = view.findViewById<RecyclerView>(R.id.list_character) as RecyclerView
 
         loadView()
-        detailComicPresenterImpl.getMarvelComic(arguments.get(MarvelConstant.ID) as Int)
+        detailComicPresenterImpl.getMarvelComic(arguments.get(KeyDatabase.ID) as Int)
         return view
     }
 

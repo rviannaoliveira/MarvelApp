@@ -2,7 +2,6 @@ package com.rviannaoliveira.marvelapp.data.repository
 
 import com.rviannaoliveira.marvelapp.model.Favorite
 import io.reactivex.Flowable
-import io.reactivex.Observable
 
 /**
  * Criado por rodrigo on 15/04/17.
@@ -10,7 +9,7 @@ import io.reactivex.Observable
 class RepositoryHelper : RepositoryData {
     private val favoriteDao = AppDatabaseFactory.getDefaultInstance().favoriteDao()
 
-    override fun getAllFavorites(): Observable<Favorite> {
+    override fun getAllFavorites(): Flowable<Favorite> {
         val favorites: Flowable<List<Favorite>> = favoriteDao.getAll()
         val favorite = Favorite()
 
@@ -23,7 +22,7 @@ class RepositoryHelper : RepositoryData {
                         favorite.comics.add(item)
                     }
                 })
-        return Observable.just(favorite)
+        return Flowable.just(favorite)
     }
 
     override fun insertFavorite(favorite: Favorite) {
