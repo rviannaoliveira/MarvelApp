@@ -17,11 +17,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
+import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterActivity
 import com.rviannaoliveira.marvelapp.model.Favorite
-import com.rviannaoliveira.marvelapp.model.FavoriteGroup
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
-import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 /**
@@ -88,7 +87,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
 
     private fun showDetail(holder: CharactersViewHolder, marvelCharacter: MarvelCharacter) {
         val detailIntent = Intent(context, DetailCharacterActivity::class.java)
-        detailIntent.putExtra(MarvelConstant.ID, marvelCharacter.id)
+        detailIntent.putExtra(KeyDatabase.ID, marvelCharacter.id)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val imagePair = Pair.create(holder.image as View, holder.image.transitionName)
@@ -107,7 +106,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
 
         if (character.favorite == null) {
             character.favorite = Favorite()
-            character.favorite?.group = FavoriteGroup.CHARACTERS
+            character.favorite?.group = KeyDatabase.FavoriteGroup.CHARACTERS
             character.favorite?.extension = character.thumbMail?.extension
             character.favorite?.path = character.thumbMail?.path
             character.favorite?.name = character.name

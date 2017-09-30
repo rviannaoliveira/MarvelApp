@@ -4,6 +4,7 @@ import com.rviannaoliveira.marvelapp.characters.CharactersPresenter;
 import com.rviannaoliveira.marvelapp.characters.CharactersPresenterImpl;
 import com.rviannaoliveira.marvelapp.characters.CharactersView;
 import com.rviannaoliveira.marvelapp.data.api.ApiData;
+import com.rviannaoliveira.marvelapp.data.repository.RepositoryHelper;
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter;
 
 import org.junit.Rule;
@@ -17,6 +18,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -36,6 +39,8 @@ public class MarvelInteractionTest {
 
     @Mock
     CharactersView charactersView;
+    @Inject
+    RepositoryHelper databaseRealm;
 
     @Test
     public void testCreate() {

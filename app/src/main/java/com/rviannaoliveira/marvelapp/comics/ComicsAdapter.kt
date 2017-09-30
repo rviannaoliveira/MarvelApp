@@ -17,11 +17,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
+import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.detailComic.DetailComicActivity
 import com.rviannaoliveira.marvelapp.model.Favorite
-import com.rviannaoliveira.marvelapp.model.FavoriteGroup
 import com.rviannaoliveira.marvelapp.model.MarvelComic
-import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 /**
@@ -98,7 +97,7 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
 
         if (comics.favorite == null) {
             comics.favorite = Favorite()
-            comics.favorite?.group = FavoriteGroup.COMICS
+            comics.favorite?.group = KeyDatabase.FavoriteGroup.COMICS
             comics.favorite?.extension = comics.thumbMail?.extension
             comics.favorite?.path = comics.thumbMail?.path
             comics.favorite?.name = comics.title
@@ -113,7 +112,7 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
 
     private fun showDetail(holder: ComicsAdapter.ComicViewHolder, marvelComic: MarvelComic) {
         val detailIntent = Intent(context, DetailComicActivity::class.java)
-        detailIntent.putExtra(MarvelConstant.ID, marvelComic.id)
+        detailIntent.putExtra(KeyDatabase.ID, marvelComic.id)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val imagePair = Pair.create(holder.image as View, holder.image.transitionName)

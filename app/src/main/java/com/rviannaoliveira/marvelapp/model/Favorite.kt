@@ -1,14 +1,15 @@
 package com.rviannaoliveira.marvelapp.model
 
-import io.realm.RealmObject
-import io.realm.annotations.Ignore
-import io.realm.annotations.PrimaryKey
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.PrimaryKey
 
 /**
  * Criado por rodrigo on 15/04/17.
  */
-open class Favorite : RealmObject() {
-    @PrimaryKey
+@Entity
+open class Favorite {
+    @PrimaryKey(autoGenerate = true)
     open var id: Int? = null
     open var idMarvel: Int? = null
     open var name: String? = null

@@ -15,43 +15,39 @@ import io.reactivex.functions.BiFunction
  * Criado por rodrigo on 09/04/17.
  */
 object DataManager {
-    var apiData: ApiData = MarvelApiHelper()
-        @VisibleForTesting
-        set
-    var repositoryData: RepositoryData = RepositoryHelper()
+    @VisibleForTesting
+    private var apiData: ApiData = MarvelApiHelper()
+    @VisibleForTesting
+    private var repositoryData: RepositoryData = RepositoryHelper()
 
     fun getMarvelCharacters(offset: Int): Observable<ArrayList<MarvelCharacter>> {
         val characters = apiData.getMarvelCharacters(offset)
         val favorites = repositoryData.getCharactersFavorites()
-        return Observable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>, ArrayList<MarvelCharacter>>({ characters, favorites ->
-            combineCharacter(characters, favorites)
-        }))
+        return Observable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>,
+                ArrayList<MarvelCharacter>>(this::combineCharacter))
 
     }
 
     fun getMarvelCharactersBeginLetter(letter: String): Observable<ArrayList<MarvelCharacter>> {
         val characters = apiData.getMarvelCharactersBeginLetter(letter)
         val favorites = repositoryData.getCharactersFavorites()
-        return Observable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>, ArrayList<MarvelCharacter>>({ characters, favorites ->
-            combineCharacter(characters, favorites)
-        }))
+        return Observable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>,
+                ArrayList<MarvelCharacter>>(this::combineCharacter))
 
     }
 
     fun getMarvelComics(offset: Int): Observable<ArrayList<MarvelComic>> {
         val comics = apiData.getMarvelComics(offset)
         val favorites = repositoryData.getComicsFavorites()
-        return Observable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>, ArrayList<MarvelComic>>({ comics, favorites ->
-            combineComic(comics, favorites)
-        }))
+        return Observable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>,
+                ArrayList<MarvelComic>>(this::combineComic))
     }
 
     fun getMarvelComicsBeginLetter(letter: String): Observable<ArrayList<MarvelComic>> {
         val comics = apiData.getMarvelComicsBeginLetter(letter)
         val favorites = repositoryData.getComicsFavorites()
-        return Observable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>, ArrayList<MarvelComic>>({ comics, favorites ->
-            combineComic(comics, favorites)
-        }))
+        return Observable.zip(comics, favorites, BiFunction<ArrayList<MarvelComic>, List<Favorite>,
+                ArrayList<MarvelComic>>(this::combineComic))
     }
 
     fun getDetailMarvelCharacter(id: Int?): Observable<MarvelCharacter> {

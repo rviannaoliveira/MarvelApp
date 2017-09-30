@@ -1,7 +1,7 @@
 package com.rviannaoliveira.marvelapp.model
 
+import android.arch.persistence.room.Ignore
 import com.google.gson.annotations.SerializedName
-import io.realm.annotations.Ignore
 
 /**
  * Criado por rodrigo on 14/04/17.

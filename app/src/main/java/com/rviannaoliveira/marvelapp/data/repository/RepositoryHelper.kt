@@ -1,25 +1,23 @@
 package com.rviannaoliveira.marvelapp.data.repository
 
 import com.rviannaoliveira.marvelapp.model.Favorite
-import com.rviannaoliveira.marvelapp.model.FavoriteGroup
-import com.rviannaoliveira.marvelapp.util.MarvelConstant
+import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.realm.Realm
 
 /**
  * Criado por rodrigo on 15/04/17.
  */
 class RepositoryHelper : RepositoryData {
-    private val realm = Realm.getDefaultInstance()
+    private val favoriteDao = AppDatabaseFactory.getDefaultInstance().favoriteDao()
 
     override fun getAllFavorites(): Observable<Favorite> {
-        val favorites: List<Favorite> = realm.where(Favorite::class.java).findAll()
+        val favorites: Flowable<List<Favorite>> = favoriteDao.getAll()
         val favorite = Favorite()
 
-        Observable.fromArray(favorites)
+        favorites
                 .flatMapIterable({ list -> list })
                 .forEach({ item ->
-                    if (FavoriteGroup.CHARACTERS == item.group) {
+                    if (KeyDatabase.FavoriteGroup.CHARACTERS == item.group) {
                         favorite.characters.add(item)
                     } else {
                         favorite.comics.add(item)
@@ -29,37 +27,18 @@ class RepositoryHelper : RepositoryData {
     }
 
     override fun insertFavorite(favorite: Favorite) {
-        if (favorite.id == null) {
-            favorite.id = this.getNextKey()
-        }
-        realm.executeTransactionAsync { realm1 -> realm1.insertOrUpdate(favorite) }
+        favoriteDao.insert(favorite)
     }
 
     override fun deleteFavorite(favorite: Favorite) {
-        realm.beginTransaction()
-        val favoriteDeleted = realm.where(Favorite::class.java).equalTo(MarvelConstant.ID, favorite.id).findFirst()
-        favoriteDeleted.deleteFromRealm()
-        realm.commitTransaction()
+        favoriteDao.delete(favorite)
     }
 
-    override fun getCharactersFavorites(): Observable<List<Favorite>> {
-        val favorites: List<Favorite> = realm.where(Favorite::class.java)
-                .equalTo(MarvelConstant.GROUP, FavoriteGroup.CHARACTERS).findAll()
-        return Observable.fromArray(favorites)
+    override fun getCharactersFavorites(): Flowable<List<Favorite>> {
+        return favoriteDao.getCharactersFavorites()
     }
 
-    override fun getComicsFavorites(): Observable<List<Favorite>> {
-        val favorites: List<Favorite> = realm.where(Favorite::class.java)
-                .equalTo(MarvelConstant.GROUP, FavoriteGroup.COMICS).findAll()
-        return Observable.fromArray(favorites)
-    }
-
-    private fun getNextKey(): Int {
-        return try {
-            realm.where(Favorite::class.java).max(MarvelConstant.ID).toInt() + 1
-        } catch (e: Exception) {
-            1
-        }
-
+    override fun getComicsFavorites(): Flowable<List<Favorite>> {
+        return favoriteDao.getComicsFavorites()
     }
 }

@@ -2,8 +2,7 @@ package com.rviannaoliveira.marvelapp
 
 import android.app.Application
 import com.facebook.stetho.Stetho
-import com.uphyca.stetho_realm.RealmInspectorModulesProvider
-import io.realm.Realm
+import com.rviannaoliveira.marvelapp.data.repository.AppDatabaseFactory
 import okhttp3.HttpUrl
 import timber.log.Timber
 import timber.log.Timber.DebugTree
@@ -17,22 +16,21 @@ class MarvelApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Realm.init(this)
         context = this
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
             initStetho()
         }
+        AppDatabaseFactory.init(this)
     }
 
-    fun initStetho() {
-        Realm.init(this)
+    private fun initStetho() {
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                         .build())
     }
+
 
     companion object {
         var URL: HttpUrl? = null
