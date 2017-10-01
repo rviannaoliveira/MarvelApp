@@ -41,7 +41,7 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         setHasOptionsMenu(true)
 
         loadView()
-        charactersPresenterImpl.getMarvelCharacters(0)
+        charactersPresenterImpl.loadMarvelCharacters(0)
         return view
     }
 
@@ -66,7 +66,7 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
             AlertDialog.Builder(context).createFilterCustom(context, DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
                 val letter = context.resources.getStringArray(R.array.alphabetic)[positionFilter]
                 charactersAdapter?.clear()
-                if (positionFilter == 0) charactersPresenterImpl.getMarvelCharacters(0) else charactersPresenterImpl.getMarvelCharactersBeginLetter(letter)
+                if (positionFilter == 0) charactersPresenterImpl.loadMarvelCharacters(0) else charactersPresenterImpl.loadMarvelCharactersBeginLetter(letter)
                 d.dismiss()
             }).show()
 
@@ -124,7 +124,7 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
                         && totalItemCount >= PAGE_SIZE) {
                     isLoading = true
                     charactersAdapter?.showLoading(isLoading)
-                    charactersPresenterImpl.getMarvelCharacters(totalItemCount)
+                    charactersPresenterImpl.loadMarvelCharacters(totalItemCount)
                 }
             }
         }

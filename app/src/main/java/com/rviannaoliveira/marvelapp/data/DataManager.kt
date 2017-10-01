@@ -3,13 +3,16 @@ package com.rviannaoliveira.marvelapp.data
 import android.support.annotation.VisibleForTesting
 import com.rviannaoliveira.marvelapp.data.api.ApiData
 import com.rviannaoliveira.marvelapp.data.api.MarvelApiHelper
+import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.data.repository.RepositoryData
 import com.rviannaoliveira.marvelapp.data.repository.RepositoryHelper
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.model.MarvelComic
 import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Criado por rodrigo on 09/04/17.
@@ -25,7 +28,6 @@ object DataManager {
         val favorites = repositoryData.getCharactersFavorites()
         return Flowable.zip(characters, favorites, BiFunction<ArrayList<MarvelCharacter>, List<Favorite>,
                 ArrayList<MarvelCharacter>>(this::combineCharacter))
-
     }
 
     fun getMarvelCharactersBeginLetter(letter: String): Flowable<ArrayList<MarvelCharacter>> {
@@ -59,7 +61,21 @@ object DataManager {
     }
 
     fun getAllFavorites(): Flowable<Favorite> {
+        val favorite = Favorite()
+
         return repositoryData.getAllFavorites()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .concatMap { list ->
+                    list.forEach { item ->
+                        if (KeyDatabase.FavoriteGroup.CHARACTERS == item.groupType) {
+                            favorite.characters.add(item)
+                        } else {
+                            favorite.comics.add(item)
+                        }
+                    }
+                    Flowable.just(favorite)
+                }
     }
 
     fun insertFavorite(favorite: Favorite) {

@@ -1,8 +1,6 @@
-package com.rviannaoliveira.marvelapp.comics
+package com.rviannaoliveira.marvelapp.favorite
 
 import com.rviannaoliveira.marvelapp.data.DataManager
-import com.rviannaoliveira.marvelapp.favorite.FavoritePresenter
-import com.rviannaoliveira.marvelapp.favorite.FavoriteView
 import com.rviannaoliveira.marvelapp.model.Favorite
 import timber.log.Timber
 
@@ -11,7 +9,7 @@ import timber.log.Timber
  */
 class FavoritePresenterImpl(private val view: FavoriteView) : FavoritePresenter {
 
-    override fun getFavorites() {
+    override fun loadFavorites() {
         view.showProgressBar()
         val observableFavorites = DataManager.getAllFavorites()
         observableFavorites.subscribe({ favorites ->

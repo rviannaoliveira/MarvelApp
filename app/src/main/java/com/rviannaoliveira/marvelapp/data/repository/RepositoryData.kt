@@ -7,7 +7,7 @@ import io.reactivex.Flowable
  * Criado por rodrigo on 15/04/17.
  */
 interface RepositoryData {
-    fun getAllFavorites(): Flowable<Favorite>
+    fun getAllFavorites(): Flowable<List<Favorite>>
     fun getCharactersFavorites(): Flowable<List<Favorite>>
     fun getComicsFavorites(): Flowable<List<Favorite>>
     fun insertFavorite(favorite: Favorite)

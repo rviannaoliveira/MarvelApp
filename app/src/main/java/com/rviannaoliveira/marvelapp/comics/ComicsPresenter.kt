@@ -6,6 +6,6 @@ import com.rviannaoliveira.marvelapp.base.BasePresenterFavorite
  * Criado por rodrigo on 14/04/17.
  */
 interface ComicsPresenter : BasePresenterFavorite{
-    fun getMarvelComics(offset: Int)
-    fun getMarvelComicsBeginLetter(letter: String)
+    fun loadMarvelComics(offset: Int)
+    fun loadMarvelComicsBeginLetter(letter: String)
 }

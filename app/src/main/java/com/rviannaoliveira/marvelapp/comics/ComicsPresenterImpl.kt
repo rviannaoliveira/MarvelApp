@@ -9,7 +9,7 @@ import timber.log.Timber
  */
 class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
 
-    override fun getMarvelComics(offset: Int) {
+    override fun loadMarvelComics(offset: Int) {
         if (offset == 0) {
             view.showProgressBar()
         }
@@ -24,7 +24,7 @@ class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
         })
     }
 
-    override fun getMarvelComicsBeginLetter(letter: String) {
+    override fun loadMarvelComicsBeginLetter(letter: String) {
         view.showProgressBar()
         val observableComics = DataManager.getMarvelComicsBeginLetter(letter)
         observableComics.subscribe({ marvelComics ->

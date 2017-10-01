@@ -6,7 +6,7 @@ import com.rviannaoliveira.marvelapp.model.Favorite
  * Criado por rodrigo on 15/04/17.
  */
 interface FavoritePresenter {
-    fun getFavorites()
+    fun loadFavorites()
     fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean)
 
 }

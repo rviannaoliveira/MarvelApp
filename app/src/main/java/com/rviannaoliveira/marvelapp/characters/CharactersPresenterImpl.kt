@@ -9,7 +9,7 @@ import timber.log.Timber
  */
 class CharactersPresenterImpl(private val charactersView: CharactersView) : CharactersPresenter {
 
-    override fun getMarvelCharacters(offset: Int) {
+    override fun loadMarvelCharacters(offset: Int) {
         if (offset == 0) {
             charactersView.showProgressBar()
         }
@@ -24,7 +24,7 @@ class CharactersPresenterImpl(private val charactersView: CharactersView) : Char
         }, { charactersView.hideProgressBar() })
     }
 
-    override fun getMarvelCharactersBeginLetter(letter: String) {
+    override fun loadMarvelCharactersBeginLetter(letter: String) {
         charactersView.showProgressBar()
         val observableCharacters = DataManager.getMarvelCharactersBeginLetter(letter)
 

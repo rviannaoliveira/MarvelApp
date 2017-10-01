@@ -16,7 +16,6 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
-import com.rviannaoliveira.marvelapp.comics.FavoritePresenterImpl
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
@@ -44,7 +43,7 @@ class FavoriteFragment : Fragment(), FavoriteView {
         blockCharacter = viewFavorite.findViewById<LinearLayout>(R.id.block_character) as LinearLayout
         blockComic = viewFavorite.findViewById<LinearLayout>(R.id.block_comics) as LinearLayout
         loadView()
-        favoritePresenterImpl.getFavorites()
+        favoritePresenterImpl.loadFavorites()
         return viewFavorite
     }
 

@@ -41,7 +41,7 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener {
         setHasOptionsMenu(true)
 
         loadView()
-        comicsPresenter.getMarvelComics(0)
+        comicsPresenter.loadMarvelComics(0)
         return view
     }
 
@@ -76,7 +76,7 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener {
             AlertDialog.Builder(context).createFilterCustom(context, DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
                 val letter = context.resources.getStringArray(R.array.alphabetic)[positionFilter]
                 comicsAdapter.clear()
-                if (positionFilter == 0) comicsPresenter.getMarvelComics(0) else comicsPresenter.getMarvelComicsBeginLetter(letter)
+                if (positionFilter == 0) comicsPresenter.loadMarvelComics(0) else comicsPresenter.loadMarvelComicsBeginLetter(letter)
                 d.dismiss()
             }).show()
 
@@ -137,7 +137,7 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener {
                         && totalItemCount >= MifareUltralight.PAGE_SIZE) {
                     isLoading = true
                     comicsAdapter.showLoading(isLoading)
-                    comicsPresenter.getMarvelComics(totalItemCount)
+                    comicsPresenter.loadMarvelComics(totalItemCount)
                 }
             }
         }

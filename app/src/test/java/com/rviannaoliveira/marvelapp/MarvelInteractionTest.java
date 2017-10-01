@@ -4,7 +4,6 @@ import com.rviannaoliveira.marvelapp.characters.CharactersPresenter;
 import com.rviannaoliveira.marvelapp.characters.CharactersPresenterImpl;
 import com.rviannaoliveira.marvelapp.characters.CharactersView;
 import com.rviannaoliveira.marvelapp.data.api.ApiData;
-import com.rviannaoliveira.marvelapp.data.repository.RepositoryHelper;
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter;
 
 import org.junit.Rule;
@@ -17,15 +16,8 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-
-import io.reactivex.Observable;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Criado por rodrigo on 24/09/17.
@@ -39,15 +31,13 @@ public class MarvelInteractionTest {
 
     @Mock
     CharactersView charactersView;
-    @Inject
-    RepositoryHelper databaseRealm;
 
     @Test
     public void testCreate() {
         ApiData apiData = mock(ApiData.class);
-        when(apiData.getMarvelCharacters(0)).thenReturn(Observable.<ArrayList<MarvelCharacter>>empty());
+//        when(apiData.getMarvelCharacters(0)).thenReturn(Observable.<ArrayList<MarvelCharacter>>empty());
 
-        getCharactersPresenterUnderTest().getMarvelCharacters(0);
+        getCharactersPresenterUnderTest().loadMarvelCharacters(0);
 
         verify(this.charactersView).loadCharacters(ArgumentMatchers.<MarvelCharacter>anyList());
         verify(this.charactersView).hideProgressBar();
