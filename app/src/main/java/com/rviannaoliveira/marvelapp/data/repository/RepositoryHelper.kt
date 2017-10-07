@@ -3,7 +3,6 @@ package com.rviannaoliveira.marvelapp.data.repository
 import com.rviannaoliveira.marvelapp.model.Favorite
 import io.reactivex.Flowable
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
@@ -20,16 +19,14 @@ class RepositoryHelper : RepositoryData {
     override fun insertFavorite(favorite: Favorite) {
         Single.fromCallable({ favoriteDao.insert(favorite) })
                 .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ Timber.d("Sucess") },
+                .subscribe({ Timber.d("Success") },
                         { error -> Timber.w("Error>$error") })
     }
 
     override fun deleteFavorite(favorite: Favorite) {
         Single.fromCallable({ favoriteDao.delete(favorite) })
                 .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ Timber.d("Sucess") },
+                .subscribe({ Timber.d("Success") },
                         { error -> Timber.w("Error>$error") })
     }
 

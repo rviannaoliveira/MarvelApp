@@ -12,8 +12,8 @@ interface ApiData {
     fun getMarvelComics(offset: Int): Flowable<List<MarvelComic>>
     fun getDetailCharacter(id: Int?): Flowable<MarvelCharacter>
     fun getDetailComic(id: Int?): Flowable<MarvelComic>
-    fun removeFavoriteCharacter(idMarvel: Int?)
-    fun removeFavoriteComic(idMarvel: Int?)
+    fun removeFavoriteCharacterCache(idMarvel: Int?)
+    fun removeFavoriteComicCache(idMarvel: Int?)
     fun getMarvelCharactersBeginLetter(letter: String): Flowable<List<MarvelCharacter>>
     fun getMarvelComicsBeginLetter(letter: String): Flowable<List<MarvelComic>>
 }

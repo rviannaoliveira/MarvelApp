@@ -17,7 +17,6 @@ import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.characters.DetailComicPresenter
 import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterAdapter
-import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicPresenterImpl
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicView
 import com.rviannaoliveira.marvelapp.model.MarvelComic
 import com.rviannaoliveira.marvelapp.util.MarvelUtil

@@ -55,7 +55,7 @@ class DataManager(private val apiData: ApiData = MarvelApiHelper(), private val 
         return apiData.getDetailComic(id)
     }
 
-    fun getAllFavorites(): Flowable<Favorite> {
+    override fun getAllFavorites(): Flowable<Favorite> {
         val favorite = Favorite()
 
         return repositoryData.getAllFavorites()
@@ -81,9 +81,9 @@ class DataManager(private val apiData: ApiData = MarvelApiHelper(), private val 
         repositoryData.deleteFavorite(favorite)
     }
 
-    fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean) {
-        if (removeCharacter) apiData.removeFavoriteCharacter(favorite.idMarvel) else apiData.removeFavoriteComic(favorite.idMarvel)
-        repositoryData.deleteFavorite(favorite)
+    override fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean) {
+        if (removeCharacter) apiData.removeFavoriteCharacterCache(favorite.idMarvel) else apiData.removeFavoriteComicCache(favorite.idMarvel)
+        deleteFavorite(favorite)
     }
 
     private fun combineCharacter(characters: List<MarvelCharacter>, favorites: List<Favorite>): List<MarvelCharacter> {
@@ -130,4 +130,6 @@ interface DataManagerInterface {
     fun getMarvelCharactersBeginLetter(letter: String): Flowable<List<MarvelCharacter>>
     fun insertFavorite(favorite: Favorite)
     fun deleteFavorite(favorite: Favorite)
+    fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean)
+    fun getAllFavorites(): Flowable<Favorite>
 }

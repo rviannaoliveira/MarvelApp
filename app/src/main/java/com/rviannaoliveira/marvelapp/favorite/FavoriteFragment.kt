@@ -16,6 +16,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
+import com.rviannaoliveira.marvelapp.data.DataManagerFactory
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
@@ -25,7 +26,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  */
 class FavoriteFragment : Fragment(), FavoriteView {
 
-    private val favoritePresenterImpl: FavoritePresenter = FavoritePresenterImpl(this)
+    private val favoritePresenterImpl: FavoritePresenter = FavoritePresenterImpl(this, DataManagerFactory.getDefaultInstance())
     private lateinit var characterFavoriteAdapter: FavoriteAdapter
     private lateinit var comicFavoriteAdapter: FavoriteAdapter
     private lateinit var progressbar: ProgressBar
@@ -46,6 +47,7 @@ class FavoriteFragment : Fragment(), FavoriteView {
         favoritePresenterImpl.loadFavorites()
         return viewFavorite
     }
+
 
     override fun loadView() {
         characterFavoriteAdapter = FavoriteAdapter(activity as AppCompatActivity, favoritePresenterImpl)

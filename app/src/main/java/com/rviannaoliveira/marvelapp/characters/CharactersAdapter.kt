@@ -72,6 +72,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
                 holder.name.text = marvelCharacter.name
                 MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
                 holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
+                holder.favorite.isChecked = marvelCharacter.favorite != null
                 holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
                 holder.image.setOnClickListener { showDetail(holder, marvelCharacter) }
             } else {
@@ -113,7 +114,9 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
             character.favorite?.idMarvel = character.id
         }
 
-        character.favorite?.let { presenter.toggleFavorite(it, checkView.isChecked) }
+        character.favorite?.let {
+            presenter.toggleFavorite(it, checkView.isChecked)
+        }
 
     }
 

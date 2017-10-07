@@ -2,7 +2,6 @@ package com.rviannaoliveira.marvelapp.data.api
 
 import com.rviannaoliveira.marvelapp.model.*
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function3
@@ -16,10 +15,13 @@ import io.reactivex.schedulers.Schedulers
 class MarvelApiHelper : ApiData {
     private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)
     private var LIMIT_REGISTER = 30
-    private var charactersCache = ArrayList<MarvelCharacter>()
-    private var comicsCache = ArrayList<MarvelComic>()
     private var detailCharacterCache = HashMap<Int, MarvelCharacter>()
     private var detailComicCache = HashMap<Int, MarvelComic>()
+
+    companion object {
+        private var charactersCache = ArrayList<MarvelCharacter>()
+        private var comicsCache = ArrayList<MarvelComic>()
+    }
 
 
     override fun getMarvelCharacters(offset: Int): Flowable<List<MarvelCharacter>> {
@@ -149,26 +151,21 @@ class MarvelApiHelper : ApiData {
         }
     }
 
-    override fun removeFavoriteCharacter(idMarvel: Int?) {
-        Observable.fromArray(charactersCache)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMapIterable({ list -> list })
-                .filter({ item -> item.id == idMarvel })
-                .subscribe({ item ->
-                    item.favorite = null
-                })
+    override fun removeFavoriteCharacterCache(idMarvel: Int?) {
+        charactersCache.forEach { item ->
+            if (item.id == idMarvel) {
+                item.favorite = null
+            }
+        }
     }
 
-    override fun removeFavoriteComic(idMarvel: Int?) {
-        Observable.fromArray(comicsCache)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMapIterable({ list -> list })
-                .filter({ item -> item.id == idMarvel })
-                .subscribe({ item ->
-                    item.favorite = null
-                })
+    override fun removeFavoriteComicCache(idMarvel: Int?) {
+        comicsCache.forEach { item ->
+            if (item.id == idMarvel) {
+                item.favorite = null
+
+            }
+        }
     }
 
 }

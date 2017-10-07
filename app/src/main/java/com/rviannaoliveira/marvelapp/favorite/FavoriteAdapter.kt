@@ -83,12 +83,12 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
     }
 
     private fun removeFavorite(favorite: Favorite, position: Int) {
-        favorites.remove(favorite)
         favoritePresenterImpl.deleteFavorite(favorite, block.id == R.id.block_character)
+        favorites.remove(favorite)
         notifyItemRemoved(position)
         notifyDataSetChanged()
 
-        if (favorites.isEmpty()) {
+        if (favorites.size == 0) {
             block.visibility = View.GONE
         }
     }
