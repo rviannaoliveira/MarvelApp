@@ -102,17 +102,17 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener {
         progressbar.visibility = View.GONE
     }
 
-    override fun loadComics(comics: ArrayList<MarvelComic>) {
+    override fun loadComics(comics: List<MarvelComic>) {
         loadComicRecyclerView(comics, false)
     }
 
-    private fun loadComicRecyclerView(comics: ArrayList<MarvelComic>, listForLetter: Boolean) {
+    private fun loadComicRecyclerView(comics: List<MarvelComic>, listForLetter: Boolean) {
         comicsAdapter.setComics(comics, listForLetter)
         isLoading = false
         comicsAdapter.showLoading(isLoading)
     }
 
-    override fun loadFilterComics(comics: ArrayList<MarvelComic>) {
+    override fun loadFilterComics(comics: List<MarvelComic>) {
         loadComicRecyclerView(comics, true)
     }
 

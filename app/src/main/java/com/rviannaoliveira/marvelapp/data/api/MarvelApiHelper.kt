@@ -22,7 +22,7 @@ class MarvelApiHelper : ApiData {
     private var detailComicCache = HashMap<Int, MarvelComic>()
 
 
-    override fun getMarvelCharacters(offset: Int): Flowable<ArrayList<MarvelCharacter>> {
+    override fun getMarvelCharacters(offset: Int): Flowable<List<MarvelCharacter>> {
         if (offset == 0 && charactersCache.isNotEmpty()) {
             return Flowable.fromArray(charactersCache)
         }
@@ -38,7 +38,7 @@ class MarvelApiHelper : ApiData {
                 })
     }
 
-    override fun getMarvelCharactersBeginLetter(letter: String): Flowable<ArrayList<MarvelCharacter>> {
+    override fun getMarvelCharactersBeginLetter(letter: String): Flowable<List<MarvelCharacter>> {
 
         val response = marvelService.getCharactersBeginLetter(100, letter)
         return response.subscribeOn(Schedulers.newThread())
@@ -50,7 +50,7 @@ class MarvelApiHelper : ApiData {
                 })
     }
 
-    override fun getMarvelComicsBeginLetter(letter: String): Flowable<ArrayList<MarvelComic>> {
+    override fun getMarvelComicsBeginLetter(letter: String): Flowable<List<MarvelComic>> {
         val response = marvelService.getComicsBeginLetter(100, letter)
         return response.subscribeOn(Schedulers.newThread())
                 .retry(1)
@@ -61,7 +61,7 @@ class MarvelApiHelper : ApiData {
                 })
     }
 
-    override fun getMarvelComics(offset: Int): Flowable<ArrayList<MarvelComic>> {
+    override fun getMarvelComics(offset: Int): Flowable<List<MarvelComic>> {
         if (offset == 0 && comicsCache.isNotEmpty()) {
             return Flowable.fromArray(comicsCache)
         }

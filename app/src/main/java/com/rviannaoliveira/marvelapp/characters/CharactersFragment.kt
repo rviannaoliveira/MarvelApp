@@ -15,6 +15,7 @@ import android.support.v7.widget.SearchView
 import android.view.*
 import android.widget.ProgressBar
 import com.rviannaoliveira.marvelapp.R
+import com.rviannaoliveira.marvelapp.data.DataManagerFactory
 import com.rviannaoliveira.marvelapp.extensions.createFilterCustom
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
@@ -25,7 +26,7 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  */
 
 class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextListener {
-    private val charactersPresenterImpl: CharactersPresenter = CharactersPresenterImpl(this)
+    private val charactersPresenterImpl: CharactersPresenter = CharactersPresenterImpl(this, DataManagerFactory.getDefaultInstance())
     private var charactersAdapter: CharactersAdapter? = null
     private lateinit var progressbar: ProgressBar
     private lateinit var charactersRecyclerView: RecyclerView
@@ -76,7 +77,7 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        listState = savedInstanceState?.getParcelable<Parcelable>(LIST_STATE_KEY)
+        listState = savedInstanceState?.getParcelable(LIST_STATE_KEY)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

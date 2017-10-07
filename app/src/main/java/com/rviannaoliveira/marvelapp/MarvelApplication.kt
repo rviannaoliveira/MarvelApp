@@ -21,6 +21,10 @@ class MarvelApplication : Application() {
             Timber.plant(DebugTree())
             initStetho()
         }
+        initRoom()
+    }
+
+    private fun initRoom() {
         AppDatabaseFactory.init(this)
     }
 

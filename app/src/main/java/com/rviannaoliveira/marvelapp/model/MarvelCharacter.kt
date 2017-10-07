@@ -7,15 +7,21 @@ import com.google.gson.annotations.SerializedName
  * Criado por rodrigo on 08/04/17.
  */
 
-class MarvelCharacter : BaseModelMarvel() {
+class MarvelCharacter : BaseModelMarvel {
+
+    constructor() : super()
+    constructor(id: Int) : super() {
+        this.id = id
+    }
+
     @SerializedName("urls")
     val urls: ArrayList<MarvelUrl>? = null
     @SerializedName("comics")
     var comics: MarvelComicList? = null
     @SerializedName("stories")
-    val stories : MarvelStoryList? = null
+    val stories: MarvelStoryList? = null
     @SerializedName("series")
-    val series : MarvelSeriesList? = null
+    val series: MarvelSeriesList? = null
     @Ignore
     var favorite: Favorite? = null
     var comicList: ArrayList<MarvelComic>? = null

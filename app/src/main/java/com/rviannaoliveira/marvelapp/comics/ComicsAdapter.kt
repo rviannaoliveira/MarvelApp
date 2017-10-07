@@ -37,7 +37,7 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
 
     override fun isListForLetter() = listForLetter
 
-    fun setComics(comics: ArrayList<MarvelComic>, listForLetter: Boolean) {
+    fun setComics(comics: List<MarvelComic>, listForLetter: Boolean) {
         this.comics.addAll(comics)
         this.comicsOriginal.addAll(comics)
         this.listForLetter = listForLetter

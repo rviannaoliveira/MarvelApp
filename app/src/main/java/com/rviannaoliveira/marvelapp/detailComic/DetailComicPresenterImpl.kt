@@ -1,7 +1,8 @@
-package com.rviannaoliveira.marvelapp.detailCharacter
+package com.rviannaoliveira.marvelapp.detailComic
 
 import com.rviannaoliveira.marvelapp.characters.DetailComicPresenter
-import com.rviannaoliveira.marvelapp.data.DataManager
+import com.rviannaoliveira.marvelapp.data.DataManagerFactory
+import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicView
 import timber.log.Timber
 
 /**
@@ -11,8 +12,8 @@ class DetailComicPresenterImpl(private val view: DetailComicView) : DetailComicP
 
     override fun getMarvelComic(id: Int) {
         view.showProgressBar()
-        DataManager.getDetailComicCharacter(id)
-                .subscribe({ comic ->
+        DataManagerFactory.getDefaultInstance()?.loadDetailComicCharacter(id)
+                ?.subscribe({ comic ->
                     view.hideProgressBar()
                     view.loadComic(comic)
                 }, { error ->

@@ -1,7 +1,7 @@
 package com.rviannaoliveira.marvelapp.detailCharacter
 
 import com.rviannaoliveira.marvelapp.characters.DetailCharacterPresenter
-import com.rviannaoliveira.marvelapp.data.DataManager
+import com.rviannaoliveira.marvelapp.data.DataManagerFactory
 import timber.log.Timber
 
 /**
@@ -11,8 +11,8 @@ class DetailCharacterPresenterImpl(private val view: DetailCharacterView) : Deta
 
     override fun getMarvelCharacter(id: Int) {
         view.showProgressBar()
-        DataManager.getDetailMarvelCharacter(id)
-                .subscribe({ character ->
+        DataManagerFactory.getDefaultInstance()?.loadDetailMarvelCharacter(id)
+                ?.subscribe({ character ->
                     view.hideProgressBar()
                     view.loadCharacter(character)
                 }, { error ->

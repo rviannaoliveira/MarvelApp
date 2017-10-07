@@ -7,6 +7,6 @@ import com.rviannaoliveira.marvelapp.model.MarvelComic
  * Criado por rodrigo on 14/04/17.
  */
 interface ComicsView : BaseView {
-    fun loadComics(comics: ArrayList<MarvelComic>)
-    fun loadFilterComics(comics: ArrayList<MarvelComic>)
+    fun loadComics(comics: List<MarvelComic>)
+    fun loadFilterComics(comics: List<MarvelComic>)
 }
