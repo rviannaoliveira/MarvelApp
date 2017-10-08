@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 @Config(constants = BuildConfig.class)
-public class MarvelInteractionPresenterTest {
+public class MarvelInteractionCharacterPresenterTest {
     @Rule
     public MockitoRule mockito = MockitoJUnit.rule();
     //Criar rule customizado para datamanager  basear Rx2TestSchedulerRule
@@ -51,6 +51,17 @@ public class MarvelInteractionPresenterTest {
 
         verify(this.charactersView).showProgressBar();
         verify(this.charactersView).loadCharacters(ArgumentMatchers.<MarvelCharacter>anyList());
+        verify(this.charactersView).hideProgressBar();
+    }
+
+    @Test
+    public void loadMarvelCharactersBeginLetter() {
+        String letter = "a";
+        when(dataManager.getMarvelCharactersBeginLetter(letter)).thenReturn(Flowable.just(mockList));
+        getCharactersPresenterUnderTest().loadMarvelCharactersBeginLetter(letter);
+
+        verify(this.charactersView).showProgressBar();
+        verify(this.charactersView).loadFilterCharacters(ArgumentMatchers.<MarvelCharacter>anyList());
         verify(this.charactersView).hideProgressBar();
     }
 
