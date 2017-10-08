@@ -31,7 +31,7 @@ class MarvelInteractionApiHelperTest {
     @get:Rule
     val mockito = MockitoJUnit.rule()
 
-    @Mock
+    @Mock private
     lateinit var marvelService: MarvelService
 
 
@@ -49,12 +49,16 @@ class MarvelInteractionApiHelperTest {
         marvelApiHelper.getMarvelCharacters(0).test().assertValue(MarvelApiHelper.charactersCache)
     }
 
+    //Perguntar pq no gradle quebra
     @Test
     fun getMarvelCharacters() {
         val marvelApiHelper = getApiHelper()
         val marvelCharacterDataWrapper = getMarvelCharacterDataWrapper()
         whenever(marvelService.getCharacters(MarvelApiHelper.LIMIT_REGISTER, 0)).thenReturn(Flowable.just(marvelCharacterDataWrapper))
-        marvelApiHelper.getMarvelCharacters(0).test().assertValue(marvelCharacterDataWrapper.data?.results)
+        marvelApiHelper.getMarvelCharacters(0)
+                .test()
+                .assertComplete()
+                .assertValue(marvelCharacterDataWrapper.data?.results)
     }
 
     private fun getMarvelCharacterDataContainer(): MarvelCharacterDataContainer {
