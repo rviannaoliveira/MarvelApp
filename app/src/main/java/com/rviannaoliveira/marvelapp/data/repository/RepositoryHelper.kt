@@ -6,6 +6,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
+
 /**
  * Criado por rodrigo on 15/04/17.
  */
@@ -18,14 +19,14 @@ class RepositoryHelper : RepositoryData {
 
     override fun insertFavorite(favorite: Favorite) {
         Single.fromCallable({ favoriteDao.insert(favorite) })
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .subscribe({ Timber.d("Success") },
                         { error -> Timber.w("Error>$error") })
     }
 
     override fun deleteFavorite(favorite: Favorite) {
-        Single.fromCallable({ favoriteDao.delete(favorite) })
-                .subscribeOn(Schedulers.newThread())
+        Single.fromCallable { favoriteDao.delete(favorite) }
+                .subscribeOn(Schedulers.io())
                 .subscribe({ Timber.d("Success") },
                         { error -> Timber.w("Error>$error") })
     }

@@ -8,14 +8,13 @@ import android.arch.persistence.room.PrimaryKey
  * Criado por rodrigo on 15/04/17.
  */
 @Entity
-open class Favorite {
+data class Favorite(var idMarvel: Int? = 0) {
     @PrimaryKey(autoGenerate = true)
-    open var id: Int? = null
-    open var idMarvel: Int? = null
-    open var name: String? = null
-    open var path: String? = null
-    open var extension: String? = null
-    open var groupType: Int? = null
+    var id: Int? = null
+    var name: String? = null
+    var path: String? = null
+    var extension: String? = null
+    var groupType: Int? = null
     @Ignore
     val comics = ArrayList<Favorite>()
     @Ignore

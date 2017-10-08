@@ -106,12 +106,11 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
         checkView.setButtonDrawable(toggleImage(checkView.isChecked))
 
         if (character.favorite == null) {
-            character.favorite = Favorite()
+            character.favorite = Favorite(character.id)
             character.favorite?.groupType = KeyDatabase.FavoriteGroup.CHARACTERS
             character.favorite?.extension = character.thumbMail?.extension
             character.favorite?.path = character.thumbMail?.path
             character.favorite?.name = character.name
-            character.favorite?.idMarvel = character.id
         }
 
         character.favorite?.let {

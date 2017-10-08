@@ -7,5 +7,5 @@ import com.google.gson.annotations.SerializedName
  */
 class MarvelCharacterDataContainer : BaseModelMarvelContainer(){
     @SerializedName("results")
-    val results: ArrayList<MarvelCharacter>? = null
+    var results: ArrayList<MarvelCharacter>? = null
 }

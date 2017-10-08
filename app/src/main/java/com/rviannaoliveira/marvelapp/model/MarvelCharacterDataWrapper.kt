@@ -8,5 +8,5 @@ import com.google.gson.annotations.SerializedName
 
 class MarvelCharacterDataWrapper : BaseModelMarvelWrapper(){
     @SerializedName("data")
-    val data: MarvelCharacterDataContainer? = null
+    var data: MarvelCharacterDataContainer? = null
 }

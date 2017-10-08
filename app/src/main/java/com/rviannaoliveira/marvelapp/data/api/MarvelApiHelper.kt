@@ -1,5 +1,6 @@
 package com.rviannaoliveira.marvelapp.data.api
 
+import android.support.annotation.VisibleForTesting
 import com.rviannaoliveira.marvelapp.model.*
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,15 +13,15 @@ import io.reactivex.schedulers.Schedulers
  * Criado por rodrigo on 09/04/17.
  */
 
-class MarvelApiHelper : ApiData {
-    private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)
-    private var LIMIT_REGISTER = 30
-    private var detailCharacterCache = HashMap<Int, MarvelCharacter>()
-    private var detailComicCache = HashMap<Int, MarvelComic>()
+class MarvelApiHelper(private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)) : ApiData {
 
     companion object {
-        private var charactersCache = ArrayList<MarvelCharacter>()
-        private var comicsCache = ArrayList<MarvelComic>()
+        var charactersCache = ArrayList<MarvelCharacter>()
+        var comicsCache = ArrayList<MarvelComic>()
+        var detailCharacterCache = HashMap<Int, MarvelCharacter>()
+        var LIMIT_REGISTER = 30
+        @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+        private var detailComicCache = HashMap<Int, MarvelComic>()
     }
 
 
@@ -30,7 +31,8 @@ class MarvelApiHelper : ApiData {
         }
 
         val response = marvelService.getCharacters(LIMIT_REGISTER, offset)
-        return response.subscribeOn(Schedulers.newThread())
+        return response
+                .subscribeOn(Schedulers.newThread())
                 .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap({ dataWrappers ->

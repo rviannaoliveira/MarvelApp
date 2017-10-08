@@ -69,13 +69,13 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (comics.isNotEmpty()) {
             if (holder is ComicsAdapter.ComicViewHolder) {
-                val marvelComic = comics[position]
-                holder.name.text = marvelComic.title
-                MarvelUtil.setImageUrl(context, marvelComic.thumbMail?.getPathExtension(), holder.image)
-                holder.favorite.setButtonDrawable(toggleImage(marvelComic.favorite != null))
-                holder.favorite.isChecked = marvelComic.favorite != null
+                val marvelCharacter = comics[position]
+                holder.name.text = marvelCharacter.title
+                MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
+                holder.favorite.setButtonDrawable(toggleImage(marvelCharacter.favorite != null))
+                holder.favorite.isChecked = marvelCharacter.favorite != null
                 holder.favorite.setOnClickListener { view -> toggleFavorite(position, view) }
-                holder.image.setOnClickListener { showDetail(holder, marvelComic) }
+                holder.image.setOnClickListener { showDetail(holder, marvelCharacter) }
             } else {
                 if (showLoader) {
                     (holder as ComicsAdapter.LoaderViewHolder).progressBar.visibility = View.VISIBLE
@@ -97,12 +97,11 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
         checkView.setButtonDrawable(toggleImage(checkView.isChecked))
 
         if (comics.favorite == null) {
-            comics.favorite = Favorite()
+            comics.favorite = Favorite(comics.id)
             comics.favorite?.groupType = KeyDatabase.FavoriteGroup.COMICS
             comics.favorite?.extension = comics.thumbMail?.extension
             comics.favorite?.path = comics.thumbMail?.path
             comics.favorite?.name = comics.title
-            comics.favorite?.idMarvel = comics.id
         }
         comics.favorite?.let { presenter.toggleFavorite(it, checkView.isChecked) }
     }
