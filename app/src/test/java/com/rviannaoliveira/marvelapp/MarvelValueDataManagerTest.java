@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 @Config(constants = BuildConfig.class)
-public class MarvelInteractionDataManagerTest {
+public class MarvelValueDataManagerTest {
     @Rule
     public MockitoRule mockito = MockitoJUnit.rule();
 
@@ -49,13 +49,17 @@ public class MarvelInteractionDataManagerTest {
         dataManager = getDataManager();
     }
 
+    //Pesquisar sobre teste parametrizado
+
     @Test
     public void loadMarvelCharacters_withFavoritesEmpty() {
         List<MarvelCharacter> characters = Arrays.asList(new MarvelCharacter[]{new MarvelCharacter(1)});
 
         when(apiData.getMarvelCharacters(0)).thenReturn(Flowable.just(characters));
         when(repositoryData.getCharactersFavorites()).thenReturn(Flowable.just(Collections.<Favorite>emptyList()));
-        dataManager.getMarvelCharacters(0).test().assertValue(characters);
+        dataManager.getMarvelCharacters(0)
+                .test()
+                .assertValue(characters);
     }
 
     @Test

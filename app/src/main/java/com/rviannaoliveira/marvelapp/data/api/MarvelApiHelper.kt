@@ -1,6 +1,5 @@
 package com.rviannaoliveira.marvelapp.data.api
 
-import android.support.annotation.VisibleForTesting
 import com.rviannaoliveira.marvelapp.model.*
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,8 +19,7 @@ class MarvelApiHelper(private var marvelService: MarvelService = MarvelClient().
         var comicsCache = ArrayList<MarvelComic>()
         var detailCharacterCache = HashMap<Int, MarvelCharacter>()
         var LIMIT_REGISTER = 30
-        @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-        private var detailComicCache = HashMap<Int, MarvelComic>()
+        var detailComicCache = HashMap<Int, MarvelComic>()
     }
 
 

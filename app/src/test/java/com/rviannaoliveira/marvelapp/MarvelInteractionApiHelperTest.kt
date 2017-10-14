@@ -34,6 +34,7 @@ class MarvelInteractionApiHelperTest {
     @Mock private
     lateinit var marvelService: MarvelService
 
+    //Refatorar usando Rules
 
     @Before
     @Throws(Exception::class)
@@ -46,10 +47,12 @@ class MarvelInteractionApiHelperTest {
     fun getMarvelCharactersCache() {
         val marvelApiHelper = getApiHelper()
         MarvelApiHelper.charactersCache = arrayListOf(MarvelCharacter(1))
-        marvelApiHelper.getMarvelCharacters(0).test().assertValue(MarvelApiHelper.charactersCache)
+        marvelApiHelper.getMarvelCharacters(0)
+                .test()
+                .assertValue(MarvelApiHelper.charactersCache)
     }
 
-    //Perguntar pq no gradle quebra
+    //Perguntar pq no gradle quebra e o que é Executor mock executor
     @Test
     fun getMarvelCharacters() {
         val marvelApiHelper = getApiHelper()
@@ -79,6 +82,7 @@ class MarvelInteractionApiHelperTest {
     @After
     fun tearDown() {
         RxAndroidPlugins.reset()
+        RxJavaPlugins.reset()
     }
 
 }
