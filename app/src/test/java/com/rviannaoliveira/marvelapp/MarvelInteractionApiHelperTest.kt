@@ -8,11 +8,7 @@ import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.model.MarvelCharacterDataContainer
 import com.rviannaoliveira.marvelapp.model.MarvelCharacterDataWrapper
 import io.reactivex.Flowable
-import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.plugins.RxJavaPlugins
-import io.reactivex.schedulers.Schedulers
 import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,17 +27,11 @@ class MarvelInteractionApiHelperTest {
     @get:Rule
     val mockito = MockitoJUnit.rule()
 
+    @get:Rule
+    val rxExternalResources = RxExternalResources()
+
     @Mock private
     lateinit var marvelService: MarvelService
-
-    //Refatorar usando Rules
-
-    @Before
-    @Throws(Exception::class)
-    fun setUp() {
-        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
-        RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
-    }
 
     @Test
     fun getMarvelCharactersCache() {
@@ -52,12 +42,13 @@ class MarvelInteractionApiHelperTest {
                 .assertValue(MarvelApiHelper.charactersCache)
     }
 
-    //Perguntar pq no gradle quebra e o que é Executor mock executor
     @Test
     fun getMarvelCharacters() {
         val marvelApiHelper = getApiHelper()
         val marvelCharacterDataWrapper = getMarvelCharacterDataWrapper()
+
         whenever(marvelService.getCharacters(MarvelApiHelper.LIMIT_REGISTER, 0)).thenReturn(Flowable.just(marvelCharacterDataWrapper))
+
         marvelApiHelper.getMarvelCharacters(0)
                 .test()
                 .assertComplete()
@@ -71,7 +62,7 @@ class MarvelInteractionApiHelperTest {
     private fun getMarvelCharacterDataWrapper(): MarvelCharacterDataWrapper {
         val marvelCharacterDataWrapper = MarvelCharacterDataWrapper()
         marvelCharacterDataWrapper.data = getMarvelCharacterDataContainer()
-        marvelCharacterDataWrapper.data?.results = arrayListOf(MarvelCharacter(2))
+        marvelCharacterDataWrapper.data?.results = arrayListOf(MarvelCharacter(1))
         return marvelCharacterDataWrapper
     }
 
@@ -80,9 +71,13 @@ class MarvelInteractionApiHelperTest {
     }
 
     @After
-    fun tearDown() {
-        RxAndroidPlugins.reset()
-        RxJavaPlugins.reset()
+    fun finish() {
+        clearCache()
+    }
+
+    private fun clearCache() {
+        MarvelApiHelper.charactersCache.clear()
+        MarvelApiHelper.comicsCache.clear()
     }
 
 }
