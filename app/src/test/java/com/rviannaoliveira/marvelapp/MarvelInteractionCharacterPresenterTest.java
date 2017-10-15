@@ -31,7 +31,6 @@ import static org.mockito.Mockito.when;
 public class MarvelInteractionCharacterPresenterTest {
     @Rule
     public MockitoRule mockito = MockitoJUnit.rule();
-    //Criar rule customizado para datamanager  basear Rx2TestSchedulerRule
 
     @Mock
     public CharactersView charactersView;

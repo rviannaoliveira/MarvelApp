@@ -49,8 +49,6 @@ public class MarvelValueDataManagerTest {
         dataManager = getDataManager();
     }
 
-    //Pesquisar sobre teste parametrizado
-
     @Test
     public void loadMarvelCharacters_withFavoritesEmpty() {
         List<MarvelCharacter> characters = Arrays.asList(new MarvelCharacter[]{new MarvelCharacter(1)});
