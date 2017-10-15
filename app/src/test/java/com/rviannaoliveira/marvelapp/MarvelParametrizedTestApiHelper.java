@@ -54,6 +54,7 @@ public class MarvelParametrizedTestApiHelper {
         });
     }
 
+    // ver com edu test Options gradle
     @Test
     public void loadMarvelCharacters() {
         DataManager dataManager = getDataManager();

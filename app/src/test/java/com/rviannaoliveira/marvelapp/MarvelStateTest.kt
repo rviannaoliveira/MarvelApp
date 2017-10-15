@@ -1,9 +1,18 @@
 package com.rviannaoliveira.marvelapp
 
+import com.nhaarman.mockito_kotlin.whenever
+import com.rviannaoliveira.marvelapp.data.api.ApiData
+import com.rviannaoliveira.marvelapp.data.api.MarvelApiHelper
+import com.rviannaoliveira.marvelapp.data.api.MarvelService
 import com.rviannaoliveira.marvelapp.fakedata.MarvelFakeDataFactory
+import io.reactivex.Flowable
+import junit.framework.Assert
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoJUnitRunner
 import org.robolectric.annotation.Config
 
 
@@ -13,18 +22,35 @@ import org.robolectric.annotation.Config
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MockitoJUnitRunner::class)
 @Config(constants = BuildConfig::class)
 class MarvelStateTest {
 
+    @get:Rule
+    val mockito = MockitoJUnit.rule()
+
+    @get:Rule
+    val rxExternalResources = RxExternalResources()
+
+    @Mock private
+    lateinit var marvelService: MarvelService
+
     @Test
-    @Throws(Exception::class)
-    fun test() {
-        val marvelCharacter = MarvelFakeDataFactory.fakeMarvelCharacterTest
+    fun getMarvelCharactersCache() {
+        val marvelApiHelper = getApiHelper()
 
-//        DataManager.getDetailMarvelCharacter(marvelCharacter.id)
-//                .test()
-//                .assertComplete()
+        whenever(marvelService.getCharacters(MarvelApiHelper.LIMIT_REGISTER, 0))
+                .thenReturn(Flowable.just(MarvelFakeDataFactory.fakeMarvelCharacterDataWrapperId2))
 
+        marvelApiHelper.getMarvelCharacters(0)
+                .test()
+                .assertComplete()
+
+        Assert.assertSame(MarvelApiHelper.charactersCache[0], MarvelFakeDataFactory.fakeMarvelCharacterDataWrapperId2.data?.results!![0])
+
+    }
+
+    private fun getApiHelper(): ApiData {
+        return MarvelApiHelper(marvelService)
     }
 }

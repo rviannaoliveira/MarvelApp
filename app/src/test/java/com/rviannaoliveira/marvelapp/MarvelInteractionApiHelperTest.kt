@@ -4,9 +4,8 @@ import com.nhaarman.mockito_kotlin.whenever
 import com.rviannaoliveira.marvelapp.data.api.ApiData
 import com.rviannaoliveira.marvelapp.data.api.MarvelApiHelper
 import com.rviannaoliveira.marvelapp.data.api.MarvelService
+import com.rviannaoliveira.marvelapp.fakedata.MarvelFakeDataFactory
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
-import com.rviannaoliveira.marvelapp.model.MarvelCharacterDataContainer
-import com.rviannaoliveira.marvelapp.model.MarvelCharacterDataWrapper
 import io.reactivex.Flowable
 import org.junit.After
 import org.junit.Rule
@@ -45,7 +44,7 @@ class MarvelInteractionApiHelperTest {
     @Test
     fun getMarvelCharacters() {
         val marvelApiHelper = getApiHelper()
-        val marvelCharacterDataWrapper = getMarvelCharacterDataWrapper()
+        val marvelCharacterDataWrapper = MarvelFakeDataFactory.fakeMarvelCharacterDataWrapperId2
 
         whenever(marvelService.getCharacters(MarvelApiHelper.LIMIT_REGISTER, 0)).thenReturn(Flowable.just(marvelCharacterDataWrapper))
 
@@ -53,17 +52,6 @@ class MarvelInteractionApiHelperTest {
                 .test()
                 .assertComplete()
                 .assertValue(marvelCharacterDataWrapper.data?.results)
-    }
-
-    private fun getMarvelCharacterDataContainer(): MarvelCharacterDataContainer {
-        return MarvelCharacterDataContainer()
-    }
-
-    private fun getMarvelCharacterDataWrapper(): MarvelCharacterDataWrapper {
-        val marvelCharacterDataWrapper = MarvelCharacterDataWrapper()
-        marvelCharacterDataWrapper.data = getMarvelCharacterDataContainer()
-        marvelCharacterDataWrapper.data?.results = arrayListOf(MarvelCharacter(1))
-        return marvelCharacterDataWrapper
     }
 
     private fun getApiHelper(): ApiData {
