@@ -9,6 +9,7 @@ import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.model.MarvelComic
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
@@ -16,13 +17,15 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Criado por rodrigo on 09/04/17.
  */
-class DataManager(private val apiData: ApiData = MarvelApiHelper(), private val repositoryData: RepositoryData = RepositoryHelper()) : DataManagerInterface {
+class DataManager(private val apiData: ApiData = MarvelApiHelper(),
+                  private val repositoryData: RepositoryData = RepositoryHelper()) : DataManagerInterface {
 
     override fun getMarvelCharacters(offset: Int): Flowable<List<MarvelCharacter>> {
         val characters = apiData.getMarvelCharacters(offset)
         val favorites = repositoryData.getCharactersFavorites()
         return Flowable.zip(characters, favorites, BiFunction<List<MarvelCharacter>, List<Favorite>,
                 List<MarvelCharacter>>(this::combineCharacter))
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun getMarvelCharactersBeginLetter(letter: String): Flowable<List<MarvelCharacter>> {
@@ -38,6 +41,7 @@ class DataManager(private val apiData: ApiData = MarvelApiHelper(), private val 
         val favorites = repositoryData.getComicsFavorites()
         return Flowable.zip(comics, favorites, BiFunction<List<MarvelComic>, List<Favorite>,
                 List<MarvelComic>>(this::combineComic))
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun getMarvelComicsBeginLetter(letter: String): Flowable<List<MarvelComic>> {
@@ -77,13 +81,9 @@ class DataManager(private val apiData: ApiData = MarvelApiHelper(), private val 
         repositoryData.insertFavorite(favorite)
     }
 
-    override fun deleteFavorite(favorite: Favorite) {
-        repositoryData.deleteFavorite(favorite)
-    }
-
-    override fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean) {
+    override fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean): Single<Unit> {
         if (removeCharacter) apiData.removeFavoriteCharacterCache(favorite.idMarvel) else apiData.removeFavoriteComicCache(favorite.idMarvel)
-        deleteFavorite(favorite)
+        return repositoryData.deleteFavorite(favorite)
     }
 
     private fun combineCharacter(characters: List<MarvelCharacter>, favorites: List<Favorite>): List<MarvelCharacter> {
@@ -129,7 +129,6 @@ interface DataManagerInterface {
     fun getMarvelCharacters(offset: Int): Flowable<List<MarvelCharacter>>
     fun getMarvelCharactersBeginLetter(letter: String): Flowable<List<MarvelCharacter>>
     fun insertFavorite(favorite: Favorite)
-    fun deleteFavorite(favorite: Favorite)
-    fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean)
+    fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean = false): Single<Unit>
     fun getAllFavorites(): Flowable<Favorite>
 }

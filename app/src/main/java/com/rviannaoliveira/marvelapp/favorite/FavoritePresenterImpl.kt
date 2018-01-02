@@ -7,22 +7,33 @@ import timber.log.Timber
 /**
  * Criado por rodrigo on 14/04/17.
  */
-class FavoritePresenterImpl(private val view: FavoriteView, private val dataManager: DataManagerInterface?) : FavoritePresenter {
-
+class FavoritePresenterImpl(private var view: FavoriteView?, private val dataManager: DataManagerInterface?) : FavoritePresenter {
     override fun loadFavorites() {
-        view.showProgressBar()
-        val observableFavorites = dataManager?.getAllFavorites()
-        observableFavorites?.subscribe({ favorites ->
-            view.loadFavorite(favorites)
-            view.hideProgressBar()
-        }, { error ->
-            view.hideProgressBar()
-            view.error()
-            Timber.w(error.message)
-        })
+        view?.let {
+            it.showProgressBar()
+            val observableFavorites = dataManager?.getAllFavorites()
+            observableFavorites?.subscribe({ favorites ->
+                it.loadFavorites(favorites)
+                it.hideProgressBar()
+            }, { error ->
+                it.hideProgressBar()
+                it.error()
+                Timber.w(error.message)
+            })
+        }
+
+
     }
 
     override fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean) {
-        dataManager?.deleteFavorite(favorite, removeCharacter)
+        dataManager?.run {
+            deleteFavorite(favorite, removeCharacter).subscribe({ _ ->
+                loadFavorites()
+            })
+        }
+    }
+
+    override fun onDestroy() {
+        view = null
     }
 }

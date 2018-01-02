@@ -26,13 +26,10 @@ class RepositoryHelper : RepositoryData {
                         { error -> Timber.w("Error>$error") })
     }
 
-    override fun deleteFavorite(favorite: Favorite) {
+    override fun deleteFavorite(favorite: Favorite): Single<Unit> =
         Single.fromCallable { favoriteDao.delete(favorite) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ Timber.d("Success") },
-                        { error -> Timber.w("Error>$error") })
-    }
 
     override fun getCharactersFavorites(): Flowable<List<Favorite>> {
         return favoriteDao.getCharactersFavorites()

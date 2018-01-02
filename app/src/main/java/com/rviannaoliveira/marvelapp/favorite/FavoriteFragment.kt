@@ -48,6 +48,10 @@ class FavoriteFragment : Fragment(), FavoriteView {
         return viewFavorite
     }
 
+    override fun onDestroy() {
+        favoritePresenterImpl.onDestroy()
+        super.onDestroy()
+    }
 
     override fun loadView() {
         characterFavoriteAdapter = FavoriteAdapter(activity as AppCompatActivity, favoritePresenterImpl)
@@ -69,7 +73,7 @@ class FavoriteFragment : Fragment(), FavoriteView {
         progressbar.visibility = View.GONE
     }
 
-    override fun loadFavorite(favorites: Favorite) {
+    override fun loadFavorites(favorites: Favorite) {
         characterFavoriteAdapter.setFavorites(favorites.characters, blockCharacter)
         comicFavoriteAdapter.setFavorites(favorites.comics, blockComic)
 

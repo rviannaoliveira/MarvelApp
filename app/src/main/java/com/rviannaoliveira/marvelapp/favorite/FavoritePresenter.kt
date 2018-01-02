@@ -8,5 +8,6 @@ import com.rviannaoliveira.marvelapp.model.Favorite
 interface FavoritePresenter {
     fun loadFavorites()
     fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean)
+    fun onDestroy()
 
 }

@@ -7,5 +7,5 @@ import com.rviannaoliveira.marvelapp.model.Favorite
  * Criado por rodrigo on 15/04/17.
  */
 interface FavoriteView : BaseView {
-    fun loadFavorite(favorites: Favorite)
+    fun loadFavorites(favorites: Favorite)
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
@@ -33,6 +34,7 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
     private lateinit var block: LinearLayout
 
     fun setFavorites(favorites: List<Favorite>, block: LinearLayout) {
+        this.favorites.clear()
         this.favorites.addAll(favorites)
         this.block = block
         if (favorites.isNotEmpty()) {
@@ -47,6 +49,7 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
         return FavoriteViewHolder(LayoutInflater.from(context).inflate(R.layout.favorite_row, parent, false))
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         if (favorites.isNotEmpty()) {
             val favorite = favorites[position]
@@ -65,6 +68,7 @@ class FavoriteAdapter(private val appCompatActivity: AppCompatActivity, private 
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun showDetail(holder: FavoriteViewHolder, favorite: Favorite) {
         val detailIntent = if (KeyDatabase.FavoriteGroup.CHARACTERS == favorite.groupType) Intent(context, DetailCharacterActivity::class.java) else Intent(context, DetailComicActivity::class.java)
         detailIntent.putExtra(KeyDatabase.ID, favorite.idMarvel)

@@ -42,7 +42,7 @@ class CharactersPresenterImpl(private val charactersView: CharactersView, privat
         if (checked) {
             dataManager?.insertFavorite(favorite)
         } else {
-            dataManager?.deleteFavorite(favorite)
+            dataManager?.run { deleteFavorite(favorite, true).subscribe() }
         }
     }
 
