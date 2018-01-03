@@ -11,7 +11,7 @@ This repository i want to use many differents libraries and tools. The project w
 ## **Goals of use of the Architeture and Libraries**
 * Architeture MVP with DataManager -> https://labs.ribot.co.uk/android-application-architecture-8b6e34acda65 ✔︎
 * Rxjava -> http://reactivex.io/ ✔︎
-* Realm -> https://realm.io/docs/java/latest/ ✔︎
+* Room -> https://developer.android.com/training/data-storage/room/index.html ✔︎
 * Kotlin -> https://kotlinlang.org/ ✔︎
 * Picasso -> http://square.github.io/picasso/ ✔︎
 * Timber -> https://github.com/JakeWharton/timber ✔︎
