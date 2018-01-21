@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.detailCharacter
+package com.rviannaoliveira.marvelapp.detailCharacter.ui
 
 
 import com.rviannaoliveira.marvelapp.base.BaseView

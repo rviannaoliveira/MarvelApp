@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.comics
+package com.rviannaoliveira.marvelapp.comics.ui
 
 import com.rviannaoliveira.marvelapp.base.BasePresenterFavorite
 

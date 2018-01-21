@@ -7,7 +7,7 @@ import io.reactivex.Flowable
 /**
  * Criado por rodrigo on 15/04/17.
  */
-interface ApiData {
+interface IApiData {
     fun getMarvelCharacters(offset: Int): Flowable<List<MarvelCharacter>>
     fun getMarvelComics(offset: Int): Flowable<List<MarvelComic>>
     fun getDetailCharacter(id: Int?): Flowable<MarvelCharacter>

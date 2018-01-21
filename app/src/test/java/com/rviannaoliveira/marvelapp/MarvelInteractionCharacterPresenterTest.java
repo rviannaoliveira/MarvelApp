@@ -1,9 +1,9 @@
 package com.rviannaoliveira.marvelapp;
 
-import com.rviannaoliveira.marvelapp.characters.CharactersPresenter;
-import com.rviannaoliveira.marvelapp.characters.CharactersPresenterImpl;
-import com.rviannaoliveira.marvelapp.characters.CharactersView;
-import com.rviannaoliveira.marvelapp.data.DataManagerInterface;
+import com.rviannaoliveira.marvelapp.characters.ui.CharactersPresenter;
+import com.rviannaoliveira.marvelapp.characters.ui.CharactersPresenterImpl;
+import com.rviannaoliveira.marvelapp.characters.ui.CharactersView;
+import com.rviannaoliveira.marvelapp.data.IDataManager;
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter;
 
 import org.junit.Rule;
@@ -36,7 +36,7 @@ public class MarvelInteractionCharacterPresenterTest {
     public CharactersView charactersView;
 
     @Mock
-    public DataManagerInterface dataManager;
+    public IDataManager dataManager;
 
     @Mock
     public List<MarvelCharacter> mockList;

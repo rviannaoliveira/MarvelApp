@@ -1,9 +1,9 @@
-package com.rviannaoliveira.marvelapp.characters
+package com.rviannaoliveira.marvelapp.comics.ui
 
 import android.app.SearchManager
 import android.content.Context
 import android.content.DialogInterface
-import android.nfc.tech.MifareUltralight.PAGE_SIZE
+import android.nfc.tech.MifareUltralight
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.Fragment
@@ -14,41 +14,65 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.*
 import android.widget.ProgressBar
+import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.KodeinInjector
+import com.github.salomonbrys.kodein.android.SupportFragmentInjector
+import com.github.salomonbrys.kodein.instance
 import com.rviannaoliveira.marvelapp.R
-import com.rviannaoliveira.marvelapp.data.DataManagerFactory
+import com.rviannaoliveira.marvelapp.comics.di.ComicModule
+import com.rviannaoliveira.marvelapp.comics.ui.adapter.ComicsAdapter
 import com.rviannaoliveira.marvelapp.extensions.createFilterCustom
-import com.rviannaoliveira.marvelapp.model.MarvelCharacter
+import com.rviannaoliveira.marvelapp.model.MarvelComic
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
-
 /**
- * Criado por rodrigo on 09/04/17.
+ * Criado por rodrigo on 14/04/17.
  */
 
-class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextListener {
-    private val charactersPresenterImpl: CharactersPresenter = CharactersPresenterImpl(this, DataManagerFactory.getDefaultInstance())
-    private var charactersAdapter: CharactersAdapter? = null
+
+class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener, SupportFragmentInjector {
+    override val injector: KodeinInjector = KodeinInjector()
+    private val comicsPresenter by injector.instance<ComicsPresenter>()
+    private lateinit var comicsAdapter: ComicsAdapter
     private lateinit var progressbar: ProgressBar
-    private lateinit var charactersRecyclerView: RecyclerView
+    private lateinit var comicsRecyclerView: RecyclerView
     private var isLoading: Boolean = false
     private val LIST_STATE_KEY = "123"
     private var listState: Parcelable? = null
     private lateinit var searchView: SearchView
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        initializeInjector()
         val view = inflater?.inflate(R.layout.fragment_list, container, false)
-        this.progressbar = view?.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
-        this.charactersRecyclerView = view.findViewById<RecyclerView>(R.id.list_recycler_view) as RecyclerView
+        comicsRecyclerView = view?.findViewById<RecyclerView>(R.id.list_recycler_view) as RecyclerView
+        progressbar = view.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
         setHasOptionsMenu(true)
 
         loadView()
-        charactersPresenterImpl.loadMarvelCharacters(0)
+        comicsPresenter.loadMarvelComics(0)
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        charactersRecyclerView.layoutManager.onRestoreInstanceState(listState)
+        comicsRecyclerView.layoutManager.onRestoreInstanceState(listState)
+    }
+
+    override fun onDestroy() {
+        destroyInjector()
+        super.onDestroy()
+    }
+
+    override fun provideOverridingModule(): Kodein.Module = ComicModule(this).dependenciesKodein
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        listState = savedInstanceState?.getParcelable(LIST_STATE_KEY)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelable(LIST_STATE_KEY, comicsRecyclerView.layoutManager.onSaveInstanceState())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -66,8 +90,8 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
 
             AlertDialog.Builder(context).createFilterCustom(context, DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
                 val letter = context.resources.getStringArray(R.array.alphabetic)[positionFilter]
-                charactersAdapter?.clear()
-                if (positionFilter == 0) charactersPresenterImpl.loadMarvelCharacters(0) else charactersPresenterImpl.loadMarvelCharactersBeginLetter(letter)
+                comicsAdapter.clear()
+                if (positionFilter == 0) comicsPresenter.loadMarvelComics(0) else comicsPresenter.loadMarvelComicsBeginLetter(letter)
                 d.dismiss()
             }).show()
 
@@ -75,23 +99,14 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        listState = savedInstanceState?.getParcelable(LIST_STATE_KEY)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        outState?.putParcelable(LIST_STATE_KEY, charactersRecyclerView.layoutManager.onSaveInstanceState())
-    }
 
     override fun loadView() {
-        charactersAdapter = CharactersAdapter(charactersPresenterImpl, activity as AppCompatActivity)
-        charactersRecyclerView.adapter = charactersAdapter
+        comicsAdapter = ComicsAdapter(comicsPresenter, activity as AppCompatActivity)
+        comicsRecyclerView.adapter = comicsAdapter
         val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
-        charactersRecyclerView.setHasFixedSize(true)
-        charactersRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
-        charactersRecyclerView.addOnScrollListener(onScrollListener())
+        comicsRecyclerView.setHasFixedSize(true)
+        comicsRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
+        comicsRecyclerView.addOnScrollListener(onScrollListener())
     }
 
     override fun showProgressBar() {
@@ -102,13 +117,24 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         progressbar.visibility = View.GONE
     }
 
-    override fun loadCharacters(marvelCharacters: List<MarvelCharacter>) {
-        this.loadCharactersRecycleView(marvelCharacters, false)
+    override fun loadComics(comics: List<MarvelComic>) {
+        loadComicRecyclerView(comics, false)
     }
+
+    private fun loadComicRecyclerView(comics: List<MarvelComic>, listForLetter: Boolean) {
+        comicsAdapter.setComics(comics, listForLetter)
+        isLoading = false
+        comicsAdapter.showLoading(isLoading)
+    }
+
+    override fun loadFilterComics(comics: List<MarvelComic>) {
+        loadComicRecyclerView(comics, true)
+    }
+
 
     override fun error() {
         if (this.isVisible) {
-            MarvelUtil.showErrorScreen(context, view, resources, R.drawable.deadpool_error)
+            MarvelUtil.showErrorScreen(context, view, resources, R.drawable.comic_error)
         }
     }
 
@@ -120,12 +146,13 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
                 val totalItemCount = recyclerView.layoutManager.itemCount
                 val firstVisibleItemPosition = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
 
-                if (!(charactersAdapter?.isListForLetter() as Boolean) && !isLoading && visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                if (!(comicsAdapter.isListForLetter()) &&
+                        !isLoading && visibleItemCount + firstVisibleItemPosition >= totalItemCount
                         && firstVisibleItemPosition >= 0
-                        && totalItemCount >= PAGE_SIZE) {
+                        && totalItemCount >= MifareUltralight.PAGE_SIZE) {
                     isLoading = true
-                    charactersAdapter?.showLoading(isLoading)
-                    charactersPresenterImpl.loadMarvelCharacters(totalItemCount)
+                    comicsAdapter.showLoading(isLoading)
+                    comicsPresenter.loadMarvelComics(totalItemCount)
                 }
             }
         }
@@ -134,19 +161,7 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
     override fun onQueryTextSubmit(query: String?): Boolean = false
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        isLoading = !newText.isNullOrEmpty()
-        charactersAdapter?.filter(newText)
+        comicsAdapter.filter(newText)
         return true
     }
-
-    override fun loadFilterCharacters(marvelCharacters: List<MarvelCharacter>) {
-        loadCharactersRecycleView(marvelCharacters, true)
-    }
-
-    private fun loadCharactersRecycleView(marvelCharacters: List<MarvelCharacter>, listForLetter: Boolean) {
-        charactersAdapter?.setCharacters(marvelCharacters, listForLetter)
-        isLoading = false
-        charactersAdapter?.showLoading(isLoading)
-    }
-
 }

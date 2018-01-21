@@ -11,8 +11,7 @@ import timber.log.Timber
 /**
  * Criado por rodrigo on 15/04/17.
  */
-class RepositoryHelper : RepositoryData {
-    private val favoriteDao = AppDatabaseFactory.getDefaultInstance().getFavoriteDao()
+class RepositoryHelper(private val favoriteDao: FavoriteDao) : IRepositoryData {
 
     override fun getAllFavorites(): Flowable<List<Favorite>> {
         return favoriteDao.getAll()

@@ -1,7 +1,7 @@
 package com.rviannaoliveira.marvelapp
 
 import com.nhaarman.mockito_kotlin.whenever
-import com.rviannaoliveira.marvelapp.data.api.ApiData
+import com.rviannaoliveira.marvelapp.data.api.IApiData
 import com.rviannaoliveira.marvelapp.data.api.MarvelApiHelper
 import com.rviannaoliveira.marvelapp.data.api.MarvelService
 import com.rviannaoliveira.marvelapp.fakedata.MarvelFakeDataFactory
@@ -50,7 +50,7 @@ class MarvelStateTest {
 
     }
 
-    private fun getApiHelper(): ApiData {
+    private fun getApiHelper(): IApiData {
         return MarvelApiHelper(marvelService)
     }
 }

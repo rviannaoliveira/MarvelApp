@@ -1,18 +1,18 @@
-package com.rviannaoliveira.marvelapp.detailCharacter
+package com.rviannaoliveira.marvelapp.detailCharacter.ui
 
-import com.rviannaoliveira.marvelapp.characters.DetailCharacterPresenter
-import com.rviannaoliveira.marvelapp.data.DataManagerFactory
+import com.rviannaoliveira.marvelapp.data.IDataManager
 import timber.log.Timber
 
 /**
  * Criado por rodrigo on 21/04/17.
  */
-class DetailCharacterPresenterImpl(private val view: DetailCharacterView) : DetailCharacterPresenter {
+class DetailCharacterPresenterImpl(private val view: DetailCharacterView,
+                                   private val dataManager: IDataManager) : DetailCharacterPresenter {
 
     override fun getMarvelCharacter(id: Int) {
         view.showProgressBar()
-        DataManagerFactory.getDefaultInstance()?.loadDetailMarvelCharacter(id)
-                ?.subscribe({ character ->
+        dataManager.loadDetailMarvelCharacter(id)
+                .subscribe({ character ->
                     view.hideProgressBar()
                     view.loadCharacter(character)
                 }, { error ->

@@ -2,15 +2,15 @@ package com.rviannaoliveira.marvelapp.detailComic
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import com.rviannaoliveira.marvelapp.R
+import com.rviannaoliveira.marvelapp.base.BaseActivity
 import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
 /**
  * Criado por rodrigo on 13/05/17.
  */
-class DetailComicActivity : AppCompatActivity() {
+class DetailComicActivity : BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

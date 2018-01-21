@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.detailCharacter
+package com.rviannaoliveira.marvelapp.detailCharacter.ui.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

@@ -1,9 +1,9 @@
 package com.rviannaoliveira.marvelapp;
 
 import com.rviannaoliveira.marvelapp.data.DataManager;
-import com.rviannaoliveira.marvelapp.data.DataManagerInterface;
-import com.rviannaoliveira.marvelapp.data.api.ApiData;
-import com.rviannaoliveira.marvelapp.data.repository.RepositoryData;
+import com.rviannaoliveira.marvelapp.data.IDataManager;
+import com.rviannaoliveira.marvelapp.data.api.IApiData;
+import com.rviannaoliveira.marvelapp.data.repository.IRepositoryData;
 import com.rviannaoliveira.marvelapp.model.Favorite;
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter;
 
@@ -37,12 +37,12 @@ public class MarvelValueDataManagerTest {
     public MockitoRule mockito = MockitoJUnit.rule();
 
     @Mock
-    public ApiData apiData;
+    public IApiData apiData;
 
     @Mock
-    public RepositoryData repositoryData;
+    public IRepositoryData repositoryData;
 
-    private DataManagerInterface dataManager;
+    private IDataManager dataManager;
 
     @Before
     public void setUp() {
@@ -92,7 +92,7 @@ public class MarvelValueDataManagerTest {
     }
 
 
-    private DataManager getDataManager() {
+    private IDataManager getDataManager() {
         return new DataManager(apiData, repositoryData);
     }
 }

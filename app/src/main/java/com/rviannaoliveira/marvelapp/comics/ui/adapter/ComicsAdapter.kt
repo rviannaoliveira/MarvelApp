@@ -1,5 +1,6 @@
-package com.rviannaoliveira.marvelapp.comics
+package com.rviannaoliveira.marvelapp.comics.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -17,6 +18,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
+import com.rviannaoliveira.marvelapp.comics.ui.ComicsPresenter
 import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.detailComic.DetailComicActivity
 import com.rviannaoliveira.marvelapp.model.Favorite
@@ -68,7 +70,7 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (comics.isNotEmpty()) {
-            if (holder is ComicsAdapter.ComicViewHolder) {
+            if (holder is ComicViewHolder) {
                 val marvelCharacter = comics[position]
                 holder.name.text = marvelCharacter.title
                 MarvelUtil.setImageUrl(context, marvelCharacter.thumbMail?.getPathExtension(), holder.image)
@@ -78,9 +80,9 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
                 holder.image.setOnClickListener { showDetail(holder, marvelCharacter) }
             } else {
                 if (showLoader) {
-                    (holder as ComicsAdapter.LoaderViewHolder).progressBar.visibility = View.VISIBLE
+                    (holder as LoaderViewHolder).progressBar.visibility = View.VISIBLE
                 } else {
-                    (holder as ComicsAdapter.LoaderViewHolder).progressBar.visibility = View.VISIBLE
+                    (holder as LoaderViewHolder).progressBar.visibility = View.VISIBLE
                 }
             }
         }
@@ -110,7 +112,8 @@ class ComicsAdapter(private val presenter: ComicsPresenter, private val appCompa
         return if (checked) R.drawable.ic_star_white_24px else R.drawable.ic_star_border_white_24px
     }
 
-    private fun showDetail(holder: ComicsAdapter.ComicViewHolder, marvelComic: MarvelComic) {
+    @SuppressLint("NewApi")
+    private fun showDetail(holder: ComicViewHolder, marvelComic: MarvelComic) {
         val detailIntent = Intent(context, DetailComicActivity::class.java)
         detailIntent.putExtra(KeyDatabase.ID, marvelComic.id)
 

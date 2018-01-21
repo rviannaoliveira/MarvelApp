@@ -1,5 +1,6 @@
-package com.rviannaoliveira.marvelapp.characters
+package com.rviannaoliveira.marvelapp.characters.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -18,7 +19,7 @@ import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.base.BaseRecyclerView
 import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
-import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterActivity
+import com.rviannaoliveira.marvelapp.detailCharacter.ui.DetailCharacterActivity
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
@@ -86,6 +87,7 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
 
     }
 
+    @SuppressLint("NewApi")
     private fun showDetail(holder: CharactersViewHolder, marvelCharacter: MarvelCharacter) {
         val detailIntent = Intent(context, DetailCharacterActivity::class.java)
         detailIntent.putExtra(KeyDatabase.ID, marvelCharacter.id)

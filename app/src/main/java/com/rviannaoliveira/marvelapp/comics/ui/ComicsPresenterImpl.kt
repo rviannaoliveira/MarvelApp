@@ -1,22 +1,20 @@
-package com.rviannaoliveira.marvelapp.comics
+package com.rviannaoliveira.marvelapp.comics.ui
 
-import com.rviannaoliveira.marvelapp.data.DataManager
-import com.rviannaoliveira.marvelapp.data.DataManagerFactory
+import com.rviannaoliveira.marvelapp.data.IDataManager
 import com.rviannaoliveira.marvelapp.model.Favorite
 import timber.log.Timber
 
 /**
  * Criado por rodrigo on 14/04/17.
  */
-class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
-    private var dataManager: DataManager? = DataManagerFactory.getDefaultInstance()
+class ComicsPresenterImpl(private val view: ComicsView, private val dataManager: IDataManager) : ComicsPresenter {
 
     override fun loadMarvelComics(offset: Int) {
         if (offset == 0) {
             view.showProgressBar()
         }
-        val observableComics = dataManager?.getMarvelComics(offset)
-        observableComics?.subscribe({ marvelComics ->
+        val observableComics = dataManager.getMarvelComics(offset)
+        observableComics.subscribe({ marvelComics ->
             view.loadComics(ArrayList(marvelComics.distinct()))
             view.hideProgressBar()
         }, { error ->
@@ -28,8 +26,8 @@ class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
 
     override fun loadMarvelComicsBeginLetter(letter: String) {
         view.showProgressBar()
-        val observableComics = dataManager?.getMarvelComicsBeginLetter(letter)
-        observableComics?.subscribe({ marvelComics ->
+        val observableComics = dataManager.getMarvelComicsBeginLetter(letter)
+        observableComics.subscribe({ marvelComics ->
             view.loadFilterComics(marvelComics)
             view.hideProgressBar()
         }, { error ->
@@ -41,9 +39,9 @@ class ComicsPresenterImpl(private val view: ComicsView) : ComicsPresenter {
 
     override fun toggleFavorite(favorite: Favorite, checked: Boolean) {
         if (checked) {
-            dataManager?.insertFavorite(favorite)
+            dataManager.insertFavorite(favorite)
         } else {
-            dataManager?.deleteFavorite(favorite)
+            dataManager.deleteFavorite(favorite)
         }
     }
 

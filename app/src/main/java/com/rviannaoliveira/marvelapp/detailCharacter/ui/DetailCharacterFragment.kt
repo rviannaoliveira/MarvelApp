@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.detailCharacter
+package com.rviannaoliveira.marvelapp.detailCharacter.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,9 +13,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.KodeinInjector
+import com.github.salomonbrys.kodein.android.SupportFragmentInjector
+import com.github.salomonbrys.kodein.instance
 import com.rviannaoliveira.marvelapp.R
-import com.rviannaoliveira.marvelapp.characters.DetailCharacterPresenter
 import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
+import com.rviannaoliveira.marvelapp.detailCharacter.di.DetailCharacterModule
+import com.rviannaoliveira.marvelapp.detailCharacter.ui.adapter.DetailComicsAdapter
+import com.rviannaoliveira.marvelapp.detailCharacter.ui.adapter.DetailSeriesAdapter
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
@@ -23,8 +29,9 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  * Criado por rodrigo on 09/04/17.
  */
 
-class DetailCharacterFragment : Fragment(), DetailCharacterView {
-    private val detailCharacterPresenterImpl: DetailCharacterPresenter = DetailCharacterPresenterImpl(this)
+class DetailCharacterFragment : Fragment(), DetailCharacterView, SupportFragmentInjector {
+    override val injector: KodeinInjector = KodeinInjector()
+    private val detailCharacterPresenterImpl by injector.instance<DetailCharacterPresenter>()
     private lateinit var image: ImageView
     private lateinit var description: TextView
     private lateinit var progressbar: ProgressBar
@@ -37,6 +44,7 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
     private lateinit var seriesAdapter: DetailSeriesAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        initializeInjector()
         val view = inflater?.inflate(R.layout.fragment_character, container, false)
 
         appActivity = activity as AppCompatActivity
@@ -56,10 +64,17 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView {
         return view
     }
 
+    override fun onDestroy() {
+        destroyInjector()
+        super.onDestroy()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         activity.onBackPressed()
         return super.onOptionsItemSelected(item)
     }
+
+    override fun provideOverridingModule(): Kodein.Module = DetailCharacterModule(this).dependenciesKodein
 
     override fun loadView() {
         comicsAdapter = DetailComicsAdapter()

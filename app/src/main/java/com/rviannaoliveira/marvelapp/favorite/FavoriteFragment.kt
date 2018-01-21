@@ -15,8 +15,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.KodeinInjector
+import com.github.salomonbrys.kodein.android.SupportFragmentInjector
+import com.github.salomonbrys.kodein.instance
 import com.rviannaoliveira.marvelapp.R
-import com.rviannaoliveira.marvelapp.data.DataManagerFactory
+import com.rviannaoliveira.marvelapp.favorite.di.FavoriteModule
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
@@ -24,9 +28,9 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
 /**
  * Criado por rodrigo on 15/04/17.
  */
-class FavoriteFragment : Fragment(), FavoriteView {
-
-    private val favoritePresenterImpl: FavoritePresenter = FavoritePresenterImpl(this, DataManagerFactory.getDefaultInstance())
+class FavoriteFragment : Fragment(), FavoriteView, SupportFragmentInjector {
+    override val injector: KodeinInjector = KodeinInjector()
+    private val favoritePresenterImpl by injector.instance<FavoritePresenter>()
     private lateinit var characterFavoriteAdapter: FavoriteAdapter
     private lateinit var comicFavoriteAdapter: FavoriteAdapter
     private lateinit var progressbar: ProgressBar
@@ -37,6 +41,7 @@ class FavoriteFragment : Fragment(), FavoriteView {
     private lateinit var viewFavorite: View
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        initializeInjector()
         viewFavorite = inflater?.inflate(R.layout.fragment_favorite, container, false) as View
         characterFavoriteRecyclerView = viewFavorite.findViewById<RecyclerView>(R.id.list_character) as RecyclerView
         comicFavoriteRecyclerView = viewFavorite.findViewById<RecyclerView>(R.id.list_comic) as RecyclerView
@@ -49,9 +54,11 @@ class FavoriteFragment : Fragment(), FavoriteView {
     }
 
     override fun onDestroy() {
-        favoritePresenterImpl.onDestroy()
+        destroyInjector()
         super.onDestroy()
     }
+
+    override fun provideOverridingModule(): Kodein.Module = FavoriteModule(this).dependenciesKodein
 
     override fun loadView() {
         characterFavoriteAdapter = FavoriteAdapter(activity as AppCompatActivity, favoritePresenterImpl)

@@ -1,8 +1,9 @@
 package com.rviannaoliveira.marvelapp;
 
 import com.rviannaoliveira.marvelapp.data.DataManager;
-import com.rviannaoliveira.marvelapp.data.api.ApiData;
-import com.rviannaoliveira.marvelapp.data.repository.RepositoryData;
+import com.rviannaoliveira.marvelapp.data.IDataManager;
+import com.rviannaoliveira.marvelapp.data.api.IApiData;
+import com.rviannaoliveira.marvelapp.data.repository.IRepositoryData;
 import com.rviannaoliveira.marvelapp.model.Favorite;
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter;
 
@@ -35,9 +36,9 @@ public class MarvelParametrizedTestApiHelper {
     public MockitoRule mockito = MockitoJUnit.rule();
 
     @Mock
-    public ApiData apiData;
+    public IApiData apiData;
     @Mock
-    public RepositoryData repositoryData;
+    public IRepositoryData repositoryData;
 
     @Parameterized.Parameter(value = 0)
     public MarvelCharacter marvelCharacter;
@@ -57,7 +58,7 @@ public class MarvelParametrizedTestApiHelper {
     // ver com edu test Options gradle
     @Test
     public void loadMarvelCharacters() {
-        DataManager dataManager = getDataManager();
+        IDataManager dataManager = getDataManager();
         List<MarvelCharacter> characters = Arrays.asList(new MarvelCharacter[]{marvelCharacter});
         List<Favorite> favorites = favorite == null ? Collections.emptyList() : Arrays.asList(new Favorite[]{favorite});
 
@@ -69,7 +70,7 @@ public class MarvelParametrizedTestApiHelper {
     }
 
 
-    private DataManager getDataManager() {
+    private IDataManager getDataManager() {
         return new DataManager(apiData, repositoryData);
     }
 }

@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
  * Criado por rodrigo on 09/04/17.
  */
 
-class MarvelApiHelper(private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)) : ApiData {
+class MarvelApiHelper(private var marvelService: MarvelService = MarvelClient().createService(MarvelService::class.java)) : IApiData {
 
     companion object {
         var charactersCache = ArrayList<MarvelCharacter>()

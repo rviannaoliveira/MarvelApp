@@ -2,16 +2,16 @@ package com.rviannaoliveira.marvelapp.main
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.rviannaoliveira.marvelapp.R
-import com.rviannaoliveira.marvelapp.characters.CharactersFragment
-import com.rviannaoliveira.marvelapp.comics.ComicsFragment
+import com.rviannaoliveira.marvelapp.base.BaseActivity
+import com.rviannaoliveira.marvelapp.characters.ui.CharactersFragment
+import com.rviannaoliveira.marvelapp.comics.ui.ComicsFragment
 import com.rviannaoliveira.marvelapp.favorite.FavoriteFragment
 import com.rviannaoliveira.marvelapp.util.MarvelConstant
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {

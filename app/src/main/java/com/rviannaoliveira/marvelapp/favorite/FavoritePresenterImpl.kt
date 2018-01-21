@@ -1,18 +1,18 @@
 package com.rviannaoliveira.marvelapp.favorite
 
-import com.rviannaoliveira.marvelapp.data.DataManagerInterface
+import com.rviannaoliveira.marvelapp.data.IDataManager
 import com.rviannaoliveira.marvelapp.model.Favorite
 import timber.log.Timber
 
 /**
  * Criado por rodrigo on 14/04/17.
  */
-class FavoritePresenterImpl(private var view: FavoriteView?, private val dataManager: DataManagerInterface?) : FavoritePresenter {
+class FavoritePresenterImpl(private var view: FavoriteView, private val dataManager: IDataManager) : FavoritePresenter {
     override fun loadFavorites() {
-        view?.let {
+        view.let {
             it.showProgressBar()
-            val observableFavorites = dataManager?.getAllFavorites()
-            observableFavorites?.subscribe({ favorites ->
+            val observableFavorites = dataManager.getAllFavorites()
+            observableFavorites.subscribe({ favorites ->
                 it.loadFavorites(favorites)
                 it.hideProgressBar()
             }, { error ->
@@ -26,14 +26,10 @@ class FavoritePresenterImpl(private var view: FavoriteView?, private val dataMan
     }
 
     override fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean) {
-        dataManager?.run {
+        dataManager.run {
             deleteFavorite(favorite, removeCharacter).subscribe({ _ ->
                 loadFavorites()
             })
         }
-    }
-
-    override fun onDestroy() {
-        view = null
     }
 }

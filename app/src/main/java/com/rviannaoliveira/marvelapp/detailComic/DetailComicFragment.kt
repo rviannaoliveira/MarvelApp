@@ -13,11 +13,16 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.KodeinInjector
+import com.github.salomonbrys.kodein.android.SupportFragmentInjector
+import com.github.salomonbrys.kodein.instance
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.characters.DetailComicPresenter
 import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterAdapter
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicView
+import com.rviannaoliveira.marvelapp.detailComic.di.DetailComicModule
 import com.rviannaoliveira.marvelapp.model.MarvelComic
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
 
@@ -25,8 +30,9 @@ import com.rviannaoliveira.marvelapp.util.MarvelUtil
  * Criado por rodrigo on 09/04/17.
  */
 
-class DetailComicFragment : Fragment(), DetailComicView {
-    private val detailComicPresenterImpl: DetailComicPresenter = DetailComicPresenterImpl(this)
+class DetailComicFragment : Fragment(), DetailComicView, SupportFragmentInjector {
+    override val injector: KodeinInjector = KodeinInjector()
+    private val detailComicPresenterImpl by injector.instance<DetailComicPresenter>()
     private lateinit var image: ImageView
     private lateinit var description: TextView
     private lateinit var progressbar: ProgressBar
@@ -36,6 +42,7 @@ class DetailComicFragment : Fragment(), DetailComicView {
     private lateinit var characterAdapter: DetailCharacterAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        initializeInjector()
         val view = inflater?.inflate(R.layout.fragment_comic, container, false)
 
         appActivity = activity as AppCompatActivity
@@ -53,10 +60,17 @@ class DetailComicFragment : Fragment(), DetailComicView {
         return view
     }
 
+    override fun onDestroy() {
+        destroyInjector()
+        super.onDestroy()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         activity.onBackPressed()
         return super.onOptionsItemSelected(item)
     }
+
+    override fun provideOverridingModule(): Kodein.Module = DetailComicModule(this).dependenciesKodein
 
     override fun loadView() {
         characterAdapter = DetailCharacterAdapter()

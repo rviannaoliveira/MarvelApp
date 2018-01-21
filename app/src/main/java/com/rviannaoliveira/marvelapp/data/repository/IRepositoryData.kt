@@ -7,7 +7,7 @@ import io.reactivex.Single
 /**
  * Criado por rodrigo on 15/04/17.
  */
-interface RepositoryData {
+interface IRepositoryData {
     fun getAllFavorites(): Flowable<List<Favorite>>
     fun getCharactersFavorites(): Flowable<List<Favorite>>
     fun getComicsFavorites(): Flowable<List<Favorite>>

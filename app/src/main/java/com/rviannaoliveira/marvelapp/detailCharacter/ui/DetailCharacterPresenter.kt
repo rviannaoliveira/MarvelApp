@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.characters
+package com.rviannaoliveira.marvelapp.detailCharacter.ui
 
 /**
  * Criado por rodrigo on 09/04/17.

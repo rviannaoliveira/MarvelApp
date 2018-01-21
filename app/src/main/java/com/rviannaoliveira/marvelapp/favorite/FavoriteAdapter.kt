@@ -20,7 +20,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
-import com.rviannaoliveira.marvelapp.detailCharacter.DetailCharacterActivity
+import com.rviannaoliveira.marvelapp.detailCharacter.ui.DetailCharacterActivity
 import com.rviannaoliveira.marvelapp.detailComic.DetailComicActivity
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.util.MarvelUtil
