@@ -32,8 +32,6 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
     private var characters = ArrayList<MarvelCharacter>()
     private var charactersOriginal = ArrayList<MarvelCharacter>()
     private var showLoader: Boolean = false
-    private val VIEW_ITEM = 1
-    private val VIEW_LOADER = 2
     private var listForLetter: Boolean = false
 
     override fun isListForLetter() = listForLetter
@@ -59,10 +57,10 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         this.context = parent.context
-        if (viewType == VIEW_ITEM) {
-            return CharactersViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row, parent, false))
+        return if (viewType == VIEW_ITEM) {
+            CharactersViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row, parent, false))
         } else {
-            return LoaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.loader_item_layout, parent, false))
+            LoaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.loader_item_layout, parent, false))
         }
     }
 
@@ -155,12 +153,17 @@ class CharactersAdapter(private val presenter: CharactersPresenter, private val 
     }
 
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image = itemView.findViewById<ImageView>(R.id.image_item) as ImageView
-        var name = itemView.findViewById<TextView>(R.id.name_item) as TextView
-        var favorite = itemView.findViewById<CheckBox>(R.id.check_favorite) as CheckBox
+        var image = itemView.findViewById(R.id.image_item) as ImageView
+        var name = itemView.findViewById(R.id.name_item) as TextView
+        var favorite = itemView.findViewById(R.id.check_favorite) as CheckBox
     }
 
     inner class LoaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var progressBar = itemView.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
+        var progressBar = itemView.findViewById(R.id.progressbar) as ProgressBar
+    }
+
+    companion object {
+        private const val VIEW_ITEM = 1
+        private const val VIEW_LOADER = 2
     }
 }

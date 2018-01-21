@@ -1,4 +1,4 @@
-package com.rviannaoliveira.marvelapp.detailCharacter
+package com.rviannaoliveira.marvelapp.detailComic
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -40,7 +40,7 @@ class DetailCharacterAdapter : RecyclerView.Adapter<DetailCharacterAdapter.Detai
     override fun getItemCount(): Int = character.size
 
     inner class DetailCharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image = itemView.findViewById<ImageView>(R.id.image_item_subdetail) as ImageView
-        var name = itemView.findViewById<TextView>(R.id.text_item_subdetail) as TextView
+        var image = itemView.findViewById(R.id.image_item_subdetail) as ImageView
+        var name = itemView.findViewById(R.id.text_item_subdetail) as TextView
     }
 }

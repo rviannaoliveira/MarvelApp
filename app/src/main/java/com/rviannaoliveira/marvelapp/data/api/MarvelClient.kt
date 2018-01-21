@@ -33,7 +33,7 @@ class MarvelClient {
         if (MarvelApplication.URL == null) {
             builder.baseUrl(API_MARVEL_URL)
         } else {
-            builder.baseUrl(MarvelApplication.URL)
+            builder.baseUrl(MarvelApplication.URL!!)
         }
 
         val retrofit: Retrofit = builder.client(httpClient).build()
