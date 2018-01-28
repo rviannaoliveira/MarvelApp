@@ -17,7 +17,8 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class CharactersTest {
-    @Rule @JvmField
+    @Rule
+    @JvmField
     val activityRule = ActivityTestRule(MainActivity::class.java, true, false)
     private lateinit var robo: RoboCharacters
     private lateinit var server: MockWebServer
@@ -33,43 +34,60 @@ class CharactersTest {
     @Test
     @Throws(Exception::class)
     fun search_for_abomination_character() {
-        robo.clickSearchButton()
-                .findCharacters("Abom")
-                .checkCharacterScreen("Abomination (Emil")
-                .closeSearchButton()
-                .checkCharacterScreenDoesntExist("Abomination (Emil")
+        searchCharacters {
+            clickSearchButton()
+            findCharacters("Abom")
+        }
+        listCharacters {
+            checkCharacterScreen("Abomination (Emil")
+            closeSearchButton()
+                    .checkCharacterScreenDoesntExist("Abomination (Emil")
+        }
     }
 
     @Test
     @Throws(Exception::class)
     fun filter_for_letter_d() {
+        filterCharacters {
+            clickFilterButton()
+            chooseLetterFilter("D")
+            clickButtonOkDialogFilter()
+        }
 
-        robo.clickFilterButton()
-                .chooseLetterFilter("D")
-                .clickButtonOkDialogFilter()
-                .checkCharacterScreen("Dagger")
+        listCharacters {
+            checkCharacterScreen("Dagger")
+        }
     }
 
     @Test
     @Throws(Exception::class)
     fun filter_for_all() {
-        robo.clickFilterButton()
-                .chooseLetterFilter("ALL")
-                .clickButtonOkDialogFilter()
-                .checkCharacterScreen("3-D Man")
+        filterCharacters {
+            clickFilterButton()
+            chooseLetterFilter("ALL")
+            clickButtonOkDialogFilter()
+        }
+
+        listCharacters {
+            checkCharacterScreen("3-D Man")
+        }
     }
 
     @Test
     @Throws(Exception::class)
     fun click_item_list_and_back() {
-        robo.clickItem(2)
-                .backToList()
+        listCharacters {
+            clickItem(2)
+            backToList()
+        }
     }
 
     @Test
     @Throws(Exception::class)
     fun click_favorite() {
-        robo.clickOnFavoriteItem(2)
-                .clickOffFavoriteItem(2)
+        listCharacters {
+            clickOnFavoriteItem(2)
+            clickOffFavoriteItem(2)
+        }
     }
 }
