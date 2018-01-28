@@ -8,6 +8,7 @@ import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers.*
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.TestUtil
+import com.rviannaoliveira.marvelapp.characters.ui.CharactersAdapter
 import org.hamcrest.Matchers.*
 
 /**

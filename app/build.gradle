@@ -79,7 +79,7 @@ dependencies {
 
     //Dependencies for Espresso
     androidTestImplementation "com.android.support:support-annotations:${versionSupport}"
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2') {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1') {
         exclude module: 'rules'
         exclude module: 'javax.annotation-api'
         exclude module: 'support-annotations'

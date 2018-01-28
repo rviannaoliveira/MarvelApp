@@ -39,7 +39,7 @@ class MainTest {
                 .existFilterButton()
                 .clickFavorite()
                 .notExistSearchButton()
-                .notExistSearchButton()
+                .notExistFilterButton()
 
     }
 }
