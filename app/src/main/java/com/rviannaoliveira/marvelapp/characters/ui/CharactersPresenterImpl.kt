@@ -2,12 +2,14 @@ package com.rviannaoliveira.marvelapp.characters.ui
 
 import com.rviannaoliveira.marvelapp.data.IDataManager
 import com.rviannaoliveira.marvelapp.model.Favorite
+import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
 /**
  * Criado por rodrigo on 09/04/17.
  */
 class CharactersPresenterImpl(private val view: CharactersView, private val dataManager: IDataManager) : CharactersPresenter {
+    private val disposable = CompositeDisposable()
 
     override fun loadMarvelCharacters(offset: Int) {
         if (offset == 0) {
@@ -16,26 +18,26 @@ class CharactersPresenterImpl(private val view: CharactersView, private val data
 
         val observableCharacters = dataManager.getMarvelCharacters(offset)
 
-        observableCharacters.subscribe({ marvelCharacters ->
+        disposable.add(observableCharacters.subscribe({ marvelCharacters ->
             view.loadCharacters(marvelCharacters)
+            view.hideProgressBar()
         }, { error ->
             view.error()
             Timber.w(error)
-        }, {
-            view.hideProgressBar()
-        })
+        }))
     }
 
     override fun loadMarvelCharactersBeginLetter(letter: String) {
         view.showProgressBar()
         val observableCharacters = dataManager.getMarvelCharactersBeginLetter(letter)
 
-        observableCharacters.subscribe({ marvelCharacters ->
+        disposable.add(observableCharacters.subscribe({ marvelCharacters ->
             view.loadFilterCharacters(marvelCharacters)
+            view.hideProgressBar()
         }, { error ->
             view.error()
             Timber.w(error)
-        }, { view.hideProgressBar() })
+        }))
     }
 
     override fun toggleFavorite(favorite: Favorite, checked: Boolean) {
@@ -47,4 +49,7 @@ class CharactersPresenterImpl(private val view: CharactersView, private val data
     }
 
 
+    override fun onDisposable() {
+        disposable.clear()
+    }
 }

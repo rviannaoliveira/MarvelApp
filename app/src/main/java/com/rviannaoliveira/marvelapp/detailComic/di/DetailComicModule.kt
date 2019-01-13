@@ -4,8 +4,8 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
-import com.rviannaoliveira.marvelapp.characters.DetailComicPresenter
 import com.rviannaoliveira.marvelapp.detailCharacter.DetailComicView
+import com.rviannaoliveira.marvelapp.detailComic.DetailComicPresenter
 import com.rviannaoliveira.marvelapp.detailComic.DetailComicPresenterImpl
 
 /**

@@ -5,7 +5,7 @@ import com.rviannaoliveira.marvelapp.data.api.IApiData
 import com.rviannaoliveira.marvelapp.data.api.MarvelApiHelper
 import com.rviannaoliveira.marvelapp.data.api.MarvelService
 import com.rviannaoliveira.marvelapp.fakedata.MarvelFakeDataFactory
-import io.reactivex.Flowable
+import io.reactivex.Single
 import junit.framework.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -40,7 +40,7 @@ class MarvelStateTest {
         val marvelApiHelper = getApiHelper()
 
         whenever(marvelService.getCharacters(MarvelApiHelper.LIMIT_REGISTER, 0))
-                .thenReturn(Flowable.just(MarvelFakeDataFactory.fakeMarvelCharacterDataWrapperId2))
+                .thenReturn(Single.just(MarvelFakeDataFactory.fakeMarvelCharacterDataWrapperId2))
 
         marvelApiHelper.getMarvelCharacters(0)
                 .test()

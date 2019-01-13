@@ -25,7 +25,7 @@ interface FavoriteDao {
     @Query("SELECT * FROM favorite WHERE ${KeyDatabase.GROUP_TYPE} = ${KeyDatabase.FavoriteGroup.COMICS}")
     fun getComicsFavorites(): Flowable<List<Favorite>>
 
-    @Query("SELECT * FROM favorite WHERE ${KeyDatabase.ID} = :arg0 ")
+    @Query("SELECT * FROM favorite WHERE ${KeyDatabase.ID} = :idMarvel ")
     fun getFavorite(idMarvel: Int?): Flowable<Favorite>
 
 

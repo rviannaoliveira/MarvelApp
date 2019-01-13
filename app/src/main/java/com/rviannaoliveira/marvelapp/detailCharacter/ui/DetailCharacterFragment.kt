@@ -15,7 +15,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.android.SupportFragmentInjector
 import com.github.salomonbrys.kodein.instance
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
@@ -43,34 +42,35 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView, SupportFragment
     private lateinit var comicsAdapter: DetailComicsAdapter
     private lateinit var seriesAdapter: DetailSeriesAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initializeInjector()
-        val view = inflater?.inflate(R.layout.fragment_character, container, false)
+        val view = inflater.inflate(R.layout.fragment_character, container, false)
 
         appActivity = activity as AppCompatActivity
         appActivity.title = ""
         setHasOptionsMenu(true)
 
-        image = view?.findViewById<ImageView>(R.id.image) as ImageView
-        description = view.findViewById<TextView>(R.id.description) as TextView
-        progressbar = view.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
-        blockComics = view.findViewById<LinearLayout>(R.id.block_comics) as LinearLayout
-        blockSeries = view.findViewById<LinearLayout>(R.id.block_series) as LinearLayout
-        reclycerViewComic = view.findViewById<RecyclerView>(R.id.list_comic) as RecyclerView
-        reclycerViewSeries = view.findViewById<RecyclerView>(R.id.list_series) as RecyclerView
+        image = view?.findViewById(R.id.image) as ImageView
+        description = view.findViewById(R.id.description) as TextView
+        progressbar = view.findViewById(R.id.progressbar) as ProgressBar
+        blockComics = view.findViewById(R.id.block_comics) as LinearLayout
+        blockSeries = view.findViewById(R.id.block_series) as LinearLayout
+        reclycerViewComic = view.findViewById(R.id.list_comic) as RecyclerView
+        reclycerViewSeries = view.findViewById(R.id.list_series) as RecyclerView
 
         loadView()
-        detailCharacterPresenterImpl.getMarvelCharacter(arguments.get(KeyDatabase.ID) as Int)
+        detailCharacterPresenterImpl.getMarvelCharacter(arguments!!.get(KeyDatabase.ID) as Int)
         return view
     }
 
     override fun onDestroy() {
         destroyInjector()
+        detailCharacterPresenterImpl.onDisposable()
         super.onDestroy()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        activity.onBackPressed()
+        activity!!.onBackPressed()
         return super.onOptionsItemSelected(item)
     }
 
@@ -90,7 +90,7 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView, SupportFragment
     }
 
     override fun loadCharacter(marvelCharacter: MarvelCharacter) {
-        MarvelUtil.setImageUrl(activity, marvelCharacter.thumbMail?.getPathExtension(), image)
+        MarvelUtil.setImageUrl(requireContext(), marvelCharacter.thumbMail?.getPathExtension(), image)
         description.text = if (marvelCharacter.description?.length == 0) getString(R.string.no_description) else marvelCharacter.description
         appActivity.supportActionBar?.title = marvelCharacter.name
 
@@ -120,7 +120,7 @@ class DetailCharacterFragment : Fragment(), DetailCharacterView, SupportFragment
 
     override fun error() {
         if (this.isVisible) {
-            MarvelUtil.showErrorScreen(context, view, resources, R.drawable.wolverine_error)
+            MarvelUtil.showErrorScreen(requireContext(), view, resources, R.drawable.wolverine_error)
         }
     }
 }

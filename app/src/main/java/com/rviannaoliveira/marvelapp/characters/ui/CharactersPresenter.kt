@@ -8,4 +8,5 @@ import com.rviannaoliveira.marvelapp.base.BasePresenterFavorite
 interface CharactersPresenter : BasePresenterFavorite {
     fun loadMarvelCharacters(offset: Int)
     fun loadMarvelCharactersBeginLetter(letter: String)
+    fun onDisposable()
 }

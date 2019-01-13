@@ -8,7 +8,7 @@ import com.rviannaoliveira.marvelapp.model.Favorite
 /**
  * Criado por rodrigo on 30/09/17.
  */
-@Database(entities = arrayOf(Favorite::class), version = 1)
+@Database(entities = [Favorite::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getFavoriteDao(): FavoriteDao
 }

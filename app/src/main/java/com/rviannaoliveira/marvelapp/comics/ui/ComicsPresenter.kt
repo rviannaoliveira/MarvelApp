@@ -8,4 +8,5 @@ import com.rviannaoliveira.marvelapp.base.BasePresenterFavorite
 interface ComicsPresenter : BasePresenterFavorite{
     fun loadMarvelComics(offset: Int)
     fun loadMarvelComicsBeginLetter(letter: String)
+    fun onDisposable()
 }

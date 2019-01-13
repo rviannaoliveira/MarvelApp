@@ -18,7 +18,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -45,7 +45,7 @@ public class MarvelInteractionCharacterPresenterTest {
     @Test
     public void loadMarvelCharacters() {
         int offset = 0;
-        when(dataManager.getMarvelCharacters(offset)).thenReturn(Flowable.just(mockList));
+        when(dataManager.getMarvelCharacters(offset)).thenReturn(Single.just(mockList));
         getCharactersPresenterUnderTest().loadMarvelCharacters(offset);
 
         verify(this.charactersView).showProgressBar();
@@ -56,7 +56,7 @@ public class MarvelInteractionCharacterPresenterTest {
     @Test
     public void loadMarvelCharactersBeginLetter() {
         String letter = "a";
-        when(dataManager.getMarvelCharactersBeginLetter(letter)).thenReturn(Flowable.just(mockList));
+        when(dataManager.getMarvelCharactersBeginLetter(letter)).thenReturn(Single.just(mockList));
         getCharactersPresenterUnderTest().loadMarvelCharactersBeginLetter(letter);
 
         verify(this.charactersView).showProgressBar();

@@ -22,6 +22,7 @@ import java.util.List;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -53,7 +54,7 @@ public class MarvelValueDataManagerTest {
     public void loadMarvelCharacters_withFavoritesEmpty() {
         List<MarvelCharacter> characters = Arrays.asList(new MarvelCharacter[]{new MarvelCharacter(1)});
 
-        when(apiData.getMarvelCharacters(0)).thenReturn(Flowable.just(characters));
+        when(apiData.getMarvelCharacters(0)).thenReturn(Single.just(characters));
         when(repositoryData.getCharactersFavorites()).thenReturn(Flowable.just(Collections.<Favorite>emptyList()));
         dataManager.getMarvelCharacters(0)
                 .test()
@@ -68,7 +69,7 @@ public class MarvelValueDataManagerTest {
         List<Favorite> favorites = Arrays.asList(new Favorite[]{favorite});
         List<MarvelCharacter> characters = Arrays.asList(new MarvelCharacter[]{marvelCharacter});
 
-        when(apiData.getMarvelCharacters(0)).thenReturn(Flowable.just(characters));
+        when(apiData.getMarvelCharacters(0)).thenReturn(Single.just(characters));
         when(repositoryData.getCharactersFavorites()).thenReturn(Flowable.just(favorites));
 
         dataManager.getMarvelCharacters(0).test().assertValue(characters);
@@ -84,7 +85,7 @@ public class MarvelValueDataManagerTest {
         List<Favorite> favorites = Arrays.asList(new Favorite[]{favorite});
         List<MarvelCharacter> characters = Arrays.asList(new MarvelCharacter[]{marvelCharacter});
 
-        when(apiData.getMarvelCharacters(0)).thenReturn(Flowable.just(characters));
+        when(apiData.getMarvelCharacters(0)).thenReturn(Single.just(characters));
         when(repositoryData.getCharactersFavorites()).thenReturn(Flowable.just(favorites));
 
         dataManager.getMarvelCharacters(0).test().assertValue(characters);

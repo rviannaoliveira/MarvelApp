@@ -5,4 +5,5 @@ package com.rviannaoliveira.marvelapp.detailCharacter.ui
  */
 interface DetailCharacterPresenter {
     fun getMarvelCharacter(id: Int)
+    fun onDisposable()
 }

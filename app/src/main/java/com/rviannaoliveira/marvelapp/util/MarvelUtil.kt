@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso
 object MarvelUtil {
 
     fun setImageUrl(context: Context, url: String?, image: ImageView) {
-        Picasso.with(context)
+        Picasso.get()
                 .load(url)
                 .fit()
                 .error(R.drawable.image_broken)

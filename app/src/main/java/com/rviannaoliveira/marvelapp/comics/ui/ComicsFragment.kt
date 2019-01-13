@@ -16,7 +16,6 @@ import android.view.*
 import android.widget.ProgressBar
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.android.SupportFragmentInjector
 import com.github.salomonbrys.kodein.instance
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.comics.di.ComicModule
@@ -41,11 +40,11 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener, S
     private var listState: Parcelable? = null
     private lateinit var searchView: SearchView
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initializeInjector()
-        val view = inflater?.inflate(R.layout.fragment_list, container, false)
-        comicsRecyclerView = view?.findViewById<RecyclerView>(R.id.list_recycler_view) as RecyclerView
-        progressbar = view.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
+        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        comicsRecyclerView = view?.findViewById(R.id.list_recycler_view) as RecyclerView
+        progressbar = view.findViewById(R.id.progressbar) as ProgressBar
         setHasOptionsMenu(true)
 
         loadView()
@@ -60,6 +59,7 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener, S
 
     override fun onDestroy() {
         destroyInjector()
+        comicsPresenter.onDisposable()
         super.onDestroy()
     }
 
@@ -70,16 +70,16 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener, S
         listState = savedInstanceState?.getParcelable(LIST_STATE_KEY)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putParcelable(LIST_STATE_KEY, comicsRecyclerView.layoutManager.onSaveInstanceState())
+        outState.putParcelable(LIST_STATE_KEY, comicsRecyclerView.layoutManager.onSaveInstanceState())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_list, menu)
-        val searchManager = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
         searchView.setOnQueryTextListener(this)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -88,8 +88,8 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener, S
         if (item?.itemId == R.id.menu_filter) {
             var positionFilter = 0
 
-            AlertDialog.Builder(context).createFilterCustom(context, DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
-                val letter = context.resources.getStringArray(R.array.alphabetic)[positionFilter]
+            AlertDialog.Builder(requireContext()).createFilterCustom(requireContext(), DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
+                val letter = requireContext().resources.getStringArray(R.array.alphabetic)[positionFilter]
                 comicsAdapter.clear()
                 if (positionFilter == 0) comicsPresenter.loadMarvelComics(0) else comicsPresenter.loadMarvelComicsBeginLetter(letter)
                 d.dismiss()
@@ -103,7 +103,7 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener, S
     override fun loadView() {
         comicsAdapter = ComicsAdapter(comicsPresenter, activity as AppCompatActivity)
         comicsRecyclerView.adapter = comicsAdapter
-        val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
+        val numberGrid = if (MarvelUtil.isPortrait(requireContext())) 2 else 3
         comicsRecyclerView.setHasFixedSize(true)
         comicsRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
         comicsRecyclerView.addOnScrollListener(onScrollListener())
@@ -134,7 +134,7 @@ class ComicsFragment : Fragment(), ComicsView, SearchView.OnQueryTextListener, S
 
     override fun error() {
         if (this.isVisible) {
-            MarvelUtil.showErrorScreen(context, view, resources, R.drawable.comic_error)
+            MarvelUtil.showErrorScreen(requireContext(), view, resources, R.drawable.comic_error)
         }
     }
 

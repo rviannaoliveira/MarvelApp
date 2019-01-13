@@ -6,7 +6,7 @@ import com.rviannaoliveira.marvelapp.data.api.MarvelApiHelper
 import com.rviannaoliveira.marvelapp.data.api.MarvelService
 import com.rviannaoliveira.marvelapp.fakedata.MarvelFakeDataFactory
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
-import io.reactivex.Flowable
+import io.reactivex.Single
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -46,7 +46,7 @@ class MarvelInteractionApiHelperTest {
         val marvelApiHelper = getApiHelper()
         val marvelCharacterDataWrapper = MarvelFakeDataFactory.fakeMarvelCharacterDataWrapperId2
 
-        whenever(marvelService.getCharacters(MarvelApiHelper.LIMIT_REGISTER, 0)).thenReturn(Flowable.just(marvelCharacterDataWrapper))
+        whenever(marvelService.getCharacters(MarvelApiHelper.LIMIT_REGISTER, 0)).thenReturn(Single.just(marvelCharacterDataWrapper))
 
         marvelApiHelper.getMarvelCharacters(0)
                 .test()

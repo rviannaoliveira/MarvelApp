@@ -6,7 +6,6 @@ import com.rviannaoliveira.marvelapp.data.repository.KeyDatabase
 import com.rviannaoliveira.marvelapp.model.Favorite
 import com.rviannaoliveira.marvelapp.model.MarvelCharacter
 import com.rviannaoliveira.marvelapp.model.MarvelComic
-import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
@@ -18,52 +17,53 @@ import io.reactivex.schedulers.Schedulers
 class DataManager(private val apiData: IApiData,
                   private val repositoryData: IRepositoryData) : IDataManager {
 
-    override fun getMarvelCharacters(offset: Int): Flowable<List<MarvelCharacter>> {
+    override fun getMarvelCharacters(offset: Int): Single<List<MarvelCharacter>> {
         val characters = apiData.getMarvelCharacters(offset)
-        val favorites = repositoryData.getCharactersFavorites()
-        return Flowable.zip(characters, favorites, BiFunction<List<MarvelCharacter>, List<Favorite>,
+        val favorites = repositoryData.getCharactersFavorites().firstOrError()
+        return Single.zip(characters, favorites, BiFunction<List<MarvelCharacter>, List<Favorite>,
                 List<MarvelCharacter>>(this::combineCharacter))
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getMarvelCharactersBeginLetter(letter: String): Flowable<List<MarvelCharacter>> {
+    override fun getMarvelCharactersBeginLetter(letter: String): Single<List<MarvelCharacter>> {
         val characters = apiData.getMarvelCharactersBeginLetter(letter)
-        val favorites = repositoryData.getCharactersFavorites()
-        return Flowable.zip(characters, favorites, BiFunction<List<MarvelCharacter>, List<Favorite>,
+        val favorites = repositoryData.getCharactersFavorites().firstOrError()
+        return Single.zip(characters, favorites, BiFunction<List<MarvelCharacter>, List<Favorite>,
                 List<MarvelCharacter>>(this::combineCharacter))
 
     }
 
-    override fun getMarvelComics(offset: Int): Flowable<List<MarvelComic>> {
+    override fun getMarvelComics(offset: Int): Single<List<MarvelComic>> {
         val comics = apiData.getMarvelComics(offset)
-        val favorites = repositoryData.getComicsFavorites()
-        return Flowable.zip(comics, favorites, BiFunction<List<MarvelComic>, List<Favorite>,
+        val favorites = repositoryData.getComicsFavorites().firstOrError()
+        return Single.zip(comics, favorites, BiFunction<List<MarvelComic>, List<Favorite>,
                 List<MarvelComic>>(this::combineComic))
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getMarvelComicsBeginLetter(letter: String): Flowable<List<MarvelComic>> {
+    override fun getMarvelComicsBeginLetter(letter: String): Single<List<MarvelComic>> {
         val comics = apiData.getMarvelComicsBeginLetter(letter)
-        val favorites = repositoryData.getComicsFavorites()
-        return Flowable.zip(comics, favorites, BiFunction<List<MarvelComic>, List<Favorite>,
+        val favorites = repositoryData.getComicsFavorites().firstOrError()
+        return Single.zip(comics, favorites, BiFunction<List<MarvelComic>, List<Favorite>,
                 List<MarvelComic>>(this::combineComic))
     }
 
-    override fun loadDetailMarvelCharacter(id: Int?): Flowable<MarvelCharacter> {
+    override fun loadDetailMarvelCharacter(id: Int?): Single<MarvelCharacter> {
         return apiData.getDetailCharacter(id)
     }
 
-    override fun loadDetailComicCharacter(id: Int?): Flowable<MarvelComic> {
+    override fun loadDetailComicCharacter(id: Int?): Single<MarvelComic> {
         return apiData.getDetailComic(id)
     }
 
-    override fun getAllFavorites(): Flowable<Favorite> {
+    override fun getAllFavorites(): Single<Favorite> {
         val favorite = Favorite()
 
         return repositoryData.getAllFavorites()
+                .firstOrError()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .concatMap { list ->
+                .map { list ->
                     list.forEach { item ->
                         if (KeyDatabase.FavoriteGroup.CHARACTERS == item.groupType) {
                             favorite.characters.add(item)
@@ -71,7 +71,7 @@ class DataManager(private val apiData: IApiData,
                             favorite.comics.add(item)
                         }
                     }
-                    Flowable.just(favorite)
+                    favorite
                 }
     }
 
@@ -124,13 +124,13 @@ class DataManager(private val apiData: IApiData,
 }
 
 interface IDataManager {
-    fun getMarvelCharacters(offset: Int): Flowable<List<MarvelCharacter>>
-    fun getMarvelCharactersBeginLetter(letter: String): Flowable<List<MarvelCharacter>>
+    fun getMarvelCharacters(offset: Int): Single<List<MarvelCharacter>>
+    fun getMarvelCharactersBeginLetter(letter: String): Single<List<MarvelCharacter>>
     fun insertFavorite(favorite: Favorite)
     fun deleteFavorite(favorite: Favorite, removeCharacter: Boolean = false): Single<Unit>
-    fun getAllFavorites(): Flowable<Favorite>
-    fun loadDetailMarvelCharacter(id: Int?): Flowable<MarvelCharacter>
-    fun loadDetailComicCharacter(id: Int?): Flowable<MarvelComic>
-    fun getMarvelComics(offset: Int): Flowable<List<MarvelComic>>
-    fun getMarvelComicsBeginLetter(letter: String): Flowable<List<MarvelComic>>
+    fun getAllFavorites(): Single<Favorite>
+    fun loadDetailMarvelCharacter(id: Int?): Single<MarvelCharacter>
+    fun loadDetailComicCharacter(id: Int?): Single<MarvelComic>
+    fun getMarvelComics(offset: Int): Single<List<MarvelComic>>
+    fun getMarvelComicsBeginLetter(letter: String): Single<List<MarvelComic>>
 }

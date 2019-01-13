@@ -16,7 +16,6 @@ import android.view.*
 import android.widget.ProgressBar
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.android.SupportFragmentInjector
 import com.github.salomonbrys.kodein.instance
 import com.rviannaoliveira.marvelapp.R
 import com.rviannaoliveira.marvelapp.characters.di.CharactersModule
@@ -40,11 +39,11 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
     private var listState: Parcelable? = null
     private lateinit var searchView: SearchView
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initializeInjector()
-        val view = inflater?.inflate(R.layout.fragment_list, container, false)
-        this.progressbar = view?.findViewById<ProgressBar>(R.id.progressbar) as ProgressBar
-        this.charactersRecyclerView = view.findViewById<RecyclerView>(R.id.list_recycler_view) as RecyclerView
+        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        this.progressbar = view?.findViewById(R.id.progressbar) as ProgressBar
+        this.charactersRecyclerView = view.findViewById(R.id.list_recycler_view) as RecyclerView
         setHasOptionsMenu(true)
 
         loadView()
@@ -59,14 +58,15 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
 
     override fun onDestroy() {
         destroyInjector()
+        charactersPresenterImpl.onDisposable()
         super.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_list, menu)
-        val searchManager = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
         searchView.setOnQueryTextListener(this)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -75,8 +75,8 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         if (item?.itemId == R.id.menu_filter) {
             var positionFilter = 0
 
-            AlertDialog.Builder(context).createFilterCustom(context, DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
-                val letter = context.resources.getStringArray(R.array.alphabetic)[positionFilter]
+            AlertDialog.Builder(requireContext()).createFilterCustom(requireContext(), DialogInterface.OnClickListener { _, w -> positionFilter = w }, DialogInterface.OnClickListener { d, _ ->
+                val letter = requireContext().resources.getStringArray(R.array.alphabetic)[positionFilter]
                 charactersAdapter?.clear()
                 if (positionFilter == 0) charactersPresenterImpl.loadMarvelCharacters(0) else charactersPresenterImpl.loadMarvelCharactersBeginLetter(letter)
                 d.dismiss()
@@ -93,15 +93,15 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
         listState = savedInstanceState?.getParcelable(LIST_STATE_KEY)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putParcelable(LIST_STATE_KEY, charactersRecyclerView.layoutManager.onSaveInstanceState())
+        outState.putParcelable(LIST_STATE_KEY, charactersRecyclerView.layoutManager.onSaveInstanceState())
     }
 
     override fun loadView() {
         charactersAdapter = CharactersAdapter(charactersPresenterImpl, activity as AppCompatActivity)
         charactersRecyclerView.adapter = charactersAdapter
-        val numberGrid = if (MarvelUtil.isPortrait(context)) 2 else 3
+        val numberGrid = if (MarvelUtil.isPortrait(requireContext())) 2 else 3
         charactersRecyclerView.setHasFixedSize(true)
         charactersRecyclerView.layoutManager = GridLayoutManager(context, numberGrid)
         charactersRecyclerView.addOnScrollListener(onScrollListener())
@@ -121,8 +121,9 @@ class CharactersFragment : Fragment(), CharactersView, SearchView.OnQueryTextLis
 
     override fun error() {
         if (this.isVisible) {
-            MarvelUtil.showErrorScreen(context, view, resources, R.drawable.deadpool_error)
+            MarvelUtil.showErrorScreen(requireContext(), view, resources, R.drawable.deadpool_error)
         }
+        hideProgressBar()
     }
 
     private fun onScrollListener(): RecyclerView.OnScrollListener {

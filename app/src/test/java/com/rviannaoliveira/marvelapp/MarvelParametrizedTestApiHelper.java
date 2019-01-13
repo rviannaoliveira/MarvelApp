@@ -21,6 +21,7 @@ import java.util.List;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 import static org.mockito.Mockito.when;
 
@@ -62,7 +63,7 @@ public class MarvelParametrizedTestApiHelper {
         List<MarvelCharacter> characters = Arrays.asList(new MarvelCharacter[]{marvelCharacter});
         List<Favorite> favorites = favorite == null ? Collections.emptyList() : Arrays.asList(new Favorite[]{favorite});
 
-        when(apiData.getMarvelCharacters(0)).thenReturn(Flowable.just(characters));
+        when(apiData.getMarvelCharacters(0)).thenReturn(Single.just(characters));
         when(repositoryData.getCharactersFavorites()).thenReturn(Flowable.just(favorites));
         dataManager.getMarvelCharacters(0)
                 .test()
